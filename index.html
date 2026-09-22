@@ -7,15 +7,107 @@
   <title>Arunodoi Academy | Digital School Portal</title>
   <link rel="stylesheet" href="style.css">
 <style>
-@media(max-width:600px){
-  .watermark{
-    gap:9px;
-    font-size:11px;
-  }
-  .watermark .signature{font-size:29px}
-  .watermark .class-label{font-size:24px}
-}
-</style>
+
+    /* =========================================
+       BOTTOM WATERMARK
+       ========================================= */
+
+    .watermark {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      gap: 14px;
+
+      padding: 18px 15px 22px;
+
+      box-sizing: border-box;
+
+      font-size: 12px;
+
+      letter-spacing: 1px;
+
+      opacity: 0.85;
+    }
+
+
+    /* Separator line */
+
+    .watermark .separator {
+      width: 55px;
+      height: 1px;
+
+      background: currentColor;
+
+      opacity: 0.35;
+    }
+
+
+    /* HeavyDukh signature */
+
+    .watermark .signature {
+
+      font-family: "Qwigley", cursive;
+
+      font-size: 38px;
+
+      line-height: 1;
+
+      letter-spacing: 1px;
+    }
+
+
+    /* Class IX 2026 */
+
+    .watermark .class-label {
+
+      font-size: 20px;
+
+      font-weight: 500;
+
+      letter-spacing: 1px;
+
+      white-space: nowrap;
+    }
+
+
+    /* =========================================
+       MOBILE WATERMARK
+       ========================================= */
+
+    @media (max-width: 600px) {
+
+      .watermark {
+
+        gap: 9px;
+
+        padding: 14px 10px 18px;
+
+        font-size: 11px;
+      }
+
+
+      .watermark .separator {
+
+        width: 38px;
+      }
+
+
+      .watermark .signature {
+
+        font-size: 29px;
+      }
+
+
+      .watermark .class-label {
+
+        font-size: 24px;
+      }
+
+    }
+
+  </style>
 </head>
 <body>
   <header class="topbar">
@@ -138,17 +230,87 @@
     </section>
   </main>
 
+  
+  <!-- =========================================
+       FOOTER
+       ========================================= -->
+
   <footer id="contact">
+
     <div class="container footer-grid">
-      <div><div class="brand footer-brand"><div class="logo">AA</div><div><strong>Arunodoi Academy</strong><span>Tangla, Udalguri, Assam</span></div></div><p>Learn • Explore • Grow</p></div>
-      <div><h3>Portal</h3><a href="#notices">Notices</a><a href="#academics">Academics</a><a href="#events">Events</a></div>
-      <div><h3>Contact</h3><p>Arunodoi Academy<br>Tangla, Udalguri, Assam</p></div>
+
+
+      <div>
+
+        <div class="brand footer-brand">
+
+          <div class="logo">
+            AA
+          </div>
+
+          <div>
+
+            <strong>
+              Arunodoi Academy
+            </strong>
+
+            <span>
+              Tangla, Udalguri, Assam
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <p>
+          Learn • Explore • Grow
+        </p>
+
+      </div>
+      <div>
+  <h3>
+          Portal
+        </h3>
+        <a href="#notices">
+          Notices
+        </a>
+        <a href="#academics">
+          Academics
+        </a>
+        <a href="#events">
+          Events
+        </a>
+     </div>
+      <div>
+        <h3>
+          Contact
+        </h3>
+        <p>
+          Arunodoi Academy<br>
+          Tangla, Udalguri, Assam
+        </p>
+      </div>
     </div>
-    <div class="copyright">© <span id="year"></span> Arunodoi Academy. All rights reserved.</div>
+    <div class="copyright">
+   ©
+      <span id="year"></span>
+      Heavy. All rights reserved.
+    </div>
   </footer>
+  <!-- =========================================
+       BOTTOM WATERMARK
+       ========================================= -->
+  <div class="watermark">
+    <span class="separator"></span>
+    <span class="signature">
+      HeavyDukh
+    </span>
+    <span class="separator"></span>
+    <span class="class-label">     
+    </span>
+  </div>
+  <!-- JAVASCRIPT -->
   <script src="script.js"></script>
-<div class="watermark"><span class="separator">
-</span><span class="signature">HeavyDukh</span>
-</div>
 </body>
 </html>
