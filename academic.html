@@ -682,17 +682,55 @@
           "Actual Class VII HTML and CSS notes will be added here."
       },
 
-      {
-        className: "VIII",
-        subject: "Computer Science",
-        type: "Practical",
-        icon: "🖥️",
-        title: "HTML Practical",
-        description:
-          "Tables, lists, forms, hyperlinks and other practical programs.",
-        content:
-          "Actual Class VIII HTML practical programs will be added here."
-      },
+       {
+    className: "VIII",
+    subject: "Computer Science",
+    type: "Question & Answer",
+    icon: "🌐",
+    title: "Chapter 5 – Lists and Tables in HTML",
+    description: "Class VIII questions and answers on HTML lists, tables, captions and related CSS properties.",
+    pdf: "resources/class-8/Chapter%205%20Lists%20and%20Tables%20in%20HTML%20Class%208.pdf"
+  },
+
+  {
+    className: "VIII",
+    subject: "Computer Science",
+    type: "Question & Answer",
+    icon: "🌐",
+    title: "Computer Networks – Questions & Answers",
+    description: "Class VIII questions and answers covering computer networks, topologies, networking media and protocols.",
+    pdf: "resources/class-8/Computer%20Networks-1%20Questions%20and%20Answers.pdf"
+  },
+
+  {
+    className: "VIII",
+    subject: "Computer Science",
+    type: "Question & Answer",
+    icon: "🗄️",
+    title: "Learn to Use MS Access 2010",
+    description: "Class VIII questions and answers on databases, tables, primary keys, forms, queries and reports.",
+    pdf: "resources/class-8/LEARN%20TO%20USE%20MS%20ACCESS%202010%20Anwer.pdf"
+  },
+
+  {
+    className: "VIII",
+    subject: "Computer Science",
+    type: "Question & Answer",
+    icon: "🎨",
+    title: "More on CSS – Lesson 4",
+    description: "Class VIII questions and answers covering CSS properties, text, fonts, margins and borders.",
+    pdf: "resources/class-8/More%20On%20CSS%20Lesson-4.pdf"
+  },
+
+  {
+    className: "VIII",
+    subject: "Computer Science",
+    type: "Question & Answer",
+    icon: "🗄️",
+    title: "Queries, Forms and Reports in MS Access 2010",
+    description: "Class VIII questions and answers on queries, forms, reports and database relationships.",
+    pdf: "resources/class-8/Queries,%20Forms%20and%20Reports%20In%20MS%20Access%202010.pdf"
+  },
 
       {
         className: "IX",
@@ -855,38 +893,15 @@
     }
 
 
-    function openResource(index) {
+function openResource(index) {
 
-      const resource =
-        resources[index];
+  const resource = resources[index];
 
-      document.getElementById(
-        "modalContent"
-      ).innerHTML = `
+  if (resource.pdf) {
+    window.open(resource.pdf, "_blank");
+  }
 
-        <p class="eyebrow">
-          ${resource.className}
-          •
-          ${resource.subject}
-          •
-          ${resource.type}
-        </p>
-
-        <h2>
-          ${resource.title}
-        </h2>
-
-        <div class="resource-content">
-          ${resource.content}
-        </div>
-
-      `;
-
-      document.getElementById(
-        "resourceModal"
-      ).classList.add("active");
-
-    }
+}
 
 
     document.getElementById(
