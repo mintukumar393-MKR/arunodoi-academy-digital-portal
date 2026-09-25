@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="description"
+        content="Academic Resources - Arunodoi Academy">
+
+  <title>Academic Resources | Arunodoi Academy</title>
+
+  <!-- Existing website CSS -->
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    /* =========================================
+       ACADEMIC PAGE
+       ========================================= */
+
+    .academic-hero {
+      background:
+        radial-gradient(circle at 85% 20%, #dceeff 0, transparent 35%),
+        linear-gradient(135deg, #f8fbff, #fff7f0);
+
+      padding: 75px 0 55px;
+    }
+
+    .academic-hero h1 {
+      font-family: "Playfair Display", serif;
+      font-size: 52px;
+      line-height: 1.1;
+      margin: 0 0 15px;
+    }
+
+    .academic-hero h1 span {
+      color: var(--accent2);
+    }
+
+    .academic-hero p {
+      color: var(--muted);
+      max-width: 650px;
+    }
+
+    /* FILTER AREA */
+
+    .academic-controls {
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+
+      padding: 25px;
+
+      margin-top: -25px;
+
+      position: relative;
+      z-index: 2;
+
+      box-shadow: var(--shadow);
+
+      display: grid;
+      grid-template-columns: 1fr 1fr 2fr;
+      gap: 15px;
+    }
+
+    .control-group label {
+      display: block;
+
+      font-size: 11px;
+      font-weight: 800;
+
+      text-transform: uppercase;
+      letter-spacing: 1px;
+
+      margin-bottom: 7px;
+    }
+
+    .control-group select,
+    .control-group input {
+      width: 100%;
+
+      padding: 13px 14px;
+
+      border: 1px solid var(--line);
+      border-radius: 9px;
+
+      background: #fff;
+
+      font-family: inherit;
+      font-size: 13px;
+
+      color: var(--ink);
+
+      outline: none;
+    }
+
+    .control-group select:focus,
+    .control-group input:focus {
+      border-color: var(--accent2);
+    }
+
+    /* RESOURCE SECTION */
+
+    .resources-section {
+      padding: 65px 0 85px;
+    }
+
+    .resource-grid {
+      display: grid;
+
+      grid-template-columns:
+        repeat(3, 1fr);
+
+      gap: 18px;
+    }
+
+    .resource-card {
+      background: #fff;
+
+      border: 1px solid var(--line);
+
+      border-radius: 17px;
+
+      padding: 25px;
+
+      transition: 0.2s;
+    }
+
+    .resource-card:hover {
+      transform: translateY(-4px);
+
+      box-shadow: var(--shadow);
+    }
+
+    .resource-icon {
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+
+    .resource-card h3 {
+      margin: 8px 0 5px;
+    }
+
+    .resource-card p {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .resource-card .resource-type {
+      display: inline-block;
+
+      font-size: 9px;
+
+      text-transform: uppercase;
+
+      letter-spacing: 1px;
+
+      color: var(--accent2);
+
+      font-weight: 800;
+
+      margin-bottom: 5px;
+    }
+
+    .resource-button {
+      display: inline-block;
+
+      margin-top: 10px;
+
+      padding: 9px 13px;
+
+      background: #eef5fb;
+
+      color: var(--accent2);
+
+      border-radius: 8px;
+
+      font-size: 12px;
+
+      font-weight: 700;
+
+      border: 0;
+
+      cursor: pointer;
+    }
+
+    .no-results {
+      grid-column: 1 / -1;
+
+      padding: 45px 20px;
+
+      text-align: center;
+
+      background: var(--soft);
+
+      border-radius: 15px;
+
+      color: var(--muted);
+    }
+
+    /* RESOURCE POPUP */
+
+    .resource-modal {
+      position: fixed;
+
+      inset: 0;
+
+      background: rgba(10, 25, 45, 0.65);
+
+      display: none;
+
+      align-items: center;
+      justify-content: center;
+
+      padding: 20px;
+
+      z-index: 100;
+    }
+
+    .resource-modal.active {
+      display: flex;
+    }
+
+    .resource-modal-box {
+      background: #fff;
+
+      width: min(650px, 100%);
+
+      max-height: 85vh;
+
+      overflow-y: auto;
+
+      border-radius: 18px;
+
+      padding: 30px;
+
+      position: relative;
+    }
+
+    .modal-close {
+      position: absolute;
+
+      right: 15px;
+      top: 10px;
+
+      border: 0;
+
+      background: none;
+
+      font-size: 28px;
+
+      cursor: pointer;
+    }
+
+    .resource-modal-box h2 {
+      font-family: "Playfair Display", serif;
+
+      margin-top: 5px;
+    }
+
+    .resource-content {
+      color: var(--muted);
+
+      font-size: 14px;
+
+      line-height: 1.8;
+    }
+
+    /* MOBILE */
+
+    @media (max-width: 800px) {
+
+      .academic-hero h1 {
+        font-size: 42px;
+      }
+
+      .academic-controls {
+        grid-template-columns: 1fr;
+      }
+
+      .resource-grid {
+        grid-template-columns:
+          repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 500px) {
+
+      .academic-hero {
+        padding: 60px 0 45px;
+      }
+
+      .academic-hero h1 {
+        font-size: 37px;
+      }
+
+      .resource-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- =========================================
+       HEADER
+       ========================================= -->
+
+  <header class="topbar">
+
+    <div class="container nav-wrap">
+
+      <a class="brand" href="index.html">
+
+        <div class="logo">
+          AA
+        </div>
+
+        <div>
+          <strong>
+            Arunodoi Academy
+          </strong>
+
+          <span>
+            Tangla, Udalguri, Assam
+          </span>
+        </div>
+
+      </a>
+
+      <button
+        class="menu-toggle"
+        aria-label="Open menu">
+
+        ☰
+
+      </button>
+
+      <nav id="mainNav">
+
+        <a href="index.html">
+          Home
+        </a>
+
+        <a href="academic.html">
+          Academics
+        </a>
+
+        <a href="quiz.html">
+          Quiz
+        </a>
+
+        <a href="results.html">
+          Results
+        </a>
+
+        <a href="portal.html">
+          Portal
+        </a>
+
+      </nav>
+
+    </div>
+
+  </header>
+
+
+  <!-- =========================================
+       HERO
+       ========================================= -->
+
+  <section class="academic-hero">
+
+    <div class="container">
+
+      <p class="eyebrow">
+        LEARNING HUB
+      </p>
+
+      <h1>
+        Academic
+        <span>Resources</span>
+      </h1>
+
+      <p>
+        Find study materials, notes, question banks,
+        practical work and project resources organised
+        for students of Arunodoi Academy.
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================================
+       FILTERS
+       ========================================= -->
+
+  <main>
+
+    <div class="container">
+
+      <div class="academic-controls">
+
+        <div class="control-group">
+
+          <label for="classSelect">
+            Class
+          </label>
+
+          <select id="classSelect">
+
+            <option value="all">
+              All Classes
+            </option>
+
+            <option value="VI">
+              Class VI
+            </option>
+
+            <option value="VII">
+              Class VII
+            </option>
+
+            <option value="VIII">
+              Class VIII
+            </option>
+
+            <option value="IX">
+              Class IX
+            </option>
+
+            <option value="X">
+              Class X
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <div class="control-group">
+
+          <label for="subjectSelect">
+            Subject
+          </label>
+
+          <select id="subjectSelect">
+
+            <option value="all">
+              All Subjects
+            </option>
+
+            <option value="Computer Science">
+              Computer Science
+            </option>
+
+            <option value="Mathematics">
+              Mathematics
+            </option>
+
+            <option value="Science">
+              Science
+            </option>
+
+            <option value="Social Science">
+              Social Science
+            </option>
+
+            <option value="English">
+              English
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <div class="control-group">
+
+          <label for="searchBox">
+            Search
+          </label>
+
+          <input
+            type="search"
+            id="searchBox"
+            placeholder="Search notes, chapters, projects...">
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- =========================================
+         RESOURCES
+         ========================================= -->
+
+    <section class="resources-section">
+
+      <div class="container">
+
+        <div class="section-heading">
+
+          <div>
+
+            <p class="eyebrow">
+              STUDY & PRACTICE
+            </p>
+
+            <h2>
+              Resources
+            </h2>
+
+          </div>
+
+        </div>
+
+
+        <div
+          id="resourceGrid"
+          class="resource-grid">
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- =========================================
+       RESOURCE MODAL
+       ========================================= -->
+
+  <div
+    class="resource-modal"
+    id="resourceModal">
+
+    <div class="resource-modal-box">
+
+      <button
+        class="modal-close"
+        id="modalClose">
+
+        ×
+
+      </button>
+
+      <div id="modalContent">
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================================
+       FOOTER
+       ========================================= -->
+
+  <footer>
+
+    <div class="container footer-grid">
+
+      <div>
+
+        <div class="brand footer-brand">
+
+          <div class="logo">
+            AA
+          </div>
+
+          <div>
+
+            <strong>
+              Arunodoi Academy
+            </strong>
+
+            <span>
+              Tangla, Udalguri, Assam
+            </span>
+
+          </div>
+
+        </div>
+
+        <p>
+          Learn • Explore • Grow
+        </p>
+
+      </div>
+
+
+      <div>
+
+        <h3>
+          Portal
+        </h3>
+
+        <a href="index.html">
+          Home
+        </a>
+
+        <a href="academic.html">
+          Academics
+        </a>
+
+        <a href="quiz.html">
+          Quiz
+        </a>
+
+        <a href="results.html">
+          Results
+        </a>
+
+      </div>
+
+
+      <div>
+
+        <h3>
+          Contact
+        </h3>
+
+        <p>
+          Arunodoi Academy<br>
+          Tangla, Udalguri, Assam
+        </p>
+
+      </div>
+
+    </div>
+
+  </footer>
+
+
+  <!-- =========================================
+       JAVASCRIPT
+       ========================================= -->
+
+  <script>
+
+    /*
+      RESOURCE DATABASE
+
+      We are starting with a few placeholder
+      categories.
+
+      Later we will replace these with your
+      actual notes, question banks and projects.
+    */
+
+    const resources = [
+
+      {
+        className: "VI",
+        subject: "Computer Science",
+        type: "Notes",
+        icon: "💻",
+        title: "Computer Basics",
+        description:
+          "Introduction to computer systems, hardware, software and basic terminology.",
+        content:
+          "Actual Class VI Computer Science notes will be added here."
+      },
+
+      {
+        className: "VII",
+        subject: "Computer Science",
+        type: "Notes",
+        icon: "🌐",
+        title: "HTML & CSS",
+        description:
+          "Introduction to webpages, HTML elements and basic CSS.",
+        content:
+          "Actual Class VII HTML and CSS notes will be added here."
+      },
+
+      {
+        className: "VIII",
+        subject: "Computer Science",
+        type: "Practical",
+        icon: "🖥️",
+        title: "HTML Practical",
+        description:
+          "Tables, lists, forms, hyperlinks and other practical programs.",
+        content:
+          "Actual Class VIII HTML practical programs will be added here."
+      },
+
+      {
+        className: "IX",
+        subject: "Mathematics",
+        type: "Notes",
+        icon: "📐",
+        title: "Mathematics Notes",
+        description:
+          "Chapter-wise mathematics notes and revision material.",
+        content:
+          "Actual Class IX Mathematics notes will be added here."
+      },
+
+      {
+        className: "IX",
+        subject: "Science",
+        type: "Projects",
+        icon: "🔬",
+        title: "Science Projects",
+        description:
+          "School science projects and practical activities.",
+        content:
+          "Actual science project resources will be added here."
+      },
+
+      {
+        className: "X",
+        subject: "Computer Science",
+        type: "Question Bank",
+        icon: "❓",
+        title: "Computer Science Question Bank",
+        description:
+          "Revision questions and examination preparation.",
+        content:
+          "Actual Class X Computer Science question bank will be added here."
+      }
+
+    ];
+
+
+    const resourceGrid =
+      document.getElementById(
+        "resourceGrid"
+      );
+
+    const classSelect =
+      document.getElementById(
+        "classSelect"
+      );
+
+    const subjectSelect =
+      document.getElementById(
+        "subjectSelect"
+      );
+
+    const searchBox =
+      document.getElementById(
+        "searchBox"
+      );
+
+
+    function displayResources() {
+
+      const selectedClass =
+        classSelect.value;
+
+      const selectedSubject =
+        subjectSelect.value;
+
+      const search =
+        searchBox.value
+          .toLowerCase()
+          .trim();
+
+
+      const filtered =
+        resources.filter(resource => {
+
+          const classMatch =
+            selectedClass === "all" ||
+            resource.className === selectedClass;
+
+          const subjectMatch =
+            selectedSubject === "all" ||
+            resource.subject === selectedSubject;
+
+          const searchMatch =
+            !search ||
+            resource.title
+              .toLowerCase()
+              .includes(search) ||
+            resource.description
+              .toLowerCase()
+              .includes(search) ||
+            resource.subject
+              .toLowerCase()
+              .includes(search);
+
+
+          return (
+            classMatch &&
+            subjectMatch &&
+            searchMatch
+          );
+
+        });
+
+
+      if (filtered.length === 0) {
+
+        resourceGrid.innerHTML = `
+          <div class="no-results">
+            No resources found.
+            More study materials will be added soon.
+          </div>
+        `;
+
+        return;
+
+      }
+
+
+      resourceGrid.innerHTML =
+        filtered.map((resource, index) => `
+
+          <article class="resource-card">
+
+            <div class="resource-icon">
+              ${resource.icon}
+            </div>
+
+            <span class="resource-type">
+              ${resource.className}
+              •
+              ${resource.subject}
+              •
+              ${resource.type}
+            </span>
+
+            <h3>
+              ${resource.title}
+            </h3>
+
+            <p>
+              ${resource.description}
+            </p>
+
+            <button
+              class="resource-button"
+              onclick="openResource(${resources.indexOf(resource)})">
+
+              Open Resource →
+
+            </button>
+
+          </article>
+
+        `).join("");
+
+    }
+
+
+    function openResource(index) {
+
+      const resource =
+        resources[index];
+
+      document.getElementById(
+        "modalContent"
+      ).innerHTML = `
+
+        <p class="eyebrow">
+          ${resource.className}
+          •
+          ${resource.subject}
+          •
+          ${resource.type}
+        </p>
+
+        <h2>
+          ${resource.title}
+        </h2>
+
+        <div class="resource-content">
+          ${resource.content}
+        </div>
+
+      `;
+
+      document.getElementById(
+        "resourceModal"
+      ).classList.add("active");
+
+    }
+
+
+    document.getElementById(
+      "modalClose"
+    ).addEventListener(
+      "click",
+      () => {
+
+        document.getElementById(
+          "resourceModal"
+        ).classList.remove("active");
+
+      }
+    );
+
+
+    document.getElementById(
+      "resourceModal"
+    ).addEventListener(
+      "click",
+      event => {
+
+        if (
+          event.target.id ===
+          "resourceModal"
+        ) {
+
+          event.target.classList.remove(
+            "active"
+          );
+
+        }
+
+      }
+    );
+
+
+    classSelect.addEventListener(
+      "change",
+      displayResources
+    );
+
+    subjectSelect.addEventListener(
+      "change",
+      displayResources
+    );
+
+    searchBox.addEventListener(
+      "input",
+      displayResources
+    );
+
+
+    displayResources();
+
+  </script>
+
+</body>
+</html>
