@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Results | Arunodoi Academy</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container nav-container">
+
+      <div class="logo">
+        Arunodoi Academy
+      </div>
+
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="academic.html">Academics</a>
+        <a href="quiz.html">Quiz</a>
+        <a href="results.html">Results</a>
+        <a href="#">Portal</a>
+      </nav>
+
+    </div>
+  </header>
+
+
+  <!-- Results Hero -->
+  <section class="hero">
+    <div class="container">
+      <h1>Student Results</h1>
+      <p>View academic and online test results of Arunodoi Academy students.</p>
+    </div>
+  </section>
+
+
+  <!-- Results Section -->
+  <section class="section">
+    <div class="container">
+
+      <div class="section-title">
+        <h2>Results</h2>
+        <p>Student result information will appear here.</p>
+      </div>
+
+      <div class="card-grid">
+
+        <div class="card">
+          <div class="card-icon">📊</div>
+          <h3>Online Test Results</h3>
+          <p>
+            View marks and performance from online MCQ tests.
+          </p>
+          <button class="btn" onclick="showMessage()">
+            View Results
+          </button>
+        </div>
+
+
+        <div class="card">
+          <div class="card-icon">🏆</div>
+          <h3>Class Performance</h3>
+          <p>
+            Class-wise performance information will be available here.
+          </p>
+          <button class="btn" onclick="showMessage()">
+            Coming Soon
+          </button>
+        </div>
+
+
+        <div class="card">
+          <div class="card-icon">📚</div>
+          <h3>Academic Results</h3>
+          <p>
+            Examination results and academic records will be added here.
+          </p>
+          <button class="btn" onclick="showMessage()">
+            Coming Soon
+          </button>
+        </div>
+
+      </div>
+
+      <div id="message" style="
+        display:none;
+        margin-top:25px;
+        padding:15px;
+        border-radius:10px;
+        text-align:center;
+        background:#eef6ff;
+      ">
+        Result system will be connected in the next step.
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <p>© 2026 Arunodoi Academy. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+
+  <script>
+    function showMessage() {
+      document.getElementById("message").style.display = "block";
+    }
+  </script>
+
+</body>
+</html>
