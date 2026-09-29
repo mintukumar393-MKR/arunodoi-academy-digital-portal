@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="description" content="Arunodoi Academy School Photos and Gallery">
+
+  <title>Photos | Arunodoi Academy</title>
+
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    .photos-hero {
+      padding: 90px 0 60px;
+      background: linear-gradient(120deg, #f8fbff, #eef6ff);
+    }
+
+    .photos-hero h1 {
+      font-size: clamp(42px, 7vw, 72px);
+      margin: 12px 0;
+      color: #102746;
+    }
+
+    .photos-hero h1 span {
+      color: #1672bd;
+    }
+
+    .photos-hero p {
+      max-width: 700px;
+      color: #667085;
+      font-size: 18px;
+      line-height: 1.7;
+    }
+
+    .photo-section {
+      padding: 70px 0;
+    }
+
+    .photo-heading {
+      margin-bottom: 30px;
+    }
+
+    .photo-heading h2 {
+      font-size: 34px;
+      color: #102746;
+      margin: 8px 0;
+    }
+
+    .photo-heading p {
+      color: #667085;
+    }
+
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .photo-card {
+      background: white;
+      border: 1px solid #e1e8f0;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 8px 25px rgba(16, 39, 70, 0.06);
+      transition: 0.25s ease;
+    }
+
+    .photo-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 35px rgba(16, 39, 70, 0.12);
+    }
+
+    .photo-placeholder {
+      height: 220px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 55px;
+      background: #eef6ff;
+    }
+
+    .photo-info {
+      padding: 18px;
+    }
+
+    .photo-info h3 {
+      margin: 0 0 7px;
+      color: #102746;
+    }
+
+    .photo-info p {
+      margin: 0;
+      color: #667085;
+      font-size: 14px;
+    }
+
+    @media (max-width: 800px) {
+      .photo-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 550px) {
+      .photos-hero {
+        padding: 60px 0 40px;
+      }
+
+      .photo-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .photo-placeholder {
+        height: 210px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header class="topbar">
+    <div class="container nav-wrap">
+
+      <a class="brand" href="index.html">
+        <div class="logo">AA</div>
+
+        <div>
+          <strong>Arunodoi Academy</strong>
+          <span>Tangla, Udalguri, Assam</span>
+        </div>
+      </a>
+
+      <button class="menu-toggle" aria-label="Open menu">☰</button>
+
+      <nav id="mainNav">
+        <a href="index.html">Home</a>
+        <a href="academic.html">Academics</a>
+        <a href="quiz.html">Quiz</a>
+        <a href="results.html">Results</a>
+        <a href="photos.html">Photos</a>
+      </nav>
+
+    </div>
+  </header>
+
+
+  <!-- HERO -->
+  <section class="photos-hero">
+    <div class="container">
+
+      <p class="eyebrow">MEMORIES</p>
+
+      <h1>
+        School <span>Photos</span>
+      </h1>
+
+      <p>
+        Explore memorable moments, celebrations, competitions,
+        exhibitions and activities of Arunodoi Academy.
+      </p>
+
+    </div>
+  </section>
+
+
+  <!-- PHOTOS -->
+  <main class="photo-section">
+
+    <div class="container">
+
+      <div class="photo-heading">
+        <p class="eyebrow">SCHOOL LIFE</p>
+        <h2>Photo Gallery</h2>
+        <p>More photographs will be added regularly.</p>
+      </div>
+
+
+      <div class="photo-grid">
+
+        <article class="photo-card">
+
+          <div class="photo-placeholder">
+            📸
+          </div>
+
+          <div class="photo-info">
+            <h3>School Events</h3>
+            <p>Important school programmes and celebrations.</p>
+          </div>
+
+        </article>
+
+
+        <article class="photo-card">
+
+          <div class="photo-placeholder">
+            🎭
+          </div>
+
+          <div class="photo-info">
+            <h3>Cultural Programmes</h3>
+            <p>Performances and cultural activities.</p>
+          </div>
+
+        </article>
+
+
+        <article class="photo-card">
+
+          <div class="photo-placeholder">
+            🏆
+          </div>
+
+          <div class="photo-info">
+            <h3>Sports & Competitions</h3>
+            <p>Sports events, quizzes and competitions.</p>
+          </div>
+
+        </article>
+
+
+        <article class="photo-card">
+
+          <div class="photo-placeholder">
+            🔬
+          </div>
+
+          <div class="photo-info">
+            <h3>Science Exhibitions</h3>
+            <p>Student projects, models and innovations.</p>
+          </div>
+
+        </article>
+
+
+        <article class="photo-card">
+
+          <div class="photo-placeholder">
+            👨‍🏫
+          </div>
+
+          <div class="photo-info">
+            <h3>Teachers' Day</h3>
+            <p>Memorable moments from Teachers' Day programmes.</p>
+          </div>
+
+        </article>
+
+
+        <article class="photo-card">
+
+          <div class="photo-placeholder">
+            🏫
+          </div>
+
+          <div class="photo-info">
+            <h3>School Activities</h3>
+            <p>Everyday learning and student activities.</p>
+          </div>
+
+        </article>
+
+      </div>
+
+    </div>
+
+  </main>
+
+
+  <!-- FOOTER -->
+  <footer>
+
+    <div class="container footer-grid">
+
+      <div>
+
+        <div class="brand footer-brand">
+
+          <div class="logo">AA</div>
+
+          <div>
+            <strong>Arunodoi Academy</strong>
+            <span>Tangla, Udalguri, Assam</span>
+          </div>
+
+        </div>
+
+        <p>Learn • Explore • Grow</p>
+
+      </div>
+
+
+      <div>
+
+        <h3>Portal</h3>
+
+        <a href="index.html">Home</a>
+        <a href="academic.html">Academics</a>
+        <a href="quiz.html">Quiz</a>
+        <a href="results.html">Results</a>
+
+      </div>
+
+
+      <div>
+
+        <h3>Contact</h3>
+
+        <p>
+          Arunodoi Academy<br>
+          Tangla, Udalguri, Assam
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <div class="copyright">
+      © <span id="year"></span> Arunodoi Academy. All rights reserved.
+    </div>
+
+  </footer>
+
+
+  <script>
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
+  </script>
+
+</body>
+</html>
