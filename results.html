@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,111 +12,285 @@
 
 <body>
 
-  <!-- Header -->
-  <header class="site-header">
-    <div class="container nav-container">
+  <!-- HEADER -->
+  <header class="topbar">
 
-      <div class="logo">
-        Arunodoi Academy
-      </div>
+    <div class="container nav-wrap">
+
+      <a class="brand" href="index.html">
+
+        <div class="logo">
+          AA
+        </div>
+
+        <div>
+          <strong>Arunodoi Academy</strong>
+          <span>Tangla, Udalguri, Assam</span>
+        </div>
+
+      </a>
 
       <nav>
-        <a href="index.html">Home</a>
-        <a href="academic.html">Academics</a>
-        <a href="quiz.html">Quiz</a>
-        <a href="results.html">Results</a>
-        <a href="#">Portal</a>
+
+        <a href="index.html">
+          Home
+        </a>
+
+        <a href="academic.html">
+          Academics
+        </a>
+
+        <a href="quiz.html">
+          Quiz
+        </a>
+
+        <a href="results.html">
+          Results
+        </a>
+
       </nav>
 
     </div>
+
   </header>
 
 
-  <!-- Results Hero -->
+  <!-- HERO -->
   <section class="hero">
+
     <div class="container">
-      <h1>Student Results</h1>
-      <p>View academic and online test results of Arunodoi Academy students.</p>
+
+      <p class="eyebrow">
+        STUDENT PORTAL
+      </p>
+
+      <h1>
+        Student Results
+      </h1>
+
+      <p class="hero-text">
+        View online test performance and academic results
+        of Arunodoi Academy students.
+      </p>
+
     </div>
+
   </section>
 
 
-  <!-- Results Section -->
-  <section class="section">
-    <div class="container">
+  <!-- RESULTS -->
+  <section class="section container">
 
-      <div class="section-title">
-        <h2>Results</h2>
-        <p>Student result information will appear here.</p>
-      </div>
+    <div class="section-heading">
 
-      <div class="card-grid">
+      <div>
 
-        <div class="card">
-          <div class="card-icon">📊</div>
-          <h3>Online Test Results</h3>
-          <p>
-            View marks and performance from online MCQ tests.
-          </p>
-          <button class="btn" onclick="showMessage()">
-            View Results
-          </button>
-        </div>
+        <p class="eyebrow">
+          PERFORMANCE
+        </p>
 
-
-        <div class="card">
-          <div class="card-icon">🏆</div>
-          <h3>Class Performance</h3>
-          <p>
-            Class-wise performance information will be available here.
-          </p>
-          <button class="btn" onclick="showMessage()">
-            Coming Soon
-          </button>
-        </div>
-
-
-        <div class="card">
-          <div class="card-icon">📚</div>
-          <h3>Academic Results</h3>
-          <p>
-            Examination results and academic records will be added here.
-          </p>
-          <button class="btn" onclick="showMessage()">
-            Coming Soon
-          </button>
-        </div>
+        <h2>
+          Results
+        </h2>
 
       </div>
 
-      <div id="message" style="
+    </div>
+
+
+    <div class="feature-grid">
+
+      <!-- ONLINE TEST -->
+      <div class="feature-card">
+
+        <span>
+          📊
+        </span>
+
+        <h3>
+          Online Test Results
+        </h3>
+
+        <p>
+          View marks and performance from online MCQ tests.
+        </p>
+
+        <button
+          class="btn primary"
+          onclick="showMessage()">
+          View Results
+        </button>
+
+      </div>
+
+
+      <!-- CLASS PERFORMANCE -->
+      <div class="feature-card">
+
+        <span>
+          🏆
+        </span>
+
+        <h3>
+          Class Performance
+        </h3>
+
+        <p>
+          Class-wise performance information will be
+          available here.
+        </p>
+
+        <button
+          class="btn secondary"
+          onclick="showMessage()">
+          Coming Soon
+        </button>
+
+      </div>
+
+
+      <!-- ACADEMIC RESULTS -->
+      <div class="feature-card">
+
+        <span>
+          📚
+        </span>
+
+        <h3>
+          Academic Results
+        </h3>
+
+        <p>
+          Examination results and academic records
+          will be added here.
+        </p>
+
+        <button
+          class="btn secondary"
+          onclick="showMessage()">
+          Coming Soon
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- MESSAGE -->
+    <div
+      id="message"
+      style="
         display:none;
-        margin-top:25px;
-        padding:15px;
-        border-radius:10px;
+        margin-top:30px;
+        padding:18px;
+        border:1px solid var(--line);
+        border-radius:12px;
+        background:#eef5fb;
         text-align:center;
-        background:#eef6ff;
+        font-weight:600;
       ">
-        Result system will be connected in the next step.
-      </div>
+
+      Result system will be connected in the next step.
 
     </div>
+
   </section>
 
 
-  <!-- Footer -->
-  <footer class="site-footer">
-    <div class="container">
-      <p>© 2026 Arunodoi Academy. All Rights Reserved.</p>
+  <!-- FOOTER -->
+  <footer>
+
+    <div class="container footer-grid">
+
+      <div>
+
+        <div class="brand footer-brand">
+
+          <div class="logo">
+            AA
+          </div>
+
+          <div>
+
+            <strong>
+              Arunodoi Academy
+            </strong>
+
+            <span>
+              Tangla, Udalguri, Assam
+            </span>
+
+          </div>
+
+        </div>
+
+        <p>
+          Learn • Explore • Grow
+        </p>
+
+      </div>
+
+
+      <div>
+
+        <h3>
+          Portal
+        </h3>
+
+        <a href="index.html">
+          Home
+        </a>
+
+        <a href="academic.html">
+          Academics
+        </a>
+
+        <a href="quiz.html">
+          Quiz
+        </a>
+
+        <a href="results.html">
+          Results
+        </a>
+
+      </div>
+
+
+      <div>
+
+        <h3>
+          Contact
+        </h3>
+
+        <p>
+          Arunodoi Academy<br>
+          Tangla, Udalguri, Assam
+        </p>
+
+      </div>
+
     </div>
+
+
+    <div class="copyright">
+
+      © 2026 Arunodoi Academy. All rights reserved.
+
+    </div>
+
   </footer>
 
 
   <script>
+
     function showMessage() {
+
       document.getElementById("message").style.display = "block";
+
     }
+
   </script>
 
 </body>
+
 </html>
