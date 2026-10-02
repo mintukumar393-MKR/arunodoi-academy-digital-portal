@@ -1091,63 +1091,66 @@ document.getElementById("submitBtn")
     document.querySelector(
       `input[name="q${index}"]:checked`
     );
+    const card = document.querySelectorAll(".question-card")[index];
 
+let feedback = card.querySelector(".answer-feedback");
 
-    if(
-      selected &&
-      Number(selected.value)===item.a
-    ){
+if (!feedback) {
+  feedback = document.createElement("div");
+  feedback.className = "answer-feedback";
+  card.appendChild(feedback);
+}
 
-      score++;
+if (
+  selected &&
+  Number(selected.value) === item.a
+) {
 
-      reviewHTML+=`
+  score++;
 
-      <div class="review-item correct">
+  card.classList.add("correct-answer");
+  card.classList.remove("wrong-answer");
 
+  feedback.innerHTML = "✓ Correct Answer";
+
+  reviewHTML += `
+    <div class="review-item correct">
       <strong>
       Question ${index+1}: Correct ✓
       </strong>
+    </div>
+  `;
 
-      </div>
+} else {
 
-      `;
+  const correctOption =
+    item.o[item.a]
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;");
 
-    }else{
+  card.classList.add("wrong-answer");
+  card.classList.remove("correct-answer");
 
-      const correctOption =
-      item.o[item.a]
-      .replace(/</g,"&lt;")
-      .replace(/>/g,"&gt;");
+  feedback.innerHTML =
+    `✗ Wrong Answer<br>
+     Correct answer: <b>${correctOption}</b>`;
 
-
-      reviewHTML+=`
-
-      <div class="review-item wrong">
-
+  reviewHTML += `
+    <div class="review-item wrong">
       <strong>
       Question ${index+1}: Incorrect ✗
       </strong>
-
       <br>
-
       Correct answer:
       <b>${correctOption}</b>
+    </div>
+  `;
 
-      </div>
-
-      `;
-
-    }
-
-  });
-
+}  });
 
   const total=questions.length;
-
   const percentage=
   ((score/total)*100).toFixed(1);
-
-
   /* SAVE LATEST RESULT */
 
   localStorage.setItem(
