@@ -148,7 +148,33 @@
   border-radius:8px;
   background:#f5f5f5;
 }
+.answer-feedback{
+  display:none;
+  margin-top:12px;
+  padding:10px 12px;
+  border-radius:8px;
+  font-weight:700;
+}
 
+.question-card.correct-answer{
+  border:2px solid #2e8b57;
+}
+
+.question-card.wrong-answer{
+  border:2px solid #d9534f;
+}
+
+.question-card.correct-answer .answer-feedback{
+  display:block;
+  color:#2e8b57;
+  background:#eaf7ef;
+}
+
+.question-card.wrong-answer .answer-feedback{
+  display:block;
+  color:#d9534f;
+  background:#fdecec;
+}
 .correct{
   border-left:4px solid #2e8b57;
 }
