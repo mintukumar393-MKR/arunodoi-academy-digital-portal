@@ -430,9 +430,9 @@
         <button id="reset-cam-btn" class="btn-pill">
           <i class="fa-solid fa-arrows-to-circle"></i> Reset View
         </button>
-        <button id="toggle-code-btn" class="btn-pill">
-          <i class="fa-solid fa-code"></i> CSS Snippet
-        </button>
+        <button id="toggle-music-btn" class="btn-pill">
+  <i class="fa-solid fa-music"></i> Music Off
+</button>
       </div>
     </header>
 
@@ -487,34 +487,6 @@
     </footer>
   </div>
 
-  <!-- Reel Code Snippet Window -->
-  <div class="code-window interactive" id="code-snippet-window">
-    <div class="code-bar">
-      <div class="traffic-dots">
-        <div class="dot dot-red"></div>
-        <div class="dot dot-yellow"></div>
-        <div class="dot dot-green"></div>
-      </div>
-      <div class="code-filename">the_coding_wizard.css</div>
-      <div></div>
-    </div>
-    <div class="code-content">
-<pre><code><span class="sel">.solar_system</span> {
-  <span class="prop">transform-style</span>: <span class="val">preserve-3d</span>;
-  <span class="prop">pointer-events</span>: <span class="val">none</span>;
-  <span class="prop">position</span>: <span class="val">absolute</span>;
-  <span class="prop">left</span>: <span class="val">0</span>;
-  <span class="prop">right</span>: <span class="val">0</span>;
-}
-
-<span class="sel">.solar_system .planet_description a</span> {
-  <span class="prop">color</span>: <span class="val">#fea082</span>;
-  <span class="prop">padding</span>: <span class="val">0 0 10px 0</span>;
-  <span class="prop">border-bottom</span>: <span class="val">2px solid</span>;
-  <span class="prop">transition</span>: <span class="val">all 0.2s</span>;
-}</code></pre>
-    </div>
-  </div>
 
   <!-- Interactive 3D App Logic -->
   <script>
@@ -879,10 +851,108 @@
       orbitLines.forEach(line => line.visible = isVisible);
     });
 
-    const codeSnippet = document.getElementById('code-snippet-window');
-    document.getElementById('toggle-code-btn').addEventListener('click', () => {
-      codeSnippet.classList.toggle('minimized');
-    });
+// Background Space Music
+let audioContext;
+let musicTimer;
+let musicPlaying = false;
+
+const musicBtn = document.getElementById('toggle-music-btn');
+
+const notes = [
+  261.63, 329.63, 392.00,
+  329.63, 293.66, 349.23,
+  440.00, 392.00
+];
+
+function playSpaceNote(frequency, duration = 1.8) {
+  if (!audioContext) {
+    audioContext = new (window.AudioContext || window.webkitAudioContext)();
+  }
+
+  const oscillator = audioContext.createOscillator();
+  const gain = audioContext.createGain();
+
+  oscillator.type = 'sine';
+  oscillator.frequency.value = frequency;
+
+  gain.gain.setValueAtTime(0.0001, audioContext.currentTime);
+  gain.gain.exponentialRampToValueAtTime(
+    0.045,
+    audioContext.currentTime + 0.15
+  );
+
+  gain.gain.exponentialRampToValueAtTime(
+    0.0001,
+    audioContext.currentTime + duration
+  );
+
+  oscillator.connect(gain);
+  gain.connect(audioContext.destination);
+
+  oscillator.start();
+  oscillator.stop(audioContext.currentTime + duration);
+}
+
+function startSpaceMusic() {
+  if (musicPlaying) return;
+
+  musicPlaying = true;
+
+  let index = 0;
+
+  function playNext() {
+    if (!musicPlaying) return;
+
+    playSpaceNote(notes[index], 2.2);
+
+    index = (index + 1) % notes.length;
+
+    musicTimer = setTimeout(playNext, 1900);
+  }
+
+  playNext();
+}
+
+function stopSpaceMusic() {
+  musicPlaying = false;
+
+  if (musicTimer) {
+    clearTimeout(musicTimer);
+  }
+}
+
+musicBtn.addEventListener('click', async () => {
+
+  if (!audioContext) {
+    audioContext = new (
+      window.AudioContext ||
+      window.webkitAudioContext
+    )();
+  }
+
+  if (audioContext.state === 'suspended') {
+    await audioContext.resume();
+  }
+
+  if (!musicPlaying) {
+
+    startSpaceMusic();
+
+    musicBtn.innerHTML =
+      '<i class="fa-solid fa-volume-high"></i> Music On';
+
+    musicBtn.classList.add('active');
+
+  } else {
+
+    stopSpaceMusic();
+
+    musicBtn.innerHTML =
+      '<i class="fa-solid fa-music"></i> Music Off';
+
+    musicBtn.classList.remove('active');
+  }
+});
 
     // Speed Controls
     document.querySelectorAll('.speed-btn').forEach(btn => {
