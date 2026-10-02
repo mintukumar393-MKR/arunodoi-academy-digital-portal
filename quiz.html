@@ -19,14 +19,9 @@
 .quiz-hero h1 span{color:var(--accent2)}
 .quiz-hero p{color:var(--muted);max-width:750px}
 
-.quiz-container{
-  padding:40px 0 70px;
-}
+.quiz-container{padding:40px 0 70px}
 
-.quiz-info,
-.student-box,
-.question-card,
-.result-box{
+.quiz-info,.student-box,.question-card,.result-box{
   background:#fff;
   border:1px solid var(--line);
   border-radius:16px;
@@ -73,11 +68,6 @@
   letter-spacing:1px;
 }
 
-.lesson-label{
-  color:var(--muted);
-  margin-left:8px;
-}
-
 .question-card h3{
   margin:10px 0 18px;
   font-size:17px;
@@ -92,21 +82,16 @@
   cursor:pointer;
 }
 
-.option:hover{
-  background:#f4f8fc;
-}
+.option:hover{background:#f4f8fc}
 
-.option input{
-  margin-right:9px;
-}
+.option input{margin-right:9px}
 
 .submit-box{
   text-align:center;
   margin-top:30px;
 }
 
-.submit-btn,
-.retry-btn{
+.submit-btn,.retry-btn{
   border:0;
   padding:13px 24px;
   border-radius:9px;
@@ -141,13 +126,8 @@
   background:#f5f5f5;
 }
 
-.correct{
-  border-left:4px solid #2e8b57;
-}
-
-.wrong{
-  border-left:4px solid #d9534f;
-}
+.correct{border-left:4px solid #2e8b57}
+.wrong{border-left:4px solid #d9534f}
 
 @media(max-width:600px){
   .quiz-hero h1{font-size:38px}
@@ -184,6 +164,7 @@
 
 <section class="quiz-hero">
 <div class="container">
+
 <p class="eyebrow">ONLINE TEST</p>
 
 <h1>
@@ -191,7 +172,7 @@ Class VIII <span>Computer Science</span>
 </h1>
 
 <p>
-230 Multiple Choice Questions covering Lessons 1–5.
+Computer Science MCQ Test – Lessons 1 to 5
 </p>
 
 </div>
@@ -206,8 +187,8 @@ Class VIII <span>Computer Science</span>
 <strong>Test Instructions</strong>
 
 <ul>
-<li>Total Questions: 230</li>
-<li>Total Marks: 230</li>
+<li>Total Questions: <span id="totalQuestions"></span></li>
+<li>Total Marks: <span id="totalMarks"></span></li>
 <li>Each question carries 1 mark.</li>
 <li>Select one correct answer for each question.</li>
 <li>Enter the student's full name.</li>
@@ -218,15 +199,13 @@ Class VIII <span>Computer Science</span>
 
 <div class="student-box">
 
-<label for="studentName">
-Student Name
-</label>
+<label for="studentName">Student Name</label>
 
 <input
 id="studentName"
 type="text"
 placeholder="Enter student's full name"
-required
+autocomplete="name"
 >
 
 </div>
@@ -236,10 +215,9 @@ required
 <div class="submit-box">
 
 <button
-type="submit"
-form="quizForm"
-class="submit-btn"
->
+type="button"
+id="submitBtn"
+class="submit-btn">
 Submit Test
 </button>
 
@@ -255,15 +233,12 @@ Submit Test
 
 <p id="resultMessage"></p>
 
-<div
-id="answerReview"
-class="answer-review">
-</div>
+<div id="answerReview" class="answer-review"></div>
 
 <button
+type="button"
 class="retry-btn"
-onclick="location.reload()"
->
+onclick="location.reload()">
 Try Again
 </button>
 
@@ -321,14 +296,11 @@ Tangla, Udalguri, Assam
 
 <script>
 
-/* =====================================================
-   CLASS VIII COMPUTER SCIENCE
-   230 MCQs
-   ===================================================== */
+/* ==========================================
+   QUESTION BANK
+   ========================================== */
 
 const questions = [
-
-/* ================= LESSON 1 ================= */
 
 {
 lesson:"Lesson 1",
@@ -360,43 +332,8 @@ a:0
 
 {
 lesson:"Lesson 1",
-q:"Which network is used around one person?",
-o:["PAN","WAN","MAN","LAN"],
-a:0
-},
-
-{
-lesson:"Lesson 1",
 q:"Which topology uses a central hub or switch?",
 o:["Star","Bus","Ring","Mesh"],
-a:0
-},
-
-{
-lesson:"Lesson 1",
-q:"Which topology uses a single backbone cable?",
-o:["Bus","Star","Ring","Mesh"],
-a:0
-},
-
-{
-lesson:"Lesson 1",
-q:"Which topology connects computers in a closed loop?",
-o:["Ring","Bus","Star","Mesh"],
-a:0
-},
-
-{
-lesson:"Lesson 1",
-q:"Which topology provides direct connections between many pairs of devices?",
-o:["Mesh","Bus","Ring","Star"],
-a:0
-},
-
-{
-lesson:"Lesson 1",
-q:"Which topology generally requires the highest cabling cost?",
-o:["Mesh","Bus","Ring","Star"],
 a:0
 },
 
@@ -409,36 +346,8 @@ a:0
 
 {
 lesson:"Lesson 1",
-q:"Which device is commonly used to connect devices within a LAN?",
-o:["Switch","Monitor","Scanner","Speaker"],
-a:0
-},
-
-{
-lesson:"Lesson 1",
-q:"Which device broadcasts data to all connected ports?",
-o:["Hub","Switch","Router","NIC"],
-a:0
-},
-
-{
-lesson:"Lesson 1",
 q:"NIC stands for:",
 o:["Network Interface Card","Network Internet Cable","New Internet Connection","Network Internal Computer"],
-a:0
-},
-
-{
-lesson:"Lesson 1",
-q:"The rules used for communication over a network are called:",
-o:["Protocols","Programs","Browsers","Drivers"],
-a:0
-},
-
-{
-lesson:"Lesson 1",
-q:"Which protocol is used for transferring webpages?",
-o:["HTTP","FTP","SMTP","POP"],
 a:0
 },
 
@@ -448,169 +357,6 @@ q:"DNS converts:",
 o:["Domain names into IP addresses","Images into text","Passwords into files","Files into folders"],
 a:0
 },
-
-{
-lesson:"Lesson 1",
-q:"The Internet is an example of a:",
-o:["WAN","LAN","PAN","MAN"],
-a:0
-},
-
-{
-lesson:"Lesson 1",
-q:"A computer that requests services from a server is called a:",
-o:["Client","Router","Hub","Gateway"],
-a:0
-},
-
-{
-lesson:"Lesson 1",
-q:"A computer that provides services to other computers is called a:",
-o:["Server","Client","Switch","NIC"],
-a:0
-},
-
-{
-lesson:"Lesson 1",
-q:"Which is an important benefit of networking?",
-o:["Resource sharing","Removing software","Stopping communication","Reducing storage to zero"],
-a:0
-},
-
-{
-lesson:"Lesson 1",
-q:"Which resource can be shared over a network?",
-o:["Printer","Chair","Desk","Notebook"],
-a:0
-},
-
-{
-lesson:"Lesson 1",
-q:"Which device can connect a computer to a network?",
-o:["NIC","Monitor","Keyboard","Speaker"],
-a:0
-},
-
-{
-lesson:"Lesson 1",
-q:"Which topology is generally simple to install?",
-o:["Bus","Mesh","Ring","Full Mesh"],
-a:0
-},
-
-{
-lesson:"Lesson 1",
-q:"If the central switch fails in a star topology, the connected network is:",
-o:["Affected","Always unaffected","Converted to bus","Converted to ring"],
-a:0
-},
-
-{
-lesson:"Lesson 1",
-q:"In a bus topology, failure of the backbone can:",
-o:["Affect the whole network","Improve speed","Create a WAN","Affect only the keyboard"],
-a:0
-},
-
-{
-lesson:"Lesson 1",
-q:"Which device directs data packets between networks?",
-o:["Router","Keyboard","Monitor","Mouse"],
-a:0
-},
-
-{
-lesson:"Lesson 1",
-q:"Which network is commonly used to connect offices in different countries?",
-o:["WAN","PAN","LAN","MAN"],
-a:0
-},
-
-{
-lesson:"Lesson 1",
-q:"Which network is commonly used within a school?",
-o:["LAN","WAN","MAN","PAN"],
-a:0
-},
-
-{
-lesson:"Lesson 1",
-q:"Which network is suitable for devices around a single person?",
-o:["PAN","WAN","MAN","LAN"],
-a:0
-},
-
-{
-lesson:"Lesson 1",
-q:"A protocol mainly defines:",
-o:["Communication rules","Screen size","Keyboard layout","File colour"],
-a:0
-},
-
-{
-lesson:"Lesson 1",
-q:"A network can help users share files and:",
-o:["Printers","Chairs","Bookshelves","Uniforms"],
-a:0
-},
-
-{
-lesson:"Lesson 1",
-q:"A network arranged around a central device is called:",
-o:["Star","Bus","Ring","Mesh"],
-a:0
-},
-
-{
-lesson:"Lesson 1",
-q:"In a ring topology, each device is generally connected to:",
-o:["Two neighbouring devices","Every device","Only a server","A printer"],
-a:0
-},
-
-{
-lesson:"Lesson 1",
-q:"A network limited to a small area is called:",
-o:["LAN","WAN","MAN","PAN"],
-a:0
-},
-
-{
-lesson:"Lesson 1",
-q:"Which network is commonly used across a metropolitan area?",
-o:["MAN","PAN","LAN","WAN"],
-a:0
-},
-
-{
-lesson:"Lesson 1",
-q:"Which device connects dissimilar networks?",
-o:["Gateway","Hub","Switch","NIC"],
-a:0
-},
-
-{
-lesson:"Lesson 1",
-q:"Which of the following is a network topology?",
-o:["Star","Folder","Browser","Spreadsheet"],
-a:0
-},
-
-{
-lesson:"Lesson 1",
-q:"What does networking allow users to do?",
-o:["Share resources","Delete all files","Stop communication","Remove hardware"],
-a:0
-},
-
-{
-lesson:"Lesson 1",
-q:"Which term means connecting computers and devices together?",
-o:["Networking","Formatting","Booting","Printing"],
-a:0
-},
-
-/* ================= LESSON 2 ================= */
 
 {
 lesson:"Lesson 2",
@@ -628,141 +374,29 @@ a:0
 
 {
 lesson:"Lesson 2",
-q:"A database is a collection of:",
-o:["Related data","Pictures only","Programs only","Web pages only"],
-a:0
-},
-
-{
-lesson:"Lesson 2",
-q:"A table consists of rows and:",
-o:["Fields","Slides","Paragraphs","Pages"],
-a:0
-},
-
-{
-lesson:"Lesson 2",
-q:"A row in a table is called a:",
+q:"A row in an Access table is called a:",
 o:["Record","Field","Query","Form"],
 a:0
 },
 
 {
 lesson:"Lesson 2",
-q:"A column in a table is called a:",
+q:"A column in an Access table is called a:",
 o:["Field","Record","Report","Database"],
 a:0
 },
 
 {
 lesson:"Lesson 2",
-q:"The intersection of a row and column contains a:",
-o:["Data value","Table","Query","Form"],
+q:"In which view is data entered into an Access table?",
+o:["Datasheet View","Design View","Report View","Print View"],
 a:0
 },
 
 {
 lesson:"Lesson 2",
-q:"Data is entered into an Access table in:",
-o:["Datasheet View","Report View","Print Preview","Slide View"],
-a:0
-},
-
-{
-lesson:"Lesson 2",
-q:"Which view is used to define fields and their data types?",
-o:["Design View","Datasheet View","Report View","Form View"],
-a:0
-},
-
-{
-lesson:"Lesson 2",
-q:"Which key is used to rename a table in the supplied material?",
+q:"Which key is used to rename a table in the supplied Access material?",
 o:["F2","F4","F8","F12"],
-a:0
-},
-
-{
-lesson:"Lesson 2",
-q:"Which shortcut saves a database object?",
-o:["Ctrl+S","Ctrl+P","Ctrl+N","Ctrl+Z"],
-a:0
-},
-
-{
-lesson:"Lesson 2",
-q:"Which shortcut opens an existing database?",
-o:["Ctrl+O","Ctrl+S","Ctrl+W","Ctrl+E"],
-a:0
-},
-
-{
-lesson:"Lesson 2",
-q:"Which command closes Access?",
-o:["Alt+F4","F1","Shift+F1","Ctrl+N"],
-a:0
-},
-
-{
-lesson:"Lesson 2",
-q:"A primary key uniquely identifies each:",
-o:["Record","Database","Report","Form"],
-a:0
-},
-
-{
-lesson:"Lesson 2",
-q:"A primary key cannot contain:",
-o:["Duplicate values","Unique values","Numbers","Text"],
-a:0
-},
-
-{
-lesson:"Lesson 2",
-q:"Which data type stores words or short text?",
-o:["Short Text","Currency","Date/Time","Yes/No"],
-a:0
-},
-
-{
-lesson:"Lesson 2",
-q:"Which data type stores monetary values?",
-o:["Currency","Short Text","Yes/No","Long Text"],
-a:0
-},
-
-{
-lesson:"Lesson 2",
-q:"Which data type stores dates and times?",
-o:["Date/Time","Number","Currency","Short Text"],
-a:0
-},
-
-{
-lesson:"Lesson 2",
-q:"Which data type stores a large amount of text?",
-o:["Long Text","Currency","Yes/No","Number"],
-a:0
-},
-
-{
-lesson:"Lesson 2",
-q:"Which data type stores logical values?",
-o:["Yes/No","Currency","Short Text","Date/Time"],
-a:0
-},
-
-{
-lesson:"Lesson 2",
-q:"Which data type is suitable for numerical values?",
-o:["Number","Short Text","Long Text","Yes/No"],
-a:0
-},
-
-{
-lesson:"Lesson 2",
-q:"Which object stores data in rows and columns?",
-o:["Table","Query","Form","Report"],
 a:0
 },
 
@@ -781,344 +415,273 @@ a:0
 },
 
 {
-lesson:"Lesson 2",
-q:"Which object presents data in printable format?",
-o:["Report","Form","Table","Query"],
-a:0
-},
-
-{
-lesson:"Lesson 2",
-q:"RDBMS stands for:",
-o:["Relational Database Management System","Random Data Backup Management System","Record Database Main System","Relational Data Browser Management Service"],
-a:0
-},
-
-{
-lesson:"Lesson 2",
-q:"SQL stands for:",
-o:["Structured Query Language","Simple Question Language","System Query Link","Structured Quick List"],
-a:0
-},
-
-{
-lesson:"Lesson 2",
-q:"The MS Access window contains the:",
-o:["Ribbon","Timeline","Slide Pane","Formula Bar only"],
-a:0
-},
-
-{
-lesson:"Lesson 2",
-q:"The Ribbon contains:",
-o:["Tabs and commands","Only records","Only tables","Only pictures"],
-a:0
-},
-
-{
-lesson:"Lesson 2",
-q:"Backstage view is opened using the:",
-o:["File tab","Home key","F2 key","Design tab"],
-a:0
-},
-
-{
-lesson:"Lesson 2",
-q:"A database template can be used to:",
-o:["Create a database quickly","Delete Windows","Browse the Internet","Edit videos"],
-a:0
-},
-
-{
-lesson:"Lesson 2",
-q:"A new database can be created from a:",
-o:["Blank database","Music player","Web browser","Printer"],
-a:0
-},
-
-{
-lesson:"Lesson 2",
-q:"A relationship between tables helps to:",
-o:["Connect related data","Change screen brightness","Create animations","Format pictures"],
-a:0
-},
-
-{
-lesson:"Lesson 2",
-q:"A foreign key refers to the primary key of:",
-o:["Another table","A report","A form","A query only"],
-a:0
-},
-
-{
-lesson:"Lesson 2",
-q:"A field's data type determines:",
-o:["Type of data stored","Screen resolution","Printer speed","Internet speed"],
-a:0
-},
-
-{
-lesson:"Lesson 2",
-q:"The New Record button is used to:",
-o:["Enter a new record","Create a report only","Close Access","Rename a database"],
-a:0
-},
-
-{
-lesson:"Lesson 2",
-q:"Design View is mainly used to:",
-o:["Design table structure","Print a report","Browse websites","Play media"],
-a:0
-},
-
-{
-lesson:"Lesson 2",
-q:"Datasheet View displays:",
-o:["Records and fields","Only forms","Only reports","Only relationships"],
-a:0
-},
-
-/* ================= LESSON 3 ================= */
-
-{
 lesson:"Lesson 3",
-q:"Queries, forms and reports are ______ of MS Access.",
-o:["Objects","Folders","Files","Drivers"],
-a:0
-},
-
-{
-lesson:"Lesson 3",
-q:"A report is an effective way to present data in:",
-o:["Printed form","Audio form","Video form","Code form"],
-a:0
-},
-
-{
-lesson:"Lesson 3",
-q:"A query displays specific records that meet a certain:",
-o:["Criterion","Colour","Font","Password"],
-a:0
-},
-
-{
-lesson:"Lesson 3",
-q:"A form is a graphical representation of a:",
-o:["Table","Printer","Browser","Network"],
-a:0
-},
-
-{
-lesson:"Lesson 3",
-q:"Which row in the query design grid displays fields?",
-o:["Field row","Table row","Show row","Criteria row"],
-a:0
-},
-
-{
-lesson:"Lesson 3",
-q:"Which row displays the name of the table?",
-o:["Table row","Field row","Criteria row","Show row"],
+q:"Which row in the query design grid is used to specify a condition?",
+o:["Criteria","Sort","Show","Table"],
 a:0
 },
 
 {
 lesson:"Lesson 3",
 q:"Which row arranges records in ascending or descending order?",
-o:["Sort row","Field row","Table row","Criteria row"],
+o:["Sort","Field","Show","Criteria"],
 a:0
 },
 
 {
 lesson:"Lesson 3",
-q:"Which row decides whether a field appears in the query result?",
-o:["Show row","Sort row","Table row","Field row"],
-a:0
-},
-
-{
-lesson:"Lesson 3",
-q:"Which row is used to specify a condition for filtering records?",
-o:["Criteria row","Show row","Table row","Field row"],
-a:0
-},
-
-{
-lesson:"Lesson 3",
-q:"The Sort row can arrange records in:",
-o:["Ascending or descending order","Only alphabetical order","Only numerical order","Random order"],
-a:0
-},
-
-{
-lesson:"Lesson 3",
-q:"The Show row controls whether a field is:",
-o:["Displayed in the result","Deleted","Renamed","Printed automatically"],
-a:0
-},
-
-{
-lesson:"Lesson 3",
-q:"The Criteria row is used to:",
-o:["Filter records","Change table colour","Insert pictures","Close the query"],
+q:"Which object presents data in printable form?",
+o:["Report","Form","Table","Query"],
 a:0
 },
 
 {
 lesson:"Lesson 3",
 q:"Which view is used to design a form?",
-o:["Design View","Form View only","Print View","Datasheet View only"],
+o:["Design View","Form View","Print View","Report View"],
 a:0
 },
 
 {
-lesson:"Lesson 3",
-q:"Which form view allows normal interaction with records?",
-o:["Form View","Design View","Layout View only","Print Preview"],
+lesson:"Lesson 4",
+q:"Which CSS property changes the capitalization of text?",
+o:["text-align","text-transform","text-indent","font-style"],
+a:1
+},
+
+{
+lesson:"Lesson 4",
+q:"Which CSS property controls the indentation of the first line?",
+o:["text-indent","text-align","line-height","word-break"],
 a:0
 },
 
 {
-lesson:"Lesson 3",
-q:"Which view helps adjust the layout of a form?",
-o:["Layout View","Datasheet View","SQL View","Report View"],
+lesson:"Lesson 4",
+q:"Which CSS property specifies the font family?",
+o:["font-family","font-style","font-size","font-weight"],
 a:0
 },
 
 {
-lesson:"Lesson 3",
-q:"The three views of a form include Form, Layout and:",
-o:["Design View","Print View","Table View","Query View"],
+lesson:"Lesson 4",
+q:"Which CSS property specifies the thickness of a border?",
+o:["border-width","border-height","border-size","border-space"],
 a:0
 },
 
 {
-lesson:"Lesson 3",
-q:"To create a form, first select the:",
-o:["Table","Printer","Report","Browser"],
+lesson:"Lesson 4",
+q:"Which CSS property sets the space between adjacent table cells?",
+o:["border-spacing","border-collapse","margin","padding"],
 a:0
 },
 
 {
-lesson:"Lesson 3",
-q:"To create a form, click the ______ tab.",
-o:["Create","File","Review","View"],
+lesson:"Lesson 5",
+q:"Which HTML tag creates an ordered list?",
+o:["<OL>","<UL>","<LI>","<DL>"],
 a:0
 },
 
 {
-lesson:"Lesson 3",
-q:"The Form command is found in the ______ group.",
-o:["Forms","Tables","Reports","Clipboard"],
+lesson:"Lesson 5",
+q:"Which HTML tag creates an unordered list?",
+o:["<UL>","<OL>","<LI>","<TABLE>"],
 a:0
 },
 
 {
-lesson:"Lesson 3",
-q:"Access creates a form using the fields of the selected:",
-o:["Table","Report","Query only","Database file name"],
+lesson:"Lesson 5",
+q:"A list within another list is called a:",
+o:["Nested List","Ordered List","Definition List","Table List"],
 a:0
 },
 
 {
-lesson:"Lesson 3",
-q:"The Navigation pane can be used to:",
-o:["Move through records","Change monitor size","Browse websites","Draw shapes"],
+lesson:"Lesson 5",
+q:"Which HTML tag is used to create a table?",
+o:["<TABLE>","<TR>","<TD>","<TH>"],
 a:0
 },
 
 {
-lesson:"Lesson 3",
-q:"The Query Design dialog box is opened using a:",
-o:["Query Design icon","Print icon","Save icon","Zoom icon"],
+lesson:"Lesson 5",
+q:"Which HTML tag defines a table row?",
+o:["<TR>","<TD>","<TH>","<TABLE>"],
 a:0
-},
+}
 
-{
-lesson:"Lesson 3",
-q:"The query result can be viewed using the appropriate:",
-o:["Query result icon","Delete icon","Help icon","Close icon"],
-a:0
-},
+];
 
-{
-lesson:"Lesson 3",
-q:"A primary key is a field that:",
-o:["Uniquely identifies a record","Stores only text","Stores only dates","Creates reports"],
-a:0
-},
 
-{
-lesson:"Lesson 3",
-q:"A foreign key is used to:",
-o:["Establish a relationship between tables","Print records","Create a form colour","Sort a report"],
-a:0
-},
+/* ==========================================
+   DISPLAY TOTAL
+   ========================================== */
 
-{
-lesson:"Lesson 3",
-q:"A primary key can contain:",
-o:["Unique values","Duplicate values","Only blank values","Only pictures"],
-a:0
-},
+document.getElementById("totalQuestions").textContent =
+questions.length;
 
-{
-lesson:"Lesson 3",
-q:"A query can be used to retrieve:",
-o:["Specific records","Only images","Only passwords","Only forms"],
-a:0
-},
+document.getElementById("totalMarks").textContent =
+questions.length;
 
-{
-lesson:"Lesson 3",
-q:"A report is mainly used for:",
-o:["Presentation and printing","Data entry only","Table design only","Network setup"],
-a:0
-},
 
-{
-lesson:"Lesson 3",
-q:"A form is mainly useful for:",
-o:["Data entry and viewing","Printing only","Sorting files","Creating networks"],
-a:0
-},
+/* ==========================================
+   CREATE QUESTIONS
+   ========================================== */
 
-{
-lesson:"Lesson 3",
-q:"The design grid is found in the:",
-o:["Query Design window","Report window only","Home screen","Windows desktop"],
-a:0
-},
+const quizForm = document.getElementById("quizForm");
 
-{
-lesson:"Lesson 3",
-q:"The Field row contains:",
-o:["Field names","Table colours","Record numbers only","Form buttons"],
-a:0
-},
+questions.forEach((item,index)=>{
 
-{
-lesson:"Lesson 3",
-q:"The Table row contains:",
-o:["Table names","Field values only","Report titles","Form views"],
-a:0
-},
+const card = document.createElement("div");
 
-{
-lesson:"Lesson 3",
-q:"The Show row normally contains a:",
-o:["Check mark","Picture","Password","Formula"],
-a:0
-},
+card.className = "question-card";
 
-{
-lesson:"Lesson 3",
-q:"A checked Show box means the field will be:",
-o:["Visible in query results","Deleted","Sorted automatically","Used as a key"],
-a:0
-},
+let html = `
+<div class="question-number">
+Question ${index + 1} • ${item.lesson}
+</div>
 
-{
-lesson:"Lesson 3",
-q:"A criterion is a:",
-o:["Condition used for filtering","Table 
+<h3>${item.q}</h3>
+`;
+
+item.o.forEach((option,optionIndex)=>{
+
+const safeOption = option
+.replace(/</g,"&lt;")
+.replace(/>/g,"&gt;");
+
+html += `
+<label class="option">
+
+<input
+type="radio"
+name="q${index}"
+value="${optionIndex}">
+
+(${String.fromCharCode(97 + optionIndex)})
+${safeOption}
+
+</label>
+`;
+
+});
+
+card.innerHTML = html;
+
+quizForm.appendChild(card);
+
+});
+
+
+/* ==========================================
+   SUBMIT TEST
+   ========================================== */
+
+document.getElementById("submitBtn").addEventListener("click",()=>{
+
+const studentName =
+document.getElementById("studentName").value.trim();
+
+if(studentName === ""){
+
+alert("Please enter the student's full name.");
+
+document.getElementById("studentName").focus();
+
+return;
+
+}
+
+let score = 0;
+
+let reviewHTML = "";
+
+questions.forEach((item,index)=>{
+
+const selected =
+document.querySelector(
+`input[name="q${index}"]:checked`
+);
+
+if(selected &&
+Number(selected.value) === item.a){
+
+score++;
+
+reviewHTML += `
+<div class="review-item correct">
+<strong>Question ${index + 1}: Correct ✓</strong>
+</div>
+`;
+
+}else{
+
+const correctOption =
+item.o[item.a]
+.replace(/</g,"&lt;")
+.replace(/>/g,"&gt;");
+
+reviewHTML += `
+<div class="review-item wrong">
+<strong>Question ${index + 1}: Incorrect ✗</strong>
+<br>
+Correct answer:
+<b>${correctOption}</b>
+</div>
+`;
+
+}
+
+});
+
+
+const total = questions.length;
+
+const percentage =
+((score / total) * 100).toFixed(1);
+
+
+/* SAVE RESULT */
+
+localStorage.setItem(
+"arunodoiLatestResult",
+JSON.stringify({
+studentName:studentName,
+score:score,
+total:total,
+percentage:percentage,
+date:new Date().toLocaleString()
+})
+);
+
+
+/* DISPLAY RESULT */
+
+document.getElementById("studentResult").textContent =
+"Student: " + studentName;
+
+document.getElementById("score").textContent =
+`${score} / ${total}`;
+
+document.getElementById("resultMessage").textContent =
+`Percentage: ${percentage}%`;
+
+document.getElementById("answerReview").innerHTML =
+reviewHTML;
+
+document.getElementById("resultBox").style.display =
+"block";
+
+window.scrollTo({
+top:document.getElementById("resultBox").offsetTop - 30,
+behavior:"smooth"
+});
+
+});
+
+</script>
+
+</body>
+</html>
