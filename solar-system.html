@@ -1095,18 +1095,24 @@
       const group = new THREE.Group();
       scene.add(group);
 
-      const texture = createProceduralTexture(data.id, data.color);
-      let material;
+  let texture;
+let material;
 
-      if (data.id === 'sun') {
-        material = new THREE.MeshBasicMaterial({ map: texture });
-      } else {
-        material = new THREE.MeshStandardMaterial({
-          map: texture,
-          roughness: 0.8,
-          metalness: 0.1
-        });
-      }
+if (data.id === 'earth') {
+    texture = new THREE.TextureLoader().load('textures/earth.jpg');
+} else {
+    texture = createProceduralTexture(data.id, data.color);
+}
+
+if (data.id === 'sun') {
+    material = new THREE.MeshBasicMaterial({ map: texture });
+} else {
+    material = new THREE.MeshStandardMaterial({
+        map: texture,
+        roughness: 0.8,
+        metalness: 0.1
+    });
+}
 
       const sphereGeo = new THREE.SphereGeometry(data.radius, 64, 64);
       const mesh = new THREE.Mesh(sphereGeo, material);
