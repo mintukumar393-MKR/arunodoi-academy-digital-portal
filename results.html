@@ -281,42 +281,93 @@
   </footer>
 
 
- <script>
+<script>
 
-  function showMessage() {
+async function viewLatestResult() {
 
-    document.getElementById("message").style.display = "block";
+  const message = document.getElementById("message");
 
-  }
+  message.innerHTML = "Loading results...";
+  message.style.display = "block";
 
-  function viewLatestResult() {
+  try {
 
-    const savedResult = localStorage.getItem("arunodoiLatestResult");
+    const response = await fetch(
+      "https://script.google.com/macros/s/AKfycbzDqMOcAIB9zHINVwPkKPz0VivABmbTHotWzkGjUo_cDUWOeAiAyNh5UaTb7CHTmdgCEg/exec"
+    );
 
-    const message = document.getElementById("message");
+    const results = await response.json();
 
-    if (!savedResult) {
-
-      message.innerHTML = "No test result found. Please take the quiz first.";
-
-      message.style.display = "block";
-
+    if (!results.length) {
+      message.innerHTML = "No test results found.";
       return;
-
     }
 
-    const result = JSON.parse(savedResult);
+    let html = `
+      <h3>Online Test Results</h3>
 
-    message.innerHTML = `
-      <strong>Latest Online Test Result</strong><br><br>
-      Student: ${result.studentName}<br>
-      Score: ${result.score} / ${result.total}<br>
-      Percentage: ${result.percentage}%
+      <div style="overflow-x:auto; margin-top:20px;">
+
+      <table style="
+        width:100%;
+        border-collapse:collapse;
+        text-align:center;
+      ">
+
+        <tr style="background:#eaf2f8;">
+          <th style="padding:10px;border:1px solid #ccc;">Date & Time</th>
+          <th style="padding:10px;border:1px solid #ccc;">Student Name</th>
+          <th style="padding:10px;border:1px solid #ccc;">Test</th>
+          <th style="padding:10px;border:1px solid #ccc;">Score</th>
+          <th style="padding:10px;border:1px solid #ccc;">Percentage</th>
+        </tr>
     `;
 
-    message.style.display = "block";
+    results.reverse().forEach(result => {
+
+      html += `
+        <tr>
+          <td style="padding:10px;border:1px solid #ccc;">
+            ${new Date(result.date).toLocaleString()}
+          </td>
+
+          <td style="padding:10px;border:1px solid #ccc;">
+            ${result.studentName}
+          </td>
+
+          <td style="padding:10px;border:1px solid #ccc;">
+            ${result.test}
+          </td>
+
+          <td style="padding:10px;border:1px solid #ccc;">
+            ${result.score} / 30
+          </td>
+
+          <td style="padding:10px;border:1px solid #ccc;">
+            ${result.percentage}%
+          </td>
+        </tr>
+      `;
+
+    });
+
+    html += `
+      </table>
+      </div>
+    `;
+
+    message.innerHTML = html;
+
+  } catch (error) {
+
+    message.innerHTML =
+      "Unable to load results. Please try again.";
+
+    console.error(error);
 
   }
+
+}
 
 </script>
 
