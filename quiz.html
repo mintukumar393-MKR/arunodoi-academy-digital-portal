@@ -1912,7 +1912,27 @@ a:0
     // Lesson 4 Practice — 30
 
 ];
+/* ==========================================
+   RANDOM 30 QUESTION QUIZ
+========================================== */
 
+function shuffleQuestions(array) {
+
+  for (let i = array.length - 1; i > 0; i--) {
+
+    const j = Math.floor(Math.random() * (i + 1));
+
+    [array[i], array[j]] = [array[j], array[i]];
+
+  }
+
+  return array;
+
+}
+
+shuffleQuestions(questions);
+
+questions.splice(30);
 /* ==========================================
    DISPLAY TOTAL
 ========================================== */
@@ -2054,7 +2074,21 @@ percentage:percentage,
 date:new Date().toLocaleString()
 })
 );
+/* SEND RESULT TO GOOGLE SHEETS */
 
+fetch("https://script.google.com/macros/s/AKfycbwJv3lil27CNAdZ7HEzbssJbtYmNJZrwjt7_nLowk6WlX6nKhK09bXbF-YQgbVCjofoOg/exec", {
+  method: "POST",
+  mode: "no-cors",
+  headers: {
+    "Content-Type": "text/plain;charset=utf-8"
+  },
+  body: JSON.stringify({
+    studentName: studentName,
+    test: "Class VIII Computer Science",
+    score: score,
+    percentage: percentage
+  })
+});
 
 /* DISPLAY RESULT */
 
