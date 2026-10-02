@@ -299,97 +299,84 @@
   }
 }
 /* =========================================
-   TOP SCHOOL PHOTO CAROUSEL
+   ARUNODOI TOP PHOTO SHOWCASE
    ========================================= */
 
-.top-photo-carousel {
+.arunodo-top-showcase {
+  height: 210px;
   position: relative;
-  height: 190px;
   overflow: hidden;
-
-  display: grid;
-  place-items: center;
-
-  perspective: 700px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   background:
-    radial-gradient(
-      circle at 50% 50%,
-      rgba(44, 145, 210, 0.12),
-      transparent 55%
-    ),
-    linear-gradient(
-      135deg,
-      #f8fbff,
-      #eef5fb
-    );
+    radial-gradient(circle at center,
+      rgba(23,105,170,.12),
+      transparent 60%),
+    linear-gradient(135deg,#f8fbff,#eef5fb);
 
   border-bottom: 1px solid var(--line);
 }
 
+/* 3D stage */
 
-/* 3D rotating container */
-
-.carousel-3d {
+.arunodo-photo-stage {
+  width: 130px;
+  height: 145px;
   position: relative;
 
-  width: 110px;
-  height: 125px;
-
   transform-style: preserve-3d;
+  perspective: 900px;
 
-  animation: schoolCarouselRotate 18s linear infinite;
+  animation: arunodoSpin 20s linear infinite;
 }
 
+/* Photos */
 
-/* Individual photos */
-
-.carousel-card {
+.arunodo-photo {
   position: absolute;
 
-  top: 0;
-  left: 0;
+  width: 110px !important;
+  height: 135px !important;
 
-  width: 105px !important;
-  height: 125px !important;
+  top: 5px;
+  left: 10px;
 
-  object-fit: cover;
+  object-fit: cover !important;
 
   border-radius: 14px;
 
-  border: 4px solid #ffffff;
+  border: 4px solid #fff;
 
   box-shadow:
-    0 12px 30px rgba(16, 35, 63, 0.18);
+    0 12px 30px rgba(16,35,63,.20);
 
   backface-visibility: hidden;
-
-  transform-style: preserve-3d;
 }
 
+/* Four sides */
 
-/* Four photos = 90° apart */
-
-.carousel-card:nth-child(1) {
-  transform: rotateY(0deg) translateZ(135px);
+.arunodo-photo:nth-child(1) {
+  transform: rotateY(0deg) translateZ(150px);
 }
 
-.carousel-card:nth-child(2) {
-  transform: rotateY(90deg) translateZ(135px);
+.arunodo-photo:nth-child(2) {
+  transform: rotateY(90deg) translateZ(150px);
 }
 
-.carousel-card:nth-child(3) {
-  transform: rotateY(180deg) translateZ(135px);
+.arunodo-photo:nth-child(3) {
+  transform: rotateY(180deg) translateZ(150px);
 }
 
-.carousel-card:nth-child(4) {
-  transform: rotateY(270deg) translateZ(135px);
+.arunodo-photo:nth-child(4) {
+  transform: rotateY(270deg) translateZ(150px);
 }
 
 
 /* Rotation */
 
-@keyframes schoolCarouselRotate {
+@keyframes arunodoSpin {
 
   from {
     transform: rotateY(0deg);
@@ -402,27 +389,32 @@
 }
 
 
-/* Title */
+/* Heading */
 
-.carousel-title {
+.arunodo-showcase-title {
   position: absolute;
 
   bottom: 10px;
 
-  font-size: 9px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  font-size: 10px;
+
   font-weight: 800;
 
   letter-spacing: 2px;
 
   color: var(--accent2);
 
-  opacity: 0.8;
+  white-space: nowrap;
 }
 
 
 /* Pause on mouse */
 
-.top-photo-carousel:hover .carousel-3d {
+.arunodo-top-showcase:hover
+.arunodo-photo-stage {
   animation-play-state: paused;
 }
 
@@ -433,39 +425,36 @@
 
 @media (max-width: 600px) {
 
-  .top-photo-carousel {
-    height: 155px;
+  .arunodo-top-showcase {
+    height: 175px;
   }
 
-  .carousel-3d {
-    width: 85px;
-    height: 100px;
+  .arunodo-photo-stage {
+    width: 100px;
+    height: 115px;
   }
 
-  .carousel-card {
-    width: 82px !important;
-    height: 100px !important;
+  .arunodo-photo {
+    width: 85px !important;
+    height: 105px !important;
+
+    left: 7px;
   }
 
-  .carousel-card:nth-child(1) {
-    transform: rotateY(0deg) translateZ(105px);
+  .arunodo-photo:nth-child(1) {
+    transform: rotateY(0deg) translateZ(115px);
   }
 
-  .carousel-card:nth-child(2) {
-    transform: rotateY(90deg) translateZ(105px);
+  .arunodo-photo:nth-child(2) {
+    transform: rotateY(90deg) translateZ(115px);
   }
 
-  .carousel-card:nth-child(3) {
-    transform: rotateY(180deg) translateZ(105px);
+  .arunodo-photo:nth-child(3) {
+    transform: rotateY(180deg) translateZ(115px);
   }
 
-  .carousel-card:nth-child(4) {
-    transform: rotateY(270deg) translateZ(105px);
-  }
-
-  .carousel-title {
-    font-size: 8px;
-    bottom: 7px;
+  .arunodo-photo:nth-child(4) {
+    transform: rotateY(270deg) translateZ(115px);
   }
 
 }
