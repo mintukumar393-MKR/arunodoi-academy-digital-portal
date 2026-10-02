@@ -115,11 +115,11 @@
           View marks and performance from online MCQ tests.
         </p>
 
-       <a
+    <button
   class="btn primary"
-  href="quiz.html">
+  onclick="viewLatestResult()">
   View Results
-</a>
+</button>
 
       </div>
 
@@ -274,22 +274,51 @@
 
     <div class="copyright">
 
-      © 2026 Arunodoi Academy. All rights reserved.
+      © 2026 HeavyDukh. All rights reserved.
 
     </div>
 
   </footer>
 
 
-  <script>
+ <script>
 
-    function showMessage() {
+  function showMessage() {
 
-      document.getElementById("message").style.display = "block";
+    document.getElementById("message").style.display = "block";
+
+  }
+
+  function viewLatestResult() {
+
+    const savedResult = localStorage.getItem("arunodoiLatestResult");
+
+    const message = document.getElementById("message");
+
+    if (!savedResult) {
+
+      message.innerHTML = "No test result found. Please take the quiz first.";
+
+      message.style.display = "block";
+
+      return;
 
     }
 
-  </script>
+    const result = JSON.parse(savedResult);
+
+    message.innerHTML = `
+      <strong>Latest Online Test Result</strong><br><br>
+      Student: ${result.studentName}<br>
+      Score: ${result.score} / ${result.total}<br>
+      Percentage: ${result.percentage}%
+    `;
+
+    message.style.display = "block";
+
+  }
+
+</script>
 
 </body>
 
