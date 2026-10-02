@@ -15,3 +15,118 @@
   display: block;
   border-radius: 15px;
 }
+/* ==============================
+   Solar System Feature
+   ============================== */
+
+.solar-feature {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.solar-card {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+  padding: 35px 40px;
+  border-radius: 24px;
+  background:
+    radial-gradient(circle at 85% 50%, rgba(99, 102, 241, 0.20), transparent 35%),
+    linear-gradient(135deg, #071426, #101b38);
+  border: 1px solid rgba(99, 102, 241, 0.25);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+}
+
+.solar-content {
+  position: relative;
+  z-index: 2;
+  max-width: 650px;
+}
+
+.solar-content h2 {
+  margin: 6px 0 12px;
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+}
+
+.solar-content p:not(.eyebrow) {
+  margin-bottom: 22px;
+  color: #cbd5e1;
+  line-height: 1.7;
+}
+
+.solar-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 20px;
+  border-radius: 999px;
+  background: #38bdf8;
+  color: #071426;
+  text-decoration: none;
+  font-weight: 700;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.solar-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(56, 189, 248, 0.35);
+}
+
+/* Solar visual */
+
+.solar-visual {
+  position: relative;
+  width: 180px;
+  height: 180px;
+  flex-shrink: 0;
+}
+
+.mini-sun {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 58px;
+  filter: drop-shadow(0 0 18px rgba(255, 190, 50, 0.8));
+}
+
+.planet-orbit {
+  position: absolute;
+  inset: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 50%;
+  animation: solar-spin 8s linear infinite;
+}
+
+.mini-planet {
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 27px;
+}
+
+@keyframes solar-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Mobile */
+
+@media (max-width: 700px) {
+  .solar-card {
+    padding: 28px 22px;
+  }
+
+  .solar-visual {
+    display: none;
+  }
+}
