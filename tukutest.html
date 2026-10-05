@@ -1,0 +1,1995 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Class IV Computer Science Test</title>
+
+<!-- Confetti -->
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+<style>
+:root {
+    --primary: #4361ee;
+    --primary-dark: #3a0ca3;
+    --secondary: #7209b7;
+    --accent: #4cc9f0;
+    --success: #10b981;
+    --danger: #ef4444;
+    --warning: #f59e0b;
+    --card-bg: rgba(255,255,255,0.92);
+    --shadow-3d: 0 10px 25px -5px rgba(0,0,0,0.1),
+                 0 8px 10px -6px rgba(0,0,0,0.1);
+}
+
+* {
+    box-sizing: border-box;
+    transition: all 0.25s cubic-bezier(0.4,0,0.2,1);
+}
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+
+    background:
+        radial-gradient(at 0% 0%, #e0c3fc 0px, transparent 50%),
+        radial-gradient(at 100% 100%, #8ec5fc 0px, transparent 50%),
+        #f1f5f9;
+
+    color: #1e293b;
+    min-height: 100vh;
+    padding: 20px 10px;
+}
+
+/* =========================
+   PROGRESS BAR
+========================= */
+
+.sticky-progress {
+    position: sticky;
+    top: 15px;
+    z-index: 100;
+
+    max-width: 850px;
+    margin: 0 auto 20px auto;
+
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: blur(12px);
+
+    border-radius: 50px;
+    padding: 10px 20px;
+
+    box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    border: 1px solid rgba(255,255,255,0.6);
+}
+
+.progress-track {
+    flex: 1;
+    height: 12px;
+
+    background: #e2e8f0;
+    border-radius: 10px;
+    overflow: hidden;
+
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.progress-fill {
+    width: 0%;
+    height: 100%;
+
+    background: linear-gradient(
+        90deg,
+        var(--accent),
+        var(--primary),
+        var(--secondary)
+    );
+
+    border-radius: 10px;
+
+    box-shadow: 0 0 12px rgba(67,97,238,0.5);
+}
+
+.progress-label {
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--primary);
+    white-space: nowrap;
+}
+
+/* =========================
+   MAIN CONTAINER
+========================= */
+
+.container {
+    max-width: 850px;
+    margin: auto;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+.header {
+    background: linear-gradient(
+        135deg,
+        #4361ee,
+        #7209b7
+    );
+
+    color: white;
+
+    padding: 30px 20px;
+
+    border-radius: 24px;
+
+    text-align: center;
+
+    box-shadow:
+        0 20px 35px -10px rgba(114,9,183,0.45),
+        0 0 0 1px rgba(255,255,255,0.2) inset;
+
+    margin-bottom: 25px;
+}
+
+.header h1 {
+    margin: 0;
+
+    font-size: 32px;
+    font-weight: 800;
+
+    text-shadow:
+        0 2px 4px rgba(0,0,0,0.2);
+}
+
+.header p {
+    margin: 7px 0 0;
+    font-size: 16px;
+    opacity: 0.9;
+}
+
+/* =========================
+   STUDENT INFORMATION
+========================= */
+
+.student-info {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 15px;
+
+    margin-bottom: 25px;
+}
+
+.input-3d {
+    width: 100%;
+
+    padding: 14px 18px;
+
+    font-size: 15px;
+
+    border-radius: 14px;
+
+    border: 1px solid #cbd5e1;
+
+    background: #ffffff;
+
+    box-shadow:
+        inset 0 2px 4px rgba(0,0,0,0.06),
+        0 4px 6px -1px rgba(0,0,0,0.04);
+
+    outline: none;
+}
+
+.input-3d:focus {
+    border-color: var(--primary);
+
+    box-shadow:
+        0 0 0 4px rgba(67,97,238,0.2),
+        inset 0 2px 4px rgba(0,0,0,0.02);
+
+    transform: translateY(-2px);
+}
+
+/* =========================
+   SECTION TITLES
+========================= */
+
+.section-title {
+    font-size: 19px;
+    font-weight: 800;
+
+    color: #0f172a;
+
+    margin: 35px 0 15px;
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.section-title::before {
+    content: '';
+
+    width: 6px;
+    height: 24px;
+
+    background:
+        linear-gradient(
+            to bottom,
+            var(--primary),
+            var(--secondary)
+        );
+
+    border-radius: 4px;
+
+    display: inline-block;
+}
+
+/* =========================
+   QUESTION CARDS
+========================= */
+
+.question-card {
+    background: var(--card-bg);
+
+    border: 1px solid rgba(255,255,255,0.8);
+
+    backdrop-filter: blur(8px);
+
+    border-radius: 18px;
+
+    padding: 22px;
+
+    margin-bottom: 18px;
+
+    box-shadow: var(--shadow-3d);
+}
+
+.question-card:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 15px 30px -5px rgba(0,0,0,0.12);
+}
+
+.question-card p {
+    margin: 0 0 15px;
+
+    font-size: 16px;
+
+    font-weight: 700;
+
+    color: #1e293b;
+}
+
+/* =========================
+   OPTIONS
+========================= */
+
+.options-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fit,minmax(200px,1fr));
+
+    gap: 10px;
+}
+
+.option-btn {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+
+    padding: 12px 16px;
+
+    border-radius: 12px;
+
+    background: #f8fafc;
+
+    border: 2px solid #e2e8f0;
+
+    cursor: pointer;
+
+    font-size: 15px;
+
+    font-weight: 600;
+
+    color: #475569;
+
+    box-shadow: 0 4px 0 #cbd5e1;
+
+    user-select: none;
+}
+
+.option-btn:hover {
+    background: #eef2ff;
+
+    border-color: #c7d2fe;
+
+    transform: translateY(-2px);
+
+    box-shadow: 0 6px 0 #cbd5e1;
+}
+
+.option-btn:active {
+    transform: translateY(2px);
+
+    box-shadow: 0 2px 0 #cbd5e1;
+}
+
+.option-btn input {
+    position: absolute;
+    opacity: 0;
+}
+
+.option-btn.selected {
+    background: #e0e7ff;
+
+    border-color: var(--primary);
+
+    color: var(--primary);
+
+    box-shadow:
+        0 4px 0 #3a0ca3;
+}
+
+/* =========================
+   SUBMIT BUTTON
+========================= */
+
+.submit-wrapper {
+    text-align: center;
+
+    margin: 40px 0;
+}
+
+.btn-3d {
+    background:
+        linear-gradient(
+            135deg,
+            var(--primary),
+            var(--secondary)
+        );
+
+    color: white;
+
+    padding: 16px 42px;
+
+    border-radius: 16px;
+
+    font-size: 18px;
+
+    font-weight: 800;
+
+    border: none;
+
+    box-shadow:
+        0 8px 0 var(--primary-dark),
+        0 15px 25px rgba(67,97,238,0.4);
+
+    cursor: pointer;
+
+    letter-spacing: 0.5px;
+}
+
+.btn-3d:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 10px 0 var(--primary-dark),
+        0 20px 30px rgba(67,97,238,0.5);
+}
+
+.btn-3d:active {
+    transform: translateY(6px);
+
+    box-shadow:
+        0 2px 0 var(--primary-dark),
+        0 5px 10px rgba(67,97,238,0.4);
+}
+
+/* =========================
+   RESULT
+========================= */
+
+#result {
+    display: none;
+
+    background: white;
+
+    border-radius: 24px;
+
+    padding: 30px;
+
+    box-shadow:
+        0 25px 50px -12px rgba(0,0,0,0.25);
+
+    text-align: center;
+
+    border: 1px solid #e2e8f0;
+
+    animation:
+        popIn 0.5s
+        cubic-bezier(0.175,0.885,0.32,1.275);
+}
+
+@keyframes popIn {
+
+    0% {
+        transform: scale(0.85);
+        opacity: 0;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.score-badge {
+    display: inline-block;
+
+    padding: 8px 18px;
+
+    border-radius: 50px;
+
+    background: #e0f2fe;
+
+    color: #0369a1;
+
+    font-weight: 700;
+
+    font-size: 14px;
+
+    margin-bottom: 12px;
+}
+
+.score-num {
+    font-size: 54px;
+
+    font-weight: 900;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--primary),
+            var(--secondary)
+        );
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    margin: 5px 0;
+}
+
+/* =========================
+   STATISTICS
+========================= */
+
+.result-stats {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap: 10px;
+
+    margin: 25px 0;
+}
+
+.stat-box {
+    padding: 15px;
+
+    border-radius: 14px;
+
+    font-weight: 700;
+}
+
+.stat-correct {
+    background: #dcfce7;
+    color: #15803d;
+}
+
+.stat-wrong {
+    background: #fee2e2;
+    color: #b91c1c;
+}
+
+.stat-unanswered {
+    background: #fef3c7;
+    color: #b45309;
+}
+
+/* =========================
+   REVIEW
+========================= */
+
+.review-item {
+    border-radius: 14px;
+
+    padding: 16px;
+
+    margin-top: 12px;
+
+    text-align: left;
+
+    box-shadow:
+        0 2px 5px rgba(0,0,0,0.04);
+}
+
+.review-item.correct {
+    background: #f0fdf4;
+
+    border: 2px solid #86efac;
+}
+
+.review-item.wrong {
+    background: #fef2f2;
+
+    border: 2px solid #fca5a5;
+}
+
+.review-item.unanswered {
+    background: #fffbeb;
+
+    border: 2px solid #fcd34d;
+}
+
+.answer-correct {
+    color: #15803d;
+    font-weight: 700;
+}
+
+.answer-wrong {
+    color: #dc2626;
+    font-weight: 700;
+}
+
+.answer-unanswered {
+    color: #b45309;
+    font-weight: 700;
+}
+
+/* =========================
+   PRINT BUTTON
+========================= */
+
+.print-btn {
+    background: #0f766e;
+
+    margin-top: 20px;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:600px) {
+
+    body {
+        padding: 10px 7px;
+    }
+
+    .student-info {
+        grid-template-columns: 1fr;
+    }
+
+    .options-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .header h1 {
+        font-size: 25px;
+    }
+
+    .result-stats {
+        grid-template-columns: 1fr;
+    }
+
+    .sticky-progress {
+        top: 5px;
+    }
+
+    .progress-label {
+        font-size: 12px;
+    }
+}
+
+/* =========================
+   PRINT
+========================= */
+
+@media print {
+
+    body {
+        background: white;
+        padding: 0;
+    }
+
+    .sticky-progress,
+    .submit-wrapper,
+    .print-btn,
+    #retryBtn {
+        display: none !important;
+    }
+
+    #result {
+        display: block !important;
+
+        box-shadow: none;
+
+        border: none;
+    }
+
+    .question-card,
+    .student-info,
+    .header {
+        display: none;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- =========================
+     PROGRESS BAR
+========================= -->
+
+<div class="sticky-progress">
+
+    <span
+        class="progress-label"
+        id="progressLabel">
+        0 / 16 Answered
+    </span>
+
+    <div class="progress-track">
+
+        <div
+            class="progress-fill"
+            id="progressFill">
+        </div>
+
+    </div>
+
+</div>
+
+
+<div class="container">
+
+<!-- =========================
+     HEADER
+========================= -->
+
+<div class="header">
+
+    <h1>
+        Half Yearly Examination
+    </h1>
+
+    <p>
+        Class IV • Computer Science
+    </p>
+
+</div>
+
+
+<!-- =========================
+     STUDENT INFORMATION
+========================= -->
+
+<div class="student-info">
+
+    <input
+        type="text"
+        id="studentName"
+        class="input-3d"
+        placeholder="Student Full Name">
+
+    <input
+        type="text"
+        id="studentClass"
+        class="input-3d"
+        placeholder="Class / Section">
+
+</div>
+
+
+<!-- =========================
+     SECTION A
+========================= -->
+
+<div class="section-title">
+    Section A: Multiple Choice Questions
+</div>
+
+
+<!-- Q1 -->
+
+<div class="question-card">
+
+<p>
+1. The page of a PowerPoint presentation is called:
+</p>
+
+<div class="options-grid">
+
+<label class="option-btn">
+<input
+type="radio"
+name="q1"
+value="a"
+onchange="updateUI(this)">
+Slide
+</label>
+
+<label class="option-btn">
+<input
+type="radio"
+name="q1"
+value="b"
+onchange="updateUI(this)">
+Document
+</label>
+
+<label class="option-btn">
+<input
+type="radio"
+name="q1"
+value="c"
+onchange="updateUI(this)">
+File
+</label>
+
+</div>
+</div>
+
+
+<!-- Q2 -->
+
+<div class="question-card">
+
+<p>
+2. A ______ is a systematic display of information.
+</p>
+
+<div class="options-grid">
+
+<label class="option-btn">
+<input
+type="radio"
+name="q2"
+value="a"
+onchange="updateUI(this)">
+Slide show
+</label>
+
+<label class="option-btn">
+<input
+type="radio"
+name="q2"
+value="b"
+onchange="updateUI(this)">
+Page
+</label>
+
+<label class="option-btn">
+<input
+type="radio"
+name="q2"
+value="c"
+onchange="updateUI(this)">
+Presentation
+</label>
+
+</div>
+</div>
+
+
+<!-- Q3 -->
+
+<div class="question-card">
+
+<p>
+3. Shapes command is present in the ______ group.
+</p>
+
+<div class="options-grid">
+
+<label class="option-btn">
+<input
+type="radio"
+name="q3"
+value="a"
+onchange="updateUI(this)">
+Text
+</label>
+
+<label class="option-btn">
+<input
+type="radio"
+name="q3"
+value="b"
+onchange="updateUI(this)">
+Illustrations
+</label>
+
+<label class="option-btn">
+<input
+type="radio"
+name="q3"
+value="c"
+onchange="updateUI(this)">
+Tables
+</label>
+
+</div>
+</div>
+
+
+<!-- Q4 -->
+
+<div class="question-card">
+
+<p>
+4. In which of the following tabs can you find the Styles group?
+</p>
+
+<div class="options-grid">
+
+<label class="option-btn">
+<input
+type="radio"
+name="q4"
+value="a"
+onchange="updateUI(this)">
+Insert
+</label>
+
+<label class="option-btn">
+<input
+type="radio"
+name="q4"
+value="b"
+onchange="updateUI(this)">
+Home
+</label>
+
+<label class="option-btn">
+<input
+type="radio"
+name="q4"
+value="c"
+onchange="updateUI(this)">
+Layout
+</label>
+
+</div>
+</div>
+
+
+<!-- Q5 -->
+
+<div class="question-card">
+
+<p>
+5. The Find command is present in the ______ group.
+</p>
+
+<div class="options-grid">
+
+<label class="option-btn">
+<input
+type="radio"
+name="q5"
+value="a"
+onchange="updateUI(this)">
+Font
+</label>
+
+<label class="option-btn">
+<input
+type="radio"
+name="q5"
+value="b"
+onchange="updateUI(this)">
+Clipboard
+</label>
+
+<label class="option-btn">
+<input
+type="radio"
+name="q5"
+value="c"
+onchange="updateUI(this)">
+Editing
+</label>
+
+</div>
+</div>
+
+
+<!-- Q6 -->
+
+<div class="question-card">
+
+<p>
+6. Header and Footer are inserted at the ______ margins of each page.
+</p>
+
+<div class="options-grid">
+
+<label class="option-btn">
+<input
+type="radio"
+name="q6"
+value="a"
+onchange="updateUI(this)">
+Top and Bottom
+</label>
+
+<label class="option-btn">
+<input
+type="radio"
+name="q6"
+value="b"
+onchange="updateUI(this)">
+Left and Right
+</label>
+
+<label class="option-btn">
+<input
+type="radio"
+name="q6"
+value="c"
+onchange="updateUI(this)">
+Both (i) and (ii)
+</label>
+
+</div>
+</div>
+
+
+<!-- =========================
+     SECTION B
+========================= -->
+
+<div class="section-title">
+    Section B: Fill in the Blanks
+</div>
+
+
+<!-- Q7 -->
+
+<div class="question-card">
+
+<p>
+7. When you click the File tab, you see the ______ Microsoft Office.
+</p>
+
+<input
+class="input-3d text-q"
+id="q7"
+oninput="calcProgress()">
+
+</div>
+
+
+<!-- Q8 -->
+
+<div class="question-card">
+
+<p>
+8. ______ spacing refers to the amount of space above or below a paragraph.
+</p>
+
+<input
+class="input-3d text-q"
+id="q8"
+oninput="calcProgress()">
+
+</div>
+
+
+<!-- Q9 -->
+
+<div class="question-card">
+
+<p>
+9. A presentation consists of multiple ______.
+</p>
+
+<input
+class="input-3d text-q"
+id="q9"
+oninput="calcProgress()">
+
+</div>
+
+
+<!-- Q10 -->
+
+<div class="question-card">
+
+<p>
+10. ______ command from the Arrange group is used to place the picture at a particular position.
+</p>
+
+<input
+class="input-3d text-q"
+id="q10"
+oninput="calcProgress()">
+
+</div>
+
+
+<!-- Q11 -->
+
+<div class="question-card">
+
+<p>
+11. A ______ is an object which acts as a placeholder to enter text.
+</p>
+
+<input
+class="input-3d text-q"
+id="q11"
+oninput="calcProgress()">
+
+</div>
+
+
+<!-- =========================
+     SECTION C
+========================= -->
+
+<div class="section-title">
+    Section C: Keyboard Shortcuts
+</div>
+
+
+<!-- Q12 -->
+
+<div class="question-card">
+
+<p>
+12. Shortcut to create a blank presentation:
+</p>
+
+<input
+class="input-3d text-q"
+id="q12"
+oninput="calcProgress()">
+
+</div>
+
+
+<!-- Q13 -->
+
+<div class="question-card">
+
+<p>
+13. Shortcut to print a presentation:
+</p>
+
+<input
+class="input-3d text-q"
+id="q13"
+oninput="calcProgress()">
+
+</div>
+
+
+<!-- Q14 -->
+
+<div class="question-card">
+
+<p>
+14. Shortcut to close a presentation:
+</p>
+
+<input
+class="input-3d text-q"
+id="q14"
+oninput="calcProgress()">
+
+</div>
+
+
+<!-- Q15 -->
+
+<div class="question-card">
+
+<p>
+15. Shortcut to create a new slide:
+</p>
+
+<input
+class="input-3d text-q"
+id="q15"
+oninput="calcProgress()">
+
+</div>
+
+
+<!-- Q16 -->
+
+<div class="question-card">
+
+<p>
+16. Shortcut to open an existing presentation:
+</p>
+
+<input
+class="input-3d text-q"
+id="q16"
+oninput="calcProgress()">
+
+</div>
+
+
+<!-- =========================
+     SUBMIT
+========================= -->
+
+<div class="submit-wrapper">
+
+<button
+id="submitBtn"
+class="btn-3d"
+onclick="submitTest()">
+
+🚀 Submit Assessment
+
+</button>
+
+</div>
+
+
+<!-- =========================
+     RESULT
+========================= -->
+
+<div id="result">
+
+<div
+class="score-badge"
+id="badgeText">
+Completed
+</div>
+
+<h2>
+Performance Summary
+</h2>
+
+<p
+id="studentResult"
+style="color:#64748b;font-weight:600;">
+</p>
+
+
+<div
+class="score-num"
+id="score">
+0 / 16
+</div>
+
+
+<p
+id="percentage"
+style="font-weight:700;font-size:18px;">
+</p>
+
+
+<!-- Statistics -->
+
+<div class="result-stats">
+
+<div class="stat-box stat-correct">
+
+✅ Correct
+
+<div id="correctCount">
+0
+</div>
+
+</div>
+
+
+<div class="stat-box stat-wrong">
+
+❌ Wrong
+
+<div id="wrongCount">
+0
+</div>
+
+</div>
+
+
+<div class="stat-box stat-unanswered">
+
+⚪ Unanswered
+
+<div id="unansweredCount">
+0
+</div>
+
+</div>
+
+</div>
+
+
+<h3 id="performanceMessage">
+</h3>
+
+
+<!-- Review -->
+
+<div
+id="review"
+style="margin-top:30px;">
+</div>
+
+
+<!-- Print -->
+
+<button
+class="btn-3d print-btn"
+onclick="window.print()">
+
+🖨️ Print Result
+
+</button>
+
+
+<!-- Retake -->
+
+<button
+id="retryBtn"
+class="btn-3d"
+style="margin-top:20px;background:#64748b;"
+onclick="location.reload()">
+
+🔄 Retake Exam
+
+</button>
+
+</div>
+
+</div>
+
+
+<script>
+
+/* =========================
+   ANSWERS
+========================= */
+
+const answers = {
+
+    q1: "a",
+    q2: "c",
+    q3: "b",
+    q4: "b",
+    q5: "c",
+    q6: "a",
+
+    q7: [
+        "backstage view",
+        "backstage"
+    ],
+
+    q8: [
+        "paragraph"
+    ],
+
+    q9: [
+        "slides",
+        "slide"
+    ],
+
+    q10: [
+        "position"
+    ],
+
+    q11: [
+        "text box",
+        "textbox",
+        "text-box"
+    ],
+
+    q12: [
+        "ctrl+n",
+        "control+n"
+    ],
+
+    q13: [
+        "ctrl+p",
+        "control+p"
+    ],
+
+    q14: [
+        "ctrl+w",
+        "control+w"
+    ],
+
+    q15: [
+        "ctrl+m",
+        "control+m"
+    ],
+
+    q16: [
+        "ctrl+o",
+        "control+o"
+    ]
+
+};
+
+
+/* =========================
+   QUESTIONS
+========================= */
+
+const questions = {
+
+    q1: "The page of PowerPoint presentation is called",
+
+    q2: "A systematic display of information",
+
+    q3: "Shapes command is present in the group",
+
+    q4: "Styles group is found in the tab",
+
+    q5: "Find command is present in the group",
+
+    q6: "Header and Footer are inserted at the margins",
+
+    q7: "When you click the File tab, you see the ______ Microsoft Office",
+
+    q8: "______ spacing refers to the amount of space above or below a paragraph",
+
+    q9: "A presentation consists of multiple ______",
+
+    q10: "Command used to place the picture at a particular position",
+
+    q11: "Object which acts as a placeholder to enter text",
+
+    q12: "Shortcut to create a blank presentation",
+
+    q13: "Shortcut to print a presentation",
+
+    q14: "Shortcut to close a presentation",
+
+    q15: "Shortcut to create a new slide",
+
+    q16: "Shortcut to open an existing presentation"
+
+};
+
+
+/* =========================
+   OPTION TEXT
+========================= */
+
+const optionText = {
+
+    1: {
+        a: "Slide",
+        b: "Document",
+        c: "File"
+    },
+
+    2: {
+        a: "Slide show",
+        b: "Page",
+        c: "Presentation"
+    },
+
+    3: {
+        a: "Text",
+        b: "Illustrations",
+        c: "Tables"
+    },
+
+    4: {
+        a: "Insert",
+        b: "Home",
+        c: "Layout"
+    },
+
+    5: {
+        a: "Font",
+        b: "Clipboard",
+        c: "Editing"
+    },
+
+    6: {
+        a: "Top and Bottom",
+        b: "Left and Right",
+        c: "Both (i) and (ii)"
+    }
+
+};
+
+
+/* =========================
+   SELECT OPTION
+========================= */
+
+function updateUI(radio) {
+
+    const parent =
+        radio.closest('.options-grid');
+
+    parent
+        .querySelectorAll('.option-btn')
+        .forEach(btn =>
+            btn.classList.remove('selected')
+        );
+
+    radio.parentElement
+        .classList.add('selected');
+
+    calcProgress();
+}
+
+
+/* =========================
+   PROGRESS
+========================= */
+
+function calcProgress() {
+
+    let answered = 0;
+
+    for (let i = 1; i <= 6; i++) {
+
+        if (
+            document.querySelector(
+                `input[name="q${i}"]:checked`
+            )
+        ) {
+            answered++;
+        }
+    }
+
+    for (let i = 7; i <= 16; i++) {
+
+        if (
+            document
+            .getElementById(`q${i}`)
+            .value
+            .trim()
+            .length > 0
+        ) {
+            answered++;
+        }
+    }
+
+    const percent =
+        Math.round(
+            (answered / 16) * 100
+        );
+
+    document
+        .getElementById("progressFill")
+        .style.width = percent + "%";
+
+    document
+        .getElementById("progressLabel")
+        .innerText =
+        `${answered} / 16 Answered`;
+}
+
+
+/* =========================
+   NORMALIZE ANSWER
+========================= */
+
+function normalize(text) {
+
+    return text
+        .toLowerCase()
+        .trim()
+        .replace(/\s+/g,"")
+        .replace(/[-–—]/g,"");
+}
+
+
+/* =========================
+   CHECK ANSWER
+========================= */
+
+function checkAnswer(
+    userAnswer,
+    correctAnswer
+) {
+
+    userAnswer =
+        normalize(userAnswer);
+
+    if (Array.isArray(correctAnswer)) {
+
+        return correctAnswer.some(
+            answer =>
+                normalize(answer) ===
+                userAnswer
+        );
+    }
+
+    return (
+        userAnswer ===
+        normalize(correctAnswer)
+    );
+}
+
+
+/* =========================
+   SUBMIT TEST
+========================= */
+
+function submitTest() {
+
+    let answered = 0;
+
+    for (let i = 1; i <= 6; i++) {
+
+        if (
+            document.querySelector(
+                `input[name="q${i}"]:checked`
+            )
+        ) {
+            answered++;
+        }
+    }
+
+    for (let i = 7; i <= 16; i++) {
+
+        if (
+            document
+            .getElementById(`q${i}`)
+            .value
+            .trim()
+        ) {
+            answered++;
+        }
+    }
+
+
+    /* Confirmation */
+
+    if (answered < 16) {
+
+        const unanswered =
+            16 - answered;
+
+        const confirmSubmit =
+            confirm(
+                `You have ${unanswered} unanswered question(s).\n\nDo you still want to submit the test?`
+            );
+
+        if (!confirmSubmit) {
+            return;
+        }
+
+    } else {
+
+        const confirmSubmit =
+            confirm(
+                "You have answered all 16 questions.\n\nAre you sure you want to submit the test?"
+            );
+
+        if (!confirmSubmit) {
+            return;
+        }
+    }
+
+
+    let score = 0;
+    let wrong = 0;
+    let unanswered = 0;
+
+    let reviewHTML = "";
+
+
+    /* =========================
+       MCQ
+    ========================= */
+
+    for (let i = 1; i <= 6; i++) {
+
+        const selected =
+            document.querySelector(
+                `input[name="q${i}"]:checked`
+            );
+
+        let userAnswer =
+            selected
+            ? selected.value
+            : "";
+
+        let correctAnswer =
+            answers["q" + i];
+
+        let isAnswered =
+            userAnswer !== "";
+
+        let isCorrect =
+            userAnswer === correctAnswer;
+
+
+        if (!isAnswered) {
+
+            unanswered++;
+
+        } else if (isCorrect) {
+
+            score++;
+
+        } else {
+
+            wrong++;
+        }
+
+
+        let userText =
+            isAnswered
+            ? optionText[i][userAnswer]
+            : "Not answered";
+
+
+        let correctText =
+            optionText[i][correctAnswer];
+
+
+        reviewHTML +=
+            createReviewCard(
+                questions["q" + i],
+                userText,
+                correctText,
+                isCorrect,
+                isAnswered
+            );
+    }
+
+
+    /* =========================
+       TEXT QUESTIONS
+    ========================= */
+
+    for (let i = 7; i <= 16; i++) {
+
+        let userAnswer =
+            document
+            .getElementById(`q${i}`)
+            .value
+            .trim();
+
+        let isAnswered =
+            userAnswer !== "";
+
+        let isCorrect =
+            isAnswered &&
+            checkAnswer(
+                userAnswer,
+                answers["q" + i]
+            );
+
+
+        if (!isAnswered) {
+
+            unanswered++;
+
+        } else if (isCorrect) {
+
+            score++;
+
+        } else {
+
+            wrong++;
+        }
+
+
+        let correctAnswer =
+            Array.isArray(
+                answers["q" + i]
+            )
+            ? answers["q" + i][0]
+            : answers["q" + i];
+
+
+        reviewHTML +=
+            createReviewCard(
+                questions["q" + i],
+                userAnswer ||
+                "Not answered",
+                correctAnswer,
+                isCorrect,
+                isAnswered
+            );
+    }
+
+
+    /* =========================
+       RESULT
+    ========================= */
+
+    const total = 16;
+
+    const percentage =
+        Math.round(
+            (score / total) * 100
+        );
+
+
+    document
+        .getElementById("score")
+        .innerText =
+        `${score} / ${total}`;
+
+
+    document
+        .getElementById("percentage")
+        .innerText =
+        `Percentage: ${percentage}%`;
+
+
+    const studentName =
+        document
+        .getElementById("studentName")
+        .value
+        .trim();
+
+
+    const studentClass =
+        document
+        .getElementById("studentClass")
+        .value
+        .trim();
+
+
+    document
+        .getElementById("studentResult")
+        .innerText =
+        `${studentName || "Student"} • ${studentClass || "Class IV"}`;
+
+
+    document
+        .getElementById("correctCount")
+        .innerText =
+        score;
+
+
+    document
+        .getElementById("wrongCount")
+        .innerText =
+        wrong;
+
+
+    document
+        .getElementById("unansweredCount")
+        .innerText =
+        unanswered;
+
+
+    /* Performance message */
+
+    let message = "";
+
+    if (percentage >= 90) {
+
+        message =
+            "🏆 Excellent! Outstanding performance!";
+
+    } else if (percentage >= 75) {
+
+        message =
+            "🌟 Very Good! Keep it up!";
+
+    } else if (percentage >= 50) {
+
+        message =
+            "👍 Good! Keep practising!";
+
+    } else {
+
+        message =
+            "📚 Keep practising. You can do better!";
+    }
+
+
+    document
+        .getElementById("performanceMessage")
+        .innerText =
+        message;
+
+
+    /* Review */
+
+    document
+        .getElementById("review")
+        .innerHTML =
+        "<h3>Answer Review</h3>" +
+        reviewHTML;
+
+
+    /* Hide submit */
+
+    document
+        .getElementById("submitBtn")
+        .style.display =
+        "none";
+
+
+    /* Disable all inputs */
+
+    document
+        .querySelectorAll(
+            "input"
+        )
+        .forEach(input => {
+
+            input.disabled = true;
+
+        });
+
+
+    /* Show result */
+
+    document
+        .getElementById("result")
+        .style.display =
+        "block";
+
+
+    document
+        .getElementById("result")
+        .scrollIntoView({
+            behavior: "smooth"
+        });
+
+
+    /* Confetti */
+
+    if (
+        percentage >= 60 &&
+        typeof confetti === "function"
+    ) {
+
+        confetti({
+
+            particleCount: 150,
+
+            spread: 80,
+
+            origin: {
+                y: 0.6
+            }
+
+        });
+
+    }
+
+}
+
+
+/* =========================
+   REVIEW CARD
+========================= */
+
+function createReviewCard(
+    question,
+    userAnswer,
+    correctAnswer,
+    isCorrect,
+    isAnswered
+) {
+
+    let statusClass = "";
+
+    let statusText = "";
+
+    if (!isAnswered) {
+
+        statusClass = "unanswered";
+
+        statusText =
+            `<div class="answer-unanswered">
+                ⚪ Not Answered
+             </div>`;
+
+    } else if (isCorrect) {
+
+        statusClass = "correct";
+
+        statusText =
+            `<div class="answer-correct">
+                ✅ Correct
+             </div>`;
+
+    } else {
+
+        statusClass = "wrong";
+
+        statusText =
+            `<div class="answer-wrong">
+                ❌ Wrong
+             </div>`;
+    }
+
+
+    return `
+
+        <div class="review-item ${statusClass}">
+
+            <div
+                style="
+                font-weight:700;
+                margin-bottom:8px;
+                ">
+
+                ${question}
+
+            </div>
+
+
+            <div
+                style="
+                font-size:14px;
+                margin-bottom:5px;
+                ">
+
+                Your Answer:
+                <b>${userAnswer}</b>
+
+            </div>
+
+
+            ${
+                !isCorrect
+                ?
+                `
+                <div
+                    style="
+                    font-size:14px;
+                    margin-bottom:8px;
+                    ">
+
+                    Correct Answer:
+                    <span class="answer-correct">
+
+                        <b>
+                            ${correctAnswer}
+                        </b>
+
+                    </span>
+
+                </div>
+                `
+                :
+                ""
+            }
+
+
+            ${statusText}
+
+        </div>
+
+    `;
+}
+
+</script>
+
+</body>
+</html>
