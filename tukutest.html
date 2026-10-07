@@ -3,1993 +3,941 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Class IV Computer Science Test</title>
-
-<!-- Confetti -->
+<title>Class VII Computer Science - Interactive Practice Test</title>
+<!-- Confetti library for high-score celebration -->
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-
 <style>
 :root {
-    --primary: #4361ee;
-    --primary-dark: #3a0ca3;
-    --secondary: #7209b7;
-    --accent: #4cc9f0;
-    --success: #10b981;
-    --danger: #ef4444;
-    --warning: #f59e0b;
-    --card-bg: rgba(255,255,255,0.92);
-    --shadow-3d: 0 10px 25px -5px rgba(0,0,0,0.1),
-                 0 8px 10px -6px rgba(0,0,0,0.1);
+  --primary: #0b3d91;
+  --primary-light: #1976d2;
+  --accent: #ff9800;
+  --bg: #f4f7fc;
+  --card-bg: #ffffff;
+  --text-main: #1e293b;
+  --text-muted: #64748b;
+  --border: #e2e8f0;
+  --correct: #10b981;
+  --correct-bg: #ecfdf5;
+  --wrong: #ef4444;
+  --wrong-bg: #fef2f2;
+  --radius: 14px;
 }
 
-* {
-    box-sizing: border-box;
-    transition: all 0.25s cubic-bezier(0.4,0,0.2,1);
-}
-
+* { box-sizing: border-box; transition: all 0.2s ease; }
 body {
-    margin: 0;
-    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-
-    background:
-        radial-gradient(at 0% 0%, #e0c3fc 0px, transparent 50%),
-        radial-gradient(at 100% 100%, #8ec5fc 0px, transparent 50%),
-        #f1f5f9;
-
-    color: #1e293b;
-    min-height: 100vh;
-    padding: 20px 10px;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text-main);
+  line-height: 1.5;
 }
 
-/* =========================
-   PROGRESS BAR
-========================= */
-
-.sticky-progress {
-    position: sticky;
-    top: 15px;
-    z-index: 100;
-
-    max-width: 850px;
-    margin: 0 auto 20px auto;
-
-    background: rgba(255,255,255,0.85);
-    backdrop-filter: blur(12px);
-
-    border-radius: 50px;
-    padding: 10px 20px;
-
-    box-shadow: 0 8px 30px rgba(0,0,0,0.12);
-
-    display: flex;
-    align-items: center;
-    gap: 15px;
-
-    border: 1px solid rgba(255,255,255,0.6);
+/* Sticky Header Bar */
+.sticky-bar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  padding: 10px 16px;
 }
 
-.progress-track {
-    flex: 1;
-    height: 12px;
-
-    background: #e2e8f0;
-    border-radius: 10px;
-    overflow: hidden;
-
-    box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+.sticky-content {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  flex-wrap: wrap;
 }
 
-.progress-fill {
-    width: 0%;
-    height: 100%;
-
-    background: linear-gradient(
-        90deg,
-        var(--accent),
-        var(--primary),
-        var(--secondary)
-    );
-
-    border-radius: 10px;
-
-    box-shadow: 0 0 12px rgba(67,97,238,0.5);
+.progress-container {
+  flex: 1;
+  min-width: 180px;
 }
 
-.progress-label {
-    font-weight: 700;
-    font-size: 14px;
-    color: var(--primary);
-    white-space: nowrap;
+.progress-info {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--primary);
+  margin-bottom: 4px;
 }
 
-/* =========================
-   MAIN CONTAINER
-========================= */
+.progress-bar-bg {
+  height: 8px;
+  background: #e2e8f0;
+  border-radius: 99px;
+  overflow: hidden;
+}
 
+.progress-bar-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #1976d2, #0b7a3e);
+  border-radius: 99px;
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.timer-box {
+  background: #0b3d91;
+  color: white;
+  padding: 6px 14px;
+  border-radius: 30px;
+  font-size: 14px;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Page Container */
 .container {
-    max-width: 850px;
-    margin: auto;
+  max-width: 1000px;
+  margin: 20px auto;
+  padding: 0 16px 40px;
 }
 
-/* =========================
-   HEADER
-========================= */
-
-.header {
-    background: linear-gradient(
-        135deg,
-        #4361ee,
-        #7209b7
-    );
-
-    color: white;
-
-    padding: 30px 20px;
-
-    border-radius: 24px;
-
-    text-align: center;
-
-    box-shadow:
-        0 20px 35px -10px rgba(114,9,183,0.45),
-        0 0 0 1px rgba(255,255,255,0.2) inset;
-
-    margin-bottom: 25px;
+/* Hero Header */
+.hero {
+  background: linear-gradient(135deg, #0b3d91, #1e88e5);
+  color: white;
+  padding: 30px 24px;
+  border-radius: var(--radius);
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(11, 61, 145, 0.2);
+  margin-bottom: 20px;
 }
 
-.header h1 {
-    margin: 0;
-
-    font-size: 32px;
-    font-weight: 800;
-
-    text-shadow:
-        0 2px 4px rgba(0,0,0,0.2);
+.hero h1 { margin: 0 0 8px; font-size: 26px; letter-spacing: -0.5px; }
+.hero h2 { margin: 0 0 12px; font-size: 18px; font-weight: 500; opacity: 0.95; }
+.badge-row { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; }
+.badge {
+  background: rgba(255,255,255,0.2);
+  backdrop-filter: blur(5px);
+  padding: 5px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
 }
 
-.header p {
-    margin: 7px 0 0;
-    font-size: 16px;
-    opacity: 0.9;
+/* Interactive Navigation Filter */
+.filter-tabs {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 6px 2px 14px;
+  margin-bottom: 12px;
 }
 
-/* =========================
-   STUDENT INFORMATION
-========================= */
-
-.student-info {
-    display: grid;
-
-    grid-template-columns: 1fr 1fr;
-
-    gap: 15px;
-
-    margin-bottom: 25px;
+.filter-tab {
+  padding: 8px 16px;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 30px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  color: var(--text-muted);
 }
 
-.input-3d {
-    width: 100%;
-
-    padding: 14px 18px;
-
-    font-size: 15px;
-
-    border-radius: 14px;
-
-    border: 1px solid #cbd5e1;
-
-    background: #ffffff;
-
-    box-shadow:
-        inset 0 2px 4px rgba(0,0,0,0.06),
-        0 4px 6px -1px rgba(0,0,0,0.04);
-
-    outline: none;
+.filter-tab.active, .filter-tab:hover {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
 }
 
-.input-3d:focus {
-    border-color: var(--primary);
-
-    box-shadow:
-        0 0 0 4px rgba(67,97,238,0.2),
-        inset 0 2px 4px rgba(0,0,0,0.02);
-
-    transform: translateY(-2px);
+/* Sections & Questions */
+.section {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  padding: 24px;
+  margin-bottom: 22px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+  border: 1px solid var(--border);
 }
 
-/* =========================
-   SECTION TITLES
-========================= */
-
-.section-title {
-    font-size: 19px;
-    font-weight: 800;
-
-    color: #0f172a;
-
-    margin: 35px 0 15px;
-
-    display: flex;
-    align-items: center;
-    gap: 10px;
+.section-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 14px;
+  margin-bottom: 18px;
+  border-bottom: 2px solid #edf2f7;
 }
 
-.section-title::before {
-    content: '';
-
-    width: 6px;
-    height: 24px;
-
-    background:
-        linear-gradient(
-            to bottom,
-            var(--primary),
-            var(--secondary)
-        );
-
-    border-radius: 4px;
-
-    display: inline-block;
+.section-head h3 {
+  margin: 0;
+  color: var(--primary);
+  font-size: 19px;
 }
 
-/* =========================
-   QUESTION CARDS
-========================= */
+.badge-counter {
+  font-size: 12px;
+  font-weight: bold;
+  background: #eff6ff;
+  color: var(--primary-light);
+  padding: 4px 10px;
+  border-radius: 20px;
+}
 
+/* Question Cards */
 .question-card {
-    background: var(--card-bg);
-
-    border: 1px solid rgba(255,255,255,0.8);
-
-    backdrop-filter: blur(8px);
-
-    border-radius: 18px;
-
-    padding: 22px;
-
-    margin-bottom: 18px;
-
-    box-shadow: var(--shadow-3d);
+  background: #f8fafc;
+  border: 1.5px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 14px;
+  position: relative;
 }
 
-.question-card:hover {
-    transform: translateY(-3px);
-
-    box-shadow:
-        0 15px 30px -5px rgba(0,0,0,0.12);
+.question-card.answered {
+  border-color: #93c5fd;
+  background: #fdfefe;
 }
 
-.question-card p {
-    margin: 0 0 15px;
-
-    font-size: 16px;
-
-    font-weight: 700;
-
-    color: #1e293b;
+.q-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 12px;
 }
 
-/* =========================
-   OPTIONS
-========================= */
+.q-title {
+  font-weight: 700;
+  font-size: 15px;
+  color: #0f172a;
+}
 
+.q-status {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 2px 8px;
+  border-radius: 8px;
+  background: #e2e8f0;
+  color: #64748b;
+  flex-shrink: 0;
+}
+
+.q-status.done {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+/* Option Buttons for MCQs / TF */
 .options-grid {
-    display: grid;
-
-    grid-template-columns:
-        repeat(auto-fit,minmax(200px,1fr));
-
-    gap: 10px;
+  display: grid;
+  gap: 8px;
 }
 
-.option-btn {
-    position: relative;
-
-    display: flex;
-    align-items: center;
-
-    padding: 12px 16px;
-
-    border-radius: 12px;
-
-    background: #f8fafc;
-
-    border: 2px solid #e2e8f0;
-
-    cursor: pointer;
-
-    font-size: 15px;
-
-    font-weight: 600;
-
-    color: #475569;
-
-    box-shadow: 0 4px 0 #cbd5e1;
-
-    user-select: none;
+.option-label {
+  display: flex;
+  align-items: center;
+  padding: 11px 14px;
+  background: white;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
 }
 
-.option-btn:hover {
-    background: #eef2ff;
-
-    border-color: #c7d2fe;
-
-    transform: translateY(-2px);
-
-    box-shadow: 0 6px 0 #cbd5e1;
+.option-label:hover {
+  background: #f1f5f9;
+  border-color: #cbd5e1;
+  transform: translateY(-1px);
 }
 
-.option-btn:active {
-    transform: translateY(2px);
-
-    box-shadow: 0 2px 0 #cbd5e1;
+.option-label input {
+  margin-right: 12px;
+  accent-color: var(--primary);
+  width: 17px;
+  height: 17px;
 }
 
-.option-btn input {
-    position: absolute;
-    opacity: 0;
+.option-label.selected {
+  background: #eff6ff;
+  border-color: var(--primary-light);
+  color: var(--primary);
+  font-weight: 600;
 }
 
-.option-btn.selected {
-    background: #e0e7ff;
-
-    border-color: var(--primary);
-
-    color: var(--primary);
-
-    box-shadow:
-        0 4px 0 #3a0ca3;
+/* Inputs */
+input[type="text"] {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1.5px solid #cbd5e1;
+  border-radius: 10px;
+  font-size: 15px;
+  outline: none;
+  background: white;
 }
 
-/* =========================
-   SUBMIT BUTTON
-========================= */
-
-.submit-wrapper {
-    text-align: center;
-
-    margin: 40px 0;
+input[type="text"]:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(11, 61, 145, 0.15);
 }
 
-.btn-3d {
-    background:
-        linear-gradient(
-            135deg,
-            var(--primary),
-            var(--secondary)
-        );
-
-    color: white;
-
-    padding: 16px 42px;
-
-    border-radius: 16px;
-
-    font-size: 18px;
-
-    font-weight: 800;
-
-    border: none;
-
-    box-shadow:
-        0 8px 0 var(--primary-dark),
-        0 15px 25px rgba(67,97,238,0.4);
-
-    cursor: pointer;
-
-    letter-spacing: 0.5px;
+textarea {
+  width: 100%;
+  min-height: 80px;
+  padding: 12px;
+  border: 1.5px solid #cbd5e1;
+  border-radius: 10px;
+  font-size: 14px;
+  font-family: inherit;
+  resize: vertical;
+  outline: none;
 }
 
-.btn-3d:hover {
-    transform: translateY(-2px);
-
-    box-shadow:
-        0 10px 0 var(--primary-dark),
-        0 20px 30px rgba(67,97,238,0.5);
+textarea:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(11, 61, 145, 0.15);
 }
 
-.btn-3d:active {
-    transform: translateY(6px);
-
-    box-shadow:
-        0 2px 0 var(--primary-dark),
-        0 5px 10px rgba(67,97,238,0.4);
+/* Feedback message box inside cards */
+.feedback-box {
+  margin-top: 10px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  display: none;
 }
 
-/* =========================
-   RESULT
-========================= */
+.feedback-box.show { display: block; }
+.feedback-box.correct-text { background: var(--correct-bg); color: #065f46; border: 1px solid #a7f3d0; }
+.feedback-box.wrong-text { background: var(--wrong-bg); color: #991b1b; border: 1px solid #fecaca; }
 
-#result {
-    display: none;
-
-    background: white;
-
-    border-radius: 24px;
-
-    padding: 30px;
-
-    box-shadow:
-        0 25px 50px -12px rgba(0,0,0,0.25);
-
-    text-align: center;
-
-    border: 1px solid #e2e8f0;
-
-    animation:
-        popIn 0.5s
-        cubic-bezier(0.175,0.885,0.32,1.275);
+.model-answer-toggle {
+  display: inline-block;
+  margin-top: 8px;
+  color: var(--primary-light);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: underline;
 }
 
-@keyframes popIn {
-
-    0% {
-        transform: scale(0.85);
-        opacity: 0;
-    }
-
-    100% {
-        transform: scale(1);
-        opacity: 1;
-    }
+.model-answer {
+  display: none;
+  background: #f1f5f9;
+  border-left: 4px solid var(--primary-light);
+  padding: 10px 14px;
+  border-radius: 0 8px 8px 0;
+  margin-top: 8px;
+  font-size: 13px;
+  color: #334155;
 }
 
-.score-badge {
-    display: inline-block;
-
-    padding: 8px 18px;
-
-    border-radius: 50px;
-
-    background: #e0f2fe;
-
-    color: #0369a1;
-
-    font-weight: 700;
-
-    font-size: 14px;
-
-    margin-bottom: 12px;
+/* Result Screen */
+#resultModal {
+  display: none;
+  background: white;
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  padding: 30px 20px;
+  text-align: center;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+  margin-bottom: 24px;
 }
 
-.score-num {
-    font-size: 54px;
-
-    font-weight: 900;
-
-    background:
-        linear-gradient(
-            135deg,
-            var(--primary),
-            var(--secondary)
-        );
-
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-
-    margin: 5px 0;
+.score-circle {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #0b3d91, #1e88e5);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+  box-shadow: 0 8px 25px rgba(11, 61, 145, 0.3);
 }
 
-/* =========================
-   STATISTICS
-========================= */
+.score-circle .score-num { font-size: 32px; font-weight: 800; line-height: 1; }
+.score-circle .score-total { font-size: 14px; opacity: 0.85; }
 
-.result-stats {
-    display: grid;
-
-    grid-template-columns:
-        repeat(3,1fr);
-
-    gap: 10px;
-
-    margin: 25px 0;
+/* Control Buttons */
+.controls {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 30px 0;
 }
 
-.stat-box {
-    padding: 15px;
-
-    border-radius: 14px;
-
-    font-weight: 700;
+.btn {
+  padding: 14px 28px;
+  border: none;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
 }
 
-.stat-correct {
-    background: #dcfce7;
-    color: #15803d;
-}
+.btn-primary { background: #0b7a3e; color: white; }
+.btn-primary:hover { background: #086332; }
 
-.stat-wrong {
-    background: #fee2e2;
-    color: #b91c1c;
-}
+.btn-shuffle { background: var(--primary); color: white; }
+.btn-shuffle:hover { background: #092e6e; }
 
-.stat-unanswered {
-    background: #fef3c7;
-    color: #b45309;
-}
+.btn-secondary { background: #e2e8f0; color: #1e293b; }
+.btn-secondary:hover { background: #cbd5e1; }
 
-/* =========================
-   REVIEW
-========================= */
-
-.review-item {
-    border-radius: 14px;
-
-    padding: 16px;
-
-    margin-top: 12px;
-
-    text-align: left;
-
-    box-shadow:
-        0 2px 5px rgba(0,0,0,0.04);
-}
-
-.review-item.correct {
-    background: #f0fdf4;
-
-    border: 2px solid #86efac;
-}
-
-.review-item.wrong {
-    background: #fef2f2;
-
-    border: 2px solid #fca5a5;
-}
-
-.review-item.unanswered {
-    background: #fffbeb;
-
-    border: 2px solid #fcd34d;
-}
-
-.answer-correct {
-    color: #15803d;
-    font-weight: 700;
-}
-
-.answer-wrong {
-    color: #dc2626;
-    font-weight: 700;
-}
-
-.answer-unanswered {
-    color: #b45309;
-    font-weight: 700;
-}
-
-/* =========================
-   PRINT BUTTON
-========================= */
-
-.print-btn {
-    background: #0f766e;
-
-    margin-top: 20px;
-}
-
-/* =========================
-   MOBILE
-========================= */
-
-@media(max-width:600px) {
-
-    body {
-        padding: 10px 7px;
-    }
-
-    .student-info {
-        grid-template-columns: 1fr;
-    }
-
-    .options-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .header h1 {
-        font-size: 25px;
-    }
-
-    .result-stats {
-        grid-template-columns: 1fr;
-    }
-
-    .sticky-progress {
-        top: 5px;
-    }
-
-    .progress-label {
-        font-size: 12px;
-    }
-}
-
-/* =========================
-   PRINT
-========================= */
-
-@media print {
-
-    body {
-        background: white;
-        padding: 0;
-    }
-
-    .sticky-progress,
-    .submit-wrapper,
-    .print-btn,
-    #retryBtn {
-        display: none !important;
-    }
-
-    #result {
-        display: block !important;
-
-        box-shadow: none;
-
-        border: none;
-    }
-
-    .question-card,
-    .student-info,
-    .header {
-        display: none;
-    }
+@media(max-width: 600px) {
+  .hero h1 { font-size: 20px; }
+  .section { padding: 16px; }
+  .sticky-content { gap: 8px; }
 }
 </style>
 </head>
-
 <body>
 
-<!-- =========================
-     PROGRESS BAR
-========================= -->
-
-<div class="sticky-progress">
-
-    <span
-        class="progress-label"
-        id="progressLabel">
-        0 / 16 Answered
-    </span>
-
-    <div class="progress-track">
-
-        <div
-            class="progress-fill"
-            id="progressFill">
-        </div>
-
+<!-- Sticky Header Bar for Progress -->
+<div class="sticky-bar">
+  <div class="sticky-content">
+    <div class="progress-container">
+      <div class="progress-info">
+        <span id="progressText">0 of 0 Completed</span>
+        <span id="percentText">0%</span>
+      </div>
+      <div class="progress-bar-bg">
+        <div class="progress-bar-fill" id="progressFill"></div>
+      </div>
     </div>
-
+    <div class="timer-box">
+      ⏱️ <span id="timeElapsed">00:00</span>
+    </div>
+  </div>
 </div>
-
 
 <div class="container">
 
-<!-- =========================
-     HEADER
-========================= -->
+  <!-- Header -->
+  <div class="hero">
+    <h1>ARUNODOI ACADEMY, TANGLA</h1>
+    <h2>Class VII • Computer Science Practice Test</h2>
+    <div class="badge-row">
+      <span class="badge">🔀 Auto-Shuffled</span>
+      <span class="badge">💡 Instant Interactive Feedback</span>
+      <span class="badge">📖 With Suggested Answers</span>
+    </div>
+  </div>
 
-<div class="header">
+  <!-- Filter Tabs -->
+  <div class="filter-tabs">
+    <button class="filter-tab active" onclick="filterSection('all', this)">All Sections</button>
+    <button class="filter-tab" onclick="filterSection('sec-mcq', this)">MCQs</button>
+    <button class="filter-tab" onclick="filterSection('sec-fill', this)">Fill in the Blanks</button>
+    <button class="filter-tab" onclick="filterSection('sec-tf', this)">True or False</button>
+    <button class="filter-tab" onclick="filterSection('sec-short', this)">Short Answers</button>
+  </div>
 
-    <h1>
-        Half Yearly Examination
-    </h1>
+  <!-- Results Box -->
+  <div id="resultModal">
+    <div class="score-circle">
+      <div class="score-num" id="finalScore">0</div>
+      <div class="score-total" id="finalMax">/ 0</div>
+    </div>
+    <h2 id="resultTitle" style="margin: 0 0 8px;">Good Effort!</h2>
+    <p id="resultSubtitle" style="color: var(--text-muted); margin: 0 0 15px;">Check the color-coded answers below to review mistakes.</p>
+    <button class="btn btn-shuffle" onclick="newTest()">🔄 Try Another Random Set</button>
+  </div>
 
-    <p>
-        Class IV • Computer Science
-    </p>
+  <!-- Questions Form -->
+  <form id="testForm">
+    
+    <!-- Section 1: MCQ -->
+    <div class="section sec-mcq">
+      <div class="section-head">
+        <h3>Question 1 — Choose the Correct Option</h3>
+        <span class="badge-counter" id="mcqCount">0 Questions</span>
+      </div>
+      <div id="mcqBox"></div>
+    </div>
 
-</div>
+    <!-- Section 2: Fill in the Blanks -->
+    <div class="section sec-fill">
+      <div class="section-head">
+        <h3>Question 2 — Fill in the Blanks</h3>
+        <span class="badge-counter" id="fillCount">0 Questions</span>
+      </div>
+      <div id="fillBox"></div>
+    </div>
 
+    <!-- Section 3: True / False -->
+    <div class="section sec-tf">
+      <div class="section-head">
+        <h3>Question 3 — True or False</h3>
+        <span class="badge-counter" id="tfCount">0 Questions</span>
+      </div>
+      <div id="tfBox"></div>
+    </div>
 
-<!-- =========================
-     STUDENT INFORMATION
-========================= -->
+    <!-- Section 4: Short Answers -->
+    <div class="section sec-short">
+      <div class="section-head">
+        <h3>Question 4 — Short Answer Questions</h3>
+        <span class="badge-counter" id="shortCount">0 Questions</span>
+      </div>
+      <div id="shortBox"></div>
+    </div>
 
-<div class="student-info">
+    <!-- Bottom Actions -->
+    <div class="controls">
+      <button type="button" class="btn btn-primary" onclick="submitTest()">✓ Submit & Check Answers</button>
+      <button type="button" class="btn btn-shuffle" onclick="newTest()">🔀 New Random Test</button>
+      <button type="button" class="btn btn-secondary" onclick="resetForm()">Clear Form</button>
+    </div>
 
-    <input
-        type="text"
-        id="studentName"
-        class="input-3d"
-        placeholder="Student Full Name">
-
-    <input
-        type="text"
-        id="studentClass"
-        class="input-3d"
-        placeholder="Class / Section">
-
-</div>
-
-
-<!-- =========================
-     SECTION A
-========================= -->
-
-<div class="section-title">
-    Section A: Multiple Choice Questions
-</div>
-
-
-<!-- Q1 -->
-
-<div class="question-card">
-
-<p>
-1. The page of a PowerPoint presentation is called:
-</p>
-
-<div class="options-grid">
-
-<label class="option-btn">
-<input
-type="radio"
-name="q1"
-value="a"
-onchange="updateUI(this)">
-Slide
-</label>
-
-<label class="option-btn">
-<input
-type="radio"
-name="q1"
-value="b"
-onchange="updateUI(this)">
-Document
-</label>
-
-<label class="option-btn">
-<input
-type="radio"
-name="q1"
-value="c"
-onchange="updateUI(this)">
-File
-</label>
+  </form>
 
 </div>
-</div>
-
-
-<!-- Q2 -->
-
-<div class="question-card">
-
-<p>
-2. A ______ is a systematic display of information.
-</p>
-
-<div class="options-grid">
-
-<label class="option-btn">
-<input
-type="radio"
-name="q2"
-value="a"
-onchange="updateUI(this)">
-Slide show
-</label>
-
-<label class="option-btn">
-<input
-type="radio"
-name="q2"
-value="b"
-onchange="updateUI(this)">
-Page
-</label>
-
-<label class="option-btn">
-<input
-type="radio"
-name="q2"
-value="c"
-onchange="updateUI(this)">
-Presentation
-</label>
-
-</div>
-</div>
-
-
-<!-- Q3 -->
-
-<div class="question-card">
-
-<p>
-3. Shapes command is present in the ______ group.
-</p>
-
-<div class="options-grid">
-
-<label class="option-btn">
-<input
-type="radio"
-name="q3"
-value="a"
-onchange="updateUI(this)">
-Text
-</label>
-
-<label class="option-btn">
-<input
-type="radio"
-name="q3"
-value="b"
-onchange="updateUI(this)">
-Illustrations
-</label>
-
-<label class="option-btn">
-<input
-type="radio"
-name="q3"
-value="c"
-onchange="updateUI(this)">
-Tables
-</label>
-
-</div>
-</div>
-
-
-<!-- Q4 -->
-
-<div class="question-card">
-
-<p>
-4. In which of the following tabs can you find the Styles group?
-</p>
-
-<div class="options-grid">
-
-<label class="option-btn">
-<input
-type="radio"
-name="q4"
-value="a"
-onchange="updateUI(this)">
-Insert
-</label>
-
-<label class="option-btn">
-<input
-type="radio"
-name="q4"
-value="b"
-onchange="updateUI(this)">
-Home
-</label>
-
-<label class="option-btn">
-<input
-type="radio"
-name="q4"
-value="c"
-onchange="updateUI(this)">
-Layout
-</label>
-
-</div>
-</div>
-
-
-<!-- Q5 -->
-
-<div class="question-card">
-
-<p>
-5. The Find command is present in the ______ group.
-</p>
-
-<div class="options-grid">
-
-<label class="option-btn">
-<input
-type="radio"
-name="q5"
-value="a"
-onchange="updateUI(this)">
-Font
-</label>
-
-<label class="option-btn">
-<input
-type="radio"
-name="q5"
-value="b"
-onchange="updateUI(this)">
-Clipboard
-</label>
-
-<label class="option-btn">
-<input
-type="radio"
-name="q5"
-value="c"
-onchange="updateUI(this)">
-Editing
-</label>
-
-</div>
-</div>
-
-
-<!-- Q6 -->
-
-<div class="question-card">
-
-<p>
-6. Header and Footer are inserted at the ______ margins of each page.
-</p>
-
-<div class="options-grid">
-
-<label class="option-btn">
-<input
-type="radio"
-name="q6"
-value="a"
-onchange="updateUI(this)">
-Top and Bottom
-</label>
-
-<label class="option-btn">
-<input
-type="radio"
-name="q6"
-value="b"
-onchange="updateUI(this)">
-Left and Right
-</label>
-
-<label class="option-btn">
-<input
-type="radio"
-name="q6"
-value="c"
-onchange="updateUI(this)">
-Both (i) and (ii)
-</label>
-
-</div>
-</div>
-
-
-<!-- =========================
-     SECTION B
-========================= -->
-
-<div class="section-title">
-    Section B: Fill in the Blanks
-</div>
-
-
-<!-- Q7 -->
-
-<div class="question-card">
-
-<p>
-7. When you click the File tab, you see the ______ Microsoft Office.
-</p>
-
-<input
-class="input-3d text-q"
-id="q7"
-oninput="calcProgress()">
-
-</div>
-
-
-<!-- Q8 -->
-
-<div class="question-card">
-
-<p>
-8. ______ spacing refers to the amount of space above or below a paragraph.
-</p>
-
-<input
-class="input-3d text-q"
-id="q8"
-oninput="calcProgress()">
-
-</div>
-
-
-<!-- Q9 -->
-
-<div class="question-card">
-
-<p>
-9. A presentation consists of multiple ______.
-</p>
-
-<input
-class="input-3d text-q"
-id="q9"
-oninput="calcProgress()">
-
-</div>
-
-
-<!-- Q10 -->
-
-<div class="question-card">
-
-<p>
-10. ______ command from the Arrange group is used to place the picture at a particular position.
-</p>
-
-<input
-class="input-3d text-q"
-id="q10"
-oninput="calcProgress()">
-
-</div>
-
-
-<!-- Q11 -->
-
-<div class="question-card">
-
-<p>
-11. A ______ is an object which acts as a placeholder to enter text.
-</p>
-
-<input
-class="input-3d text-q"
-id="q11"
-oninput="calcProgress()">
-
-</div>
-
-
-<!-- =========================
-     SECTION C
-========================= -->
-
-<div class="section-title">
-    Section C: Keyboard Shortcuts
-</div>
-
-
-<!-- Q12 -->
-
-<div class="question-card">
-
-<p>
-12. Shortcut to create a blank presentation:
-</p>
-
-<input
-class="input-3d text-q"
-id="q12"
-oninput="calcProgress()">
-
-</div>
-
-
-<!-- Q13 -->
-
-<div class="question-card">
-
-<p>
-13. Shortcut to print a presentation:
-</p>
-
-<input
-class="input-3d text-q"
-id="q13"
-oninput="calcProgress()">
-
-</div>
-
-
-<!-- Q14 -->
-
-<div class="question-card">
-
-<p>
-14. Shortcut to close a presentation:
-</p>
-
-<input
-class="input-3d text-q"
-id="q14"
-oninput="calcProgress()">
-
-</div>
-
-
-<!-- Q15 -->
-
-<div class="question-card">
-
-<p>
-15. Shortcut to create a new slide:
-</p>
-
-<input
-class="input-3d text-q"
-id="q15"
-oninput="calcProgress()">
-
-</div>
-
-
-<!-- Q16 -->
-
-<div class="question-card">
-
-<p>
-16. Shortcut to open an existing presentation:
-</p>
-
-<input
-class="input-3d text-q"
-id="q16"
-oninput="calcProgress()">
-
-</div>
-
-
-<!-- =========================
-     SUBMIT
-========================= -->
-
-<div class="submit-wrapper">
-
-<button
-id="submitBtn"
-class="btn-3d"
-onclick="submitTest()">
-
-🚀 Submit Assessment
-
-</button>
-
-</div>
-
-
-<!-- =========================
-     RESULT
-========================= -->
-
-<div id="result">
-
-<div
-class="score-badge"
-id="badgeText">
-Completed
-</div>
-
-<h2>
-Performance Summary
-</h2>
-
-<p
-id="studentResult"
-style="color:#64748b;font-weight:600;">
-</p>
-
-
-<div
-class="score-num"
-id="score">
-0 / 16
-</div>
-
-
-<p
-id="percentage"
-style="font-weight:700;font-size:18px;">
-</p>
-
-
-<!-- Statistics -->
-
-<div class="result-stats">
-
-<div class="stat-box stat-correct">
-
-✅ Correct
-
-<div id="correctCount">
-0
-</div>
-
-</div>
-
-
-<div class="stat-box stat-wrong">
-
-❌ Wrong
-
-<div id="wrongCount">
-0
-</div>
-
-</div>
-
-
-<div class="stat-box stat-unanswered">
-
-⚪ Unanswered
-
-<div id="unansweredCount">
-0
-</div>
-
-</div>
-
-</div>
-
-
-<h3 id="performanceMessage">
-</h3>
-
-
-<!-- Review -->
-
-<div
-id="review"
-style="margin-top:30px;">
-</div>
-
-
-<!-- Print -->
-
-<button
-class="btn-3d print-btn"
-onclick="window.print()">
-
-🖨️ Print Result
-
-</button>
-
-
-<!-- Retake -->
-
-<button
-id="retryBtn"
-class="btn-3d"
-style="margin-top:20px;background:#64748b;"
-onclick="location.reload()">
-
-🔄 Retake Exam
-
-</button>
-
-</div>
-
-</div>
-
 
 <script>
+// --- FULL QUESTION REPOSITORY (Deduplicated) ---
+const MCQ_BANK = [
+  {q:"In binary multiplication, 1 × 1 equals to", o:["2","8","1"], a:2},
+  {q:"To convert a decimal number into a binary number, divide the number by ..................... .", o:["2","8","10"], a:0},
+  {q:"Which of these is not a hexadecimal number?", o:["ABGH","CD23","12AB"], a:0},
+  {q:"Binary means composed of ........................ .", o:["2","4","8"], a:0},
+  {q:"The Octal number system is expressed with the power of ........................ .", o:["4","16","8"], a:2},
+  {q:"To sort data, we use the .............. tab on the Ribbon.", o:["Home","Data","View"], a:1},
+  {q:"................ is a quick way to find a set of data in a range.", o:["Sorting","Filtering","Grouping"], a:1},
+  {q:"When sorting is performed on more than one column, it is called", o:["many level sorting","multilevel sorting","column sorting"], a:1},
+  {q:".............. helps in combining data from multiple worksheets into one worksheet.", o:["Combination","Collection","Consolidation"], a:2},
+  {q:"A/An ................. chart shows the trend of values over time or categories.", o:["Bar","Area","Scatter"], a:0},
+  {q:"Charts present data and information in a .......................... manner.", o:["scattered","unarranged","compact"], a:2},
+  {q:"The Shortcut key to print a chart is .................. .", o:["Ctrl + F2","Ctrl + P","Ctrl + A"], a:1},
+  {q:"A combination of two or more charts into a single chart is called a ............. chart.", o:["Combo","Merged","Joint"], a:0},
+  {q:"Every HTML document consists of ............. .", o:["values","tags","none of these"], a:1},
+  {q:"Tags are always enclosed within a pair of ............ brackets.", o:["curly","square","angular"], a:2},
+  {q:"What is the default position of a background image in HTML?", o:["top left corner","bottom","center"], a:0},
+  {q:"An HTML document is saved with the extension ............. .", o:[".htm",".html","both (a) and (b)"], a:2},
+  {q:"Which part of a chart identifies each data series using a colour or pattern?", o:["Plot Area","Legend","Axis"], a:1},
+  {q:"CSS stands for:", o:["Cascading Style Sheets","Colourful Style Sheets","Creative Style System"], a:0}
+];
 
-/* =========================
-   ANSWERS
-========================= */
+const FILL_BANK = [
+  {q:"The most common number system is the ................ number system.", a:["decimal"]},
+  {q:"The base of the binary number system is ................ .", a:["2"]},
+  {q:"The base of the octal number system is ............... .", a:["8"]},
+  {q:"The hexadecimal number system consists of ............... digits.", a:["16"]},
+  {q:"In binary addition, 1 + 0 equals to ............. .", a:["1"]},
+  {q:"To perform multi-level sorting, click the ............... button from the Sort dialog box.", a:["add level"]},
+  {q:".................... is a way to filter data based on some specific conditions.", a:["custom filter"]},
+  {q:"................ is a tool for summarising and presenting the data.", a:["consolidation"]},
+  {q:"To filter data in Excel, click the .............. tab.", a:["data"]},
+  {q:"The Consolidate function is available in the ................. tab.", a:["data"]},
+  {q:"A picture showing numeric data is called ................ .", a:["chart"]},
+  {q:"Charts are easier to .................. and ............... .", a:["compare and understand","understand and compare"]},
+  {q:".................... identifies each data series in a unique colour or pattern.", a:["legend","legends"]},
+  {q:"The Chart Styles group is present in the ................... tab of the Ribbon.", a:["chart design","design"]},
+  {q:"The ........... and ............ tab display various chart tools.", a:["design and format","format and design"]},
+  {q:"A digit in the binary number system is called a __________.", a:["bit","bits"]},
+  {q:"_____ means arranging data in ascending or descending order.", a:["sorting"]},
+  {q:"An HTML document can be saved with the extension ____ or ____.", a:[".htm or .html",".html or .htm",".html",".htm"]}
+];
 
-const answers = {
+const TF_BANK = [
+  {q:"The decimal number system consists of 10 digits.", a:true},
+  {q:"1 multiplied by 0 is equal to 1 in the binary number system.", a:false},
+  {q:"The hexadecimal number system has the base 16.", a:true},
+  {q:"A digit in the binary number system is called bits.", a:true},
+  {q:"The binary value of (2)₁₀ is 100.", a:false},
+  {q:"The octal number system has a base of 16.", a:false},
+  {q:"Conditional Formatting is available in the Home tab of Excel.", a:true},
+  {q:"A Pie Chart can show the contribution of each part to the total.", a:true},
+  {q:"An External Style Sheet is written directly inside an HTML element.", a:false}
+];
 
-    q1: "a",
-    q2: "c",
-    q3: "b",
-    q4: "b",
-    q5: "c",
-    q6: "a",
+const SHORT_BANK = [
+  {
+    q: "Which tab contains the conditional formatting option in MS Excel?",
+    ans: "The 'Home' tab (under the Styles group)."
+  },
+  {
+    q: "Define Data Point.",
+    ans: "A data point is a single value, bar, slice, or symbol in a chart that represents a single piece of data from a worksheet cell."
+  },
+  {
+    q: "What is the full form of WYSIWYG?",
+    ans: "WYSIWYG stands for 'What You See Is What You Get'."
+  },
+  {
+    q: "In how many ways can you sort the data in Excel?",
+    ans: "Data can be sorted in two primary ways: Single-level sorting and Multi-level sorting (in Ascending or Descending order)."
+  },
+  {
+    q: "Name the tabs on which Chart Tools are present.",
+    ans: "Chart Tools are present under the 'Design' (or 'Chart Design') and 'Format' tabs."
+  },
+  {
+    q: "Which feature is used to highlight important data automatically in Excel?",
+    ans: "Conditional Formatting."
+  },
+  {
+    q: "Which feature combines data from multiple worksheets into a single worksheet?",
+    ans: "The Data Consolidation feature."
+  },
+  {
+    q: "What is Multi-level Sorting?",
+    ans: "Multi-level sorting is the process of sorting data on more than one column or field sequentially."
+  },
+  {
+    q: "Who developed the HTML standard and when?",
+    ans: "Tim Berners-Lee developed HTML in 1991."
+  },
+  {
+    q: "What are the three ways of applying CSS to an HTML document?",
+    ans: "1. Inline CSS (using style attribute)\n2. Internal CSS (using <style> in head)\n3. External CSS (linking a .css file)"
+  }
+];
 
-    q7: [
-        "backstage view",
-        "backstage"
-    ],
-
-    q8: [
-        "paragraph"
-    ],
-
-    q9: [
-        "slides",
-        "slide"
-    ],
-
-    q10: [
-        "position"
-    ],
-
-    q11: [
-        "text box",
-        "textbox",
-        "text-box"
-    ],
-
-    q12: [
-        "ctrl+n",
-        "control+n"
-    ],
-
-    q13: [
-        "ctrl+p",
-        "control+p"
-    ],
-
-    q14: [
-        "ctrl+w",
-        "control+w"
-    ],
-
-    q15: [
-        "ctrl+m",
-        "control+m"
-    ],
-
-    q16: [
-        "ctrl+o",
-        "control+o"
-    ]
-
-};
-
-
-/* =========================
-   QUESTIONS
-========================= */
-
-const questions = {
-
-    q1: "The page of PowerPoint presentation is called",
-
-    q2: "A systematic display of information",
-
-    q3: "Shapes command is present in the group",
-
-    q4: "Styles group is found in the tab",
-
-    q5: "Find command is present in the group",
-
-    q6: "Header and Footer are inserted at the margins",
-
-    q7: "When you click the File tab, you see the ______ Microsoft Office",
-
-    q8: "______ spacing refers to the amount of space above or below a paragraph",
-
-    q9: "A presentation consists of multiple ______",
-
-    q10: "Command used to place the picture at a particular position",
-
-    q11: "Object which acts as a placeholder to enter text",
-
-    q12: "Shortcut to create a blank presentation",
-
-    q13: "Shortcut to print a presentation",
-
-    q14: "Shortcut to close a presentation",
-
-    q15: "Shortcut to create a new slide",
-
-    q16: "Shortcut to open an existing presentation"
-
-};
-
-
-/* =========================
-   OPTION TEXT
-========================= */
-
-const optionText = {
-
-    1: {
-        a: "Slide",
-        b: "Document",
-        c: "File"
-    },
-
-    2: {
-        a: "Slide show",
-        b: "Page",
-        c: "Presentation"
-    },
-
-    3: {
-        a: "Text",
-        b: "Illustrations",
-        c: "Tables"
-    },
-
-    4: {
-        a: "Insert",
-        b: "Home",
-        c: "Layout"
-    },
-
-    5: {
-        a: "Font",
-        b: "Clipboard",
-        c: "Editing"
-    },
-
-    6: {
-        a: "Top and Bottom",
-        b: "Left and Right",
-        c: "Both (i) and (ii)"
-    }
-
-};
-
-
-/* =========================
-   SELECT OPTION
-========================= */
-
-function updateUI(radio) {
-
-    const parent =
-        radio.closest('.options-grid');
-
-    parent
-        .querySelectorAll('.option-btn')
-        .forEach(btn =>
-            btn.classList.remove('selected')
-        );
-
-    radio.parentElement
-        .classList.add('selected');
-
-    calcProgress();
+// Utility: Array shuffle
+function shuffle(arr) {
+  const res = [...arr];
+  for(let i = res.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [res[i], res[j]] = [res[j], res[i]];
+  }
+  return res;
 }
 
-
-/* =========================
-   PROGRESS
-========================= */
-
-function calcProgress() {
-
-    let answered = 0;
-
-    for (let i = 1; i <= 6; i++) {
-
-        if (
-            document.querySelector(
-                `input[name="q${i}"]:checked`
-            )
-        ) {
-            answered++;
-        }
-    }
-
-    for (let i = 7; i <= 16; i++) {
-
-        if (
-            document
-            .getElementById(`q${i}`)
-            .value
-            .trim()
-            .length > 0
-        ) {
-            answered++;
-        }
-    }
-
-    const percent =
-        Math.round(
-            (answered / 16) * 100
-        );
-
-    document
-        .getElementById("progressFill")
-        .style.width = percent + "%";
-
-    document
-        .getElementById("progressLabel")
-        .innerText =
-        `${answered} / 16 Answered`;
+// Timer
+let timerInterval = null;
+let seconds = 0;
+function startTimer() {
+  clearInterval(timerInterval);
+  seconds = 0;
+  timerInterval = setInterval(() => {
+    seconds++;
+    const m = String(Math.floor(seconds / 60)).padStart(2, '0');
+    const s = String(seconds % 60).padStart(2, '0');
+    document.getElementById("timeElapsed").innerText = `${m}:${s}`;
+  }, 1000);
 }
 
+// Render dynamic components
+function render() {
+  document.getElementById("resultModal").style.display = "none";
 
-/* =========================
-   NORMALIZE ANSWER
-========================= */
+  renderMCQs(shuffle(MCQ_BANK));
+  renderFills(shuffle(FILL_BANK));
+  renderTFs(shuffle(TF_BANK));
+  renderShorts(shuffle(SHORT_BANK));
 
-function normalize(text) {
-
-    return text
-        .toLowerCase()
-        .trim()
-        .replace(/\s+/g,"")
-        .replace(/[-–—]/g,"");
+  startTimer();
+  updateProgress();
+  window.scrollTo({top: 0, behavior: "smooth"});
 }
 
+function renderMCQs(items) {
+  const box = document.getElementById("mcqBox");
+  box.innerHTML = "";
+  document.getElementById("mcqCount").innerText = `${items.length} Questions`;
 
-/* =========================
-   CHECK ANSWER
-========================= */
+  items.forEach((item, i) => {
+    const card = document.createElement("div");
+    card.className = "question-card";
+    card.id = `mcq-card-${i}`;
+    card.dataset.correct = item.a;
 
-function checkAnswer(
-    userAnswer,
-    correctAnswer
-) {
+    let opts = item.o.map((opt, oIdx) => `
+      <label class="option-label" onclick="selectRadio(this, 'mcq-card-${i}')">
+        <input type="radio" name="mcq_${i}" value="${oIdx}" onchange="updateProgress()">
+        <span><strong>${String.fromCharCode(65 + oIdx)}.</strong> ${opt}</span>
+      </label>
+    `).join("");
 
-    userAnswer =
-        normalize(userAnswer);
-
-    if (Array.isArray(correctAnswer)) {
-
-        return correctAnswer.some(
-            answer =>
-                normalize(answer) ===
-                userAnswer
-        );
-    }
-
-    return (
-        userAnswer ===
-        normalize(correctAnswer)
-    );
+    card.innerHTML = `
+      <div class="q-header">
+        <span class="q-title">Q${i+1}. ${item.q}</span>
+        <span class="q-status" id="mcq-status-${i}">Pending</span>
+      </div>
+      <div class="options-grid">${opts}</div>
+      <div class="feedback-box" id="mcq-feed-${i}"></div>
+    `;
+    box.appendChild(card);
+  });
 }
 
+function renderFills(items) {
+  const box = document.getElementById("fillBox");
+  box.innerHTML = "";
+  document.getElementById("fillCount").innerText = `${items.length} Questions`;
 
-/* =========================
-   SUBMIT TEST
-========================= */
+  items.forEach((item, i) => {
+    const card = document.createElement("div");
+    card.className = "question-card";
+    card.id = `fill-card-${i}`;
+    card.dataset.answers = JSON.stringify(item.a);
+
+    card.innerHTML = `
+      <div class="q-header">
+        <span class="q-title">Q${i+1}. ${item.q}</span>
+        <span class="q-status" id="fill-status-${i}">Pending</span>
+      </div>
+      <input type="text" placeholder="Type your answer here..." oninput="onTextInput(this, 'fill-card-${i}', 'fill-status-${i}')">
+      <div class="feedback-box" id="fill-feed-${i}"></div>
+    `;
+    box.appendChild(card);
+  });
+}
+
+function renderTFs(items) {
+  const box = document.getElementById("tfBox");
+  box.innerHTML = "";
+  document.getElementById("tfCount").innerText = `${items.length} Questions`;
+
+  items.forEach((item, i) => {
+    const card = document.createElement("div");
+    card.className = "question-card";
+    card.id = `tf-card-${i}`;
+    card.dataset.correct = item.a;
+
+    card.innerHTML = `
+      <div class="q-header">
+        <span class="q-title">Q${i+1}. ${item.q}</span>
+        <span class="q-status" id="tf-status-${i}">Pending</span>
+      </div>
+      <div class="options-grid">
+        <label class="option-label" onclick="selectRadio(this, 'tf-card-${i}')">
+          <input type="radio" name="tf_${i}" value="true" onchange="updateProgress()">
+          <span>✓ True</span>
+        </label>
+        <label class="option-label" onclick="selectRadio(this, 'tf-card-${i}')">
+          <input type="radio" name="tf_${i}" value="false" onchange="updateProgress()">
+          <span>✗ False</span>
+        </label>
+      </div>
+      <div class="feedback-box" id="tf-feed-${i}"></div>
+    `;
+    box.appendChild(card);
+  });
+}
+
+function renderShorts(items) {
+  const box = document.getElementById("shortBox");
+  box.innerHTML = "";
+  document.getElementById("shortCount").innerText = `${items.length} Questions`;
+
+  items.forEach((item, i) => {
+    const card = document.createElement("div");
+    card.className = "question-card";
+    card.id = `short-card-${i}`;
+
+    card.innerHTML = `
+      <div class="q-header">
+        <span class="q-title">Q${i+1}. ${item.q}</span>
+        <span class="q-status" id="short-status-${i}">Self-Check</span>
+      </div>
+      <textarea placeholder="Write key points of your answer..." oninput="onTextInput(this, 'short-card-${i}', 'short-status-${i}')"></textarea>
+      <div>
+        <span class="model-answer-toggle" onclick="toggleAnswer('model-${i}')">💡 Reveal Model Answer</span>
+        <div class="model-answer" id="model-${i}">${item.ans.replace(/\n/g, '<br>')}</div>
+      </div>
+    `;
+    box.appendChild(card);
+  });
+}
+
+// Interactive helper for radio choices
+function selectRadio(elem, cardId) {
+  const card = document.getElementById(cardId);
+  card.querySelectorAll(".option-label").forEach(l => l.classList.remove("selected"));
+  elem.classList.add("selected");
+
+  const status = card.querySelector(".q-status");
+  if(status) {
+    status.innerText = "Answered";
+    status.classList.add("done");
+  }
+  card.classList.add("answered");
+  updateProgress();
+}
+
+function onTextInput(input, cardId, statusId) {
+  const status = document.getElementById(statusId);
+  const card = document.getElementById(cardId);
+  if (input.value.trim().length > 0) {
+    status.innerText = "Answered";
+    status.classList.add("done");
+    card.classList.add("answered");
+  } else {
+    status.innerText = "Pending";
+    status.classList.remove("done");
+    card.classList.remove("answered");
+  }
+  updateProgress();
+}
+
+function toggleAnswer(id) {
+  const el = document.getElementById(id);
+  el.style.display = (el.style.display === "block") ? "none" : "block";
+}
+
+// Progress calculation
+function updateProgress() {
+  const totalObj = document.querySelectorAll("#mcqBox .question-card, #fillBox .question-card, #tfBox .question-card").length;
+  let answered = 0;
+
+  // MCQs
+  document.querySelectorAll("#mcqBox .question-card").forEach(c => {
+    if (c.querySelector("input:checked")) answered++;
+  });
+  // Fills
+  document.querySelectorAll("#fillBox .question-card").forEach(c => {
+    const val = c.querySelector("input").value.trim();
+    if (val) answered++;
+  });
+  // TF
+  document.querySelectorAll("#tfBox .question-card").forEach(c => {
+    if (c.querySelector("input:checked")) answered++;
+  });
+
+  const percent = totalObj > 0 ? Math.round((answered / totalObj) * 100) : 0;
+  document.getElementById("progressFill").style.width = percent + "%";
+  document.getElementById("progressText").innerText = `${answered} of ${totalObj} Objective Completed`;
+  document.getElementById("percentText").innerText = `${percent}%`;
+}
+
+// Check answers
+function cleanText(str) {
+  return str.toLowerCase().trim().replace(/[.,!?;:]/g, "").replace(/\s+/g, " ");
+}
 
 function submitTest() {
+  let score = 0;
+  let totalObjective = 0;
 
-    let answered = 0;
+  // 1. Evaluate MCQs
+  document.querySelectorAll("#mcqBox .question-card").forEach((card, i) => {
+    totalObjective++;
+    const chosen = card.querySelector("input:checked");
+    const correctIdx = Number(card.dataset.correct);
+    const feed = document.getElementById(`mcq-feed-${i}`);
+    feed.className = "feedback-box show";
 
-    for (let i = 1; i <= 6; i++) {
+    const labels = card.querySelectorAll(".option-label");
+    const rightLabel = labels[correctIdx].innerText;
 
-        if (
-            document.querySelector(
-                `input[name="q${i}"]:checked`
-            )
-        ) {
-            answered++;
-        }
-    }
-
-    for (let i = 7; i <= 16; i++) {
-
-        if (
-            document
-            .getElementById(`q${i}`)
-            .value
-            .trim()
-        ) {
-            answered++;
-        }
-    }
-
-
-    /* Confirmation */
-
-    if (answered < 16) {
-
-        const unanswered =
-            16 - answered;
-
-        const confirmSubmit =
-            confirm(
-                `You have ${unanswered} unanswered question(s).\n\nDo you still want to submit the test?`
-            );
-
-        if (!confirmSubmit) {
-            return;
-        }
-
+    if (chosen && Number(chosen.value) === correctIdx) {
+      score++;
+      feed.className += " correct-text";
+      feed.innerHTML = `✓ Correct! Good job.`;
     } else {
-
-        const confirmSubmit =
-            confirm(
-                "You have answered all 16 questions.\n\nAre you sure you want to submit the test?"
-            );
-
-        if (!confirmSubmit) {
-            return;
-        }
+      feed.className += " wrong-text";
+      feed.innerHTML = `✗ Incorrect. Correct answer: <strong>${rightLabel}</strong>`;
     }
-
-
-    let score = 0;
-    let wrong = 0;
-    let unanswered = 0;
-
-    let reviewHTML = "";
-
-
-    /* =========================
-       MCQ
-    ========================= */
-
-    for (let i = 1; i <= 6; i++) {
-
-        const selected =
-            document.querySelector(
-                `input[name="q${i}"]:checked`
-            );
-
-        let userAnswer =
-            selected
-            ? selected.value
-            : "";
-
-        let correctAnswer =
-            answers["q" + i];
-
-        let isAnswered =
-            userAnswer !== "";
-
-        let isCorrect =
-            userAnswer === correctAnswer;
-
-
-        if (!isAnswered) {
-
-            unanswered++;
-
-        } else if (isCorrect) {
-
-            score++;
-
-        } else {
-
-            wrong++;
-        }
-
-
-        let userText =
-            isAnswered
-            ? optionText[i][userAnswer]
-            : "Not answered";
-
-
-        let correctText =
-            optionText[i][correctAnswer];
-
-
-        reviewHTML +=
-            createReviewCard(
-                questions["q" + i],
-                userText,
-                correctText,
-                isCorrect,
-                isAnswered
-            );
-    }
-
-
-    /* =========================
-       TEXT QUESTIONS
-    ========================= */
-
-    for (let i = 7; i <= 16; i++) {
-
-        let userAnswer =
-            document
-            .getElementById(`q${i}`)
-            .value
-            .trim();
-
-        let isAnswered =
-            userAnswer !== "";
-
-        let isCorrect =
-            isAnswered &&
-            checkAnswer(
-                userAnswer,
-                answers["q" + i]
-            );
-
-
-        if (!isAnswered) {
-
-            unanswered++;
-
-        } else if (isCorrect) {
-
-            score++;
-
-        } else {
-
-            wrong++;
-        }
-
-
-        let correctAnswer =
-            Array.isArray(
-                answers["q" + i]
-            )
-            ? answers["q" + i][0]
-            : answers["q" + i];
-
-
-        reviewHTML +=
-            createReviewCard(
-                questions["q" + i],
-                userAnswer ||
-                "Not answered",
-                correctAnswer,
-                isCorrect,
-                isAnswered
-            );
-    }
-
-
-    /* =========================
-       RESULT
-    ========================= */
-
-    const total = 16;
-
-    const percentage =
-        Math.round(
-            (score / total) * 100
-        );
-
-
-    document
-        .getElementById("score")
-        .innerText =
-        `${score} / ${total}`;
-
-
-    document
-        .getElementById("percentage")
-        .innerText =
-        `Percentage: ${percentage}%`;
-
-
-    const studentName =
-        document
-        .getElementById("studentName")
-        .value
-        .trim();
-
-
-    const studentClass =
-        document
-        .getElementById("studentClass")
-        .value
-        .trim();
-
-
-    document
-        .getElementById("studentResult")
-        .innerText =
-        `${studentName || "Student"} • ${studentClass || "Class IV"}`;
-
-
-    document
-        .getElementById("correctCount")
-        .innerText =
-        score;
-
-
-    document
-        .getElementById("wrongCount")
-        .innerText =
-        wrong;
-
-
-    document
-        .getElementById("unansweredCount")
-        .innerText =
-        unanswered;
-
-
-    /* Performance message */
-
-    let message = "";
-
-    if (percentage >= 90) {
-
-        message =
-            "🏆 Excellent! Outstanding performance!";
-
-    } else if (percentage >= 75) {
-
-        message =
-            "🌟 Very Good! Keep it up!";
-
-    } else if (percentage >= 50) {
-
-        message =
-            "👍 Good! Keep practising!";
-
+  });
+
+  // 2. Evaluate Fills
+  document.querySelectorAll("#fillBox .question-card").forEach((card, i) => {
+    totalObjective++;
+    const userVal = cleanText(card.querySelector("input").value);
+    const validAnswers = JSON.parse(card.dataset.answers);
+    const feed = document.getElementById(`fill-feed-${i}`);
+    feed.className = "feedback-box show";
+
+    const isMatch = validAnswers.some(ans => {
+      const target = cleanText(ans);
+      return userVal === target || (userVal.length > 2 && target.includes(userVal));
+    });
+
+    if (isMatch) {
+      score++;
+      feed.className += " correct-text";
+      feed.innerHTML = `✓ Correct! Expected: <strong>${validAnswers[0]}</strong>`;
     } else {
-
-        message =
-            "📚 Keep practising. You can do better!";
+      feed.className += " wrong-text";
+      feed.innerHTML = `✗ Incorrect. Expected answer: <strong>${validAnswers.join(" or ")}</strong>`;
     }
+  });
 
+  // 3. Evaluate True / False
+  document.querySelectorAll("#tfBox .question-card").forEach((card, i) => {
+    totalObjective++;
+    const chosen = card.querySelector("input:checked");
+    const correctVal = card.dataset.correct === "true";
+    const feed = document.getElementById(`tf-feed-${i}`);
+    feed.className = "feedback-box show";
 
-    document
-        .getElementById("performanceMessage")
-        .innerText =
-        message;
-
-
-    /* Review */
-
-    document
-        .getElementById("review")
-        .innerHTML =
-        "<h3>Answer Review</h3>" +
-        reviewHTML;
-
-
-    /* Hide submit */
-
-    document
-        .getElementById("submitBtn")
-        .style.display =
-        "none";
-
-
-    /* Disable all inputs */
-
-    document
-        .querySelectorAll(
-            "input"
-        )
-        .forEach(input => {
-
-            input.disabled = true;
-
-        });
-
-
-    /* Show result */
-
-    document
-        .getElementById("result")
-        .style.display =
-        "block";
-
-
-    document
-        .getElementById("result")
-        .scrollIntoView({
-            behavior: "smooth"
-        });
-
-
-    /* Confetti */
-
-    if (
-        percentage >= 60 &&
-        typeof confetti === "function"
-    ) {
-
-        confetti({
-
-            particleCount: 150,
-
-            spread: 80,
-
-            origin: {
-                y: 0.6
-            }
-
-        });
-
+    if (chosen && (chosen.value === "true") === correctVal) {
+      score++;
+      feed.className += " correct-text";
+      feed.innerHTML = `✓ Correct! The statement is indeed <strong>${correctVal ? 'True' : 'False'}</strong>.`;
+    } else {
+      feed.className += " wrong-text";
+      feed.innerHTML = `✗ Incorrect. This statement is <strong>${correctVal ? 'True' : 'False'}</strong>.`;
     }
+  });
 
+  // Results display
+  const resultModal = document.getElementById("resultModal");
+  resultModal.style.display = "block";
+  document.getElementById("finalScore").innerText = score;
+  document.getElementById("finalMax").innerText = `/ ${totalObjective}`;
+
+  const pct = Math.round((score / totalObjective) * 100);
+  const title = document.getElementById("resultTitle");
+  if (pct >= 80) {
+    title.innerText = "🌟 Outstanding Performance!";
+    confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
+  } else if (pct >= 50) {
+    title.innerText = "👍 Good Effort! Keep Practicing.";
+  } else {
+    title.innerText = "📚 Needs Improvement. Review Answers Below.";
+  }
+
+  resultModal.scrollIntoView({ behavior: "smooth", block: "center" });
 }
 
+// Section Filter
+function filterSection(secClass, btn) {
+  document.querySelectorAll(".filter-tab").forEach(t => t.classList.remove("active"));
+  btn.classList.add("active");
 
-/* =========================
-   REVIEW CARD
-========================= */
-
-function createReviewCard(
-    question,
-    userAnswer,
-    correctAnswer,
-    isCorrect,
-    isAnswered
-) {
-
-    let statusClass = "";
-
-    let statusText = "";
-
-    if (!isAnswered) {
-
-        statusClass = "unanswered";
-
-        statusText =
-            `<div class="answer-unanswered">
-                ⚪ Not Answered
-             </div>`;
-
-    } else if (isCorrect) {
-
-        statusClass = "correct";
-
-        statusText =
-            `<div class="answer-correct">
-                ✅ Correct
-             </div>`;
-
-    } else {
-
-        statusClass = "wrong";
-
-        statusText =
-            `<div class="answer-wrong">
-                ❌ Wrong
-             </div>`;
-    }
-
-
-    return `
-
-        <div class="review-item ${statusClass}">
-
-            <div
-                style="
-                font-weight:700;
-                margin-bottom:8px;
-                ">
-
-                ${question}
-
-            </div>
-
-
-            <div
-                style="
-                font-size:14px;
-                margin-bottom:5px;
-                ">
-
-                Your Answer:
-                <b>${userAnswer}</b>
-
-            </div>
-
-
-            ${
-                !isCorrect
-                ?
-                `
-                <div
-                    style="
-                    font-size:14px;
-                    margin-bottom:8px;
-                    ">
-
-                    Correct Answer:
-                    <span class="answer-correct">
-
-                        <b>
-                            ${correctAnswer}
-                        </b>
-
-                    </span>
-
-                </div>
-                `
-                :
-                ""
-            }
-
-
-            ${statusText}
-
-        </div>
-
-    `;
+  const sections = document.querySelectorAll(".section");
+  if (secClass === 'all') {
+    sections.forEach(s => s.style.display = "block");
+  } else {
+    sections.forEach(s => {
+      s.style.display = s.classList.contains(secClass) ? "block" : "none";
+    });
+  }
 }
 
+function resetForm() {
+  document.getElementById("testForm").reset();
+  document.querySelectorAll(".feedback-box").forEach(b => { b.className = "feedback-box"; b.innerHTML = ""; });
+  document.querySelectorAll(".option-label").forEach(l => l.classList.remove("selected"));
+  document.querySelectorAll(".question-card").forEach(c => c.classList.remove("answered"));
+  document.querySelectorAll(".q-status").forEach(s => { s.innerText = "Pending"; s.classList.remove("done"); });
+  document.getElementById("resultModal").style.display = "none";
+  updateProgress();
+}
+
+function newTest() {
+  resetForm();
+  render();
+}
+
+// Initialize on page load
+render();
 </script>
-
 </body>
 </html>
