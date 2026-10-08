@@ -1,0 +1,1117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Class IV Grammar Online Test</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: #eef3f8;
+    font-family: Arial, sans-serif;
+    color: #222;
+}
+
+.container {
+    max-width: 900px;
+    margin: auto;
+    padding: 15px;
+}
+
+.paper {
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 4px 18px #0002;
+    overflow: hidden;
+}
+
+/* HEADER */
+.header {
+    background: linear-gradient(135deg, #3157d5, #7048d9);
+    color: #fff;
+    text-align: center;
+    padding: 24px 15px;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 27px;
+}
+
+.header h2 {
+    margin: 8px 0;
+    font-size: 19px;
+}
+
+.header p {
+    margin: 5px;
+}
+
+/* INFO */
+.info {
+    display: flex;
+    justify-content: space-between;
+    padding: 14px 20px;
+    background: #f5f7ff;
+    font-weight: bold;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+/* STUDENT NAME */
+.student {
+    padding: 20px;
+}
+
+.student input {
+    width: 100%;
+    padding: 11px;
+    border: 1px solid #aaa;
+    border-radius: 7px;
+    font-size: 16px;
+}
+
+/* SECTION */
+.section {
+    padding: 20px;
+    border-bottom: 1px solid #ddd;
+}
+
+.section h3 {
+    margin: 0 0 8px;
+    color: #3157d5;
+    font-size: 18px;
+}
+
+.instruction {
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+/* QUESTION */
+.q {
+    padding: 15px;
+    margin: 12px 0;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background: #fafcff;
+}
+
+.q p {
+    margin: 0 0 10px;
+    font-weight: 600;
+    line-height: 1.5;
+}
+
+/* TEXT INPUT */
+.blank {
+    width: 180px;
+    max-width: 100%;
+    padding: 8px;
+    border: 1px solid #aaa;
+    border-radius: 6px;
+    font-size: 15px;
+}
+
+/* WORD BOX */
+.wordbox {
+    padding: 12px;
+    background: #f0f3fa;
+    border-radius: 8px;
+    font-weight: bold;
+    line-height: 1.8;
+    margin-bottom: 15px;
+}
+
+/* OPTIONS */
+.options label {
+    display: block;
+    padding: 8px;
+    border-radius: 6px;
+    margin: 4px 0;
+    cursor: pointer;
+}
+
+.options label:hover {
+    background: #eef2ff;
+}
+
+/* FEEDBACK */
+.feedback {
+    display: none;
+    margin-top: 12px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+.feedback.correct {
+    display: block;
+    background: #e7f8ec;
+    color: #19713a;
+    border: 1px solid #52ad70;
+}
+
+.feedback.incorrect {
+    display: block;
+    background: #fff0f0;
+    color: #b42318;
+    border: 1px solid #e26b65;
+}
+
+.feedback.unanswered {
+    display: block;
+    background: #fff8e5;
+    color: #8a6100;
+    border: 1px solid #e1b84c;
+}
+
+/* QUESTION RESULT COLORS */
+.correctBox {
+    border-color: #52ad70 !important;
+    background: #f0fff4 !important;
+}
+
+.incorrectBox {
+    border-color: #e26b65 !important;
+    background: #fff5f5 !important;
+}
+
+/* SUBMIT */
+.submit {
+    padding: 20px;
+}
+
+button {
+    width: 100%;
+    padding: 14px;
+    background: #3157d5;
+    color: white;
+    border: 0;
+    border-radius: 8px;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #2444ad;
+}
+
+/* FINAL RESULT */
+#result {
+    display: none;
+    margin-top: 18px;
+    padding: 20px;
+    text-align: center;
+    border-radius: 10px;
+    background: #eaf8ee;
+    border: 2px solid #55a76c;
+}
+
+.score {
+    font-size: 30px;
+    font-weight: bold;
+    color: #23743b;
+    margin: 8px;
+}
+
+/* FOOTER */
+.footer {
+    text-align: center;
+    padding: 18px;
+    font-weight: bold;
+}
+
+/* MOBILE */
+@media (max-width: 600px) {
+
+    .header h1 {
+        font-size: 22px;
+    }
+
+    .header h2 {
+        font-size: 16px;
+    }
+
+    .section {
+        padding: 15px;
+    }
+
+    .q {
+        padding: 12px;
+    }
+}
+</style>
+</head>
+
+
+<body>
+
+<div class="container">
+
+<div class="paper">
+
+<!-- ================= HEADER ================= -->
+
+<div class="header">
+
+<h1>ARUNODAI ACADEMY</h1>
+
+<h2>
+HALF YEARLY EXAMINATION – 2026–2027
+</h2>
+
+<p>
+<b>SUBJECT – GRAMMAR</b>
+</p>
+
+<p>
+<b>CLASS – IV (FOUR)</b>
+</p>
+
+</div>
+
+
+<!-- ================= EXAM INFO ================= -->
+
+<div class="info">
+
+<span>
+Time: 1 Hour
+</span>
+
+<span>
+Full Marks: 19
+</span>
+
+</div>
+
+
+<!-- ================= STUDENT NAME ================= -->
+
+<div class="student">
+
+<label>
+<b>Student Name</b>
+</label>
+
+<input
+type="text"
+id="studentName"
+placeholder="Enter your full name">
+
+</div>
+
+
+<form id="testForm">
+
+
+<!-- ================================================= -->
+<!-- QUESTION 1 -->
+<!-- ================================================= -->
+
+<div class="section">
+
+<h3>
+Q1. Complete these sentences with the correct forms of the adjectives in the brackets.
+</h3>
+
+<div class="instruction">
+(6 × 1 = 6)
+</div>
+
+
+<div class="q">
+
+<p>
+a) Sneha's hair is ________ (long) than mine.
+</p>
+
+<input
+class="blank textAnswer"
+data-answer="longer">
+
+<div class="feedback"></div>
+
+</div>
+
+
+<div class="q">
+
+<p>
+b) That hotel is the ________ (cheap) in town.
+</p>
+
+<input
+class="blank textAnswer"
+data-answer="cheapest">
+
+<div class="feedback"></div>
+
+</div>
+
+
+<div class="q">
+
+<p>
+c) My mother is ________ (young) than my aunt.
+</p>
+
+<input
+class="blank textAnswer"
+data-answer="younger">
+
+<div class="feedback"></div>
+
+</div>
+
+
+<div class="q">
+
+<p>
+d) My friend is ________ (patient) than I am.
+</p>
+
+<input
+class="blank textAnswer"
+data-answer="more patient">
+
+<div class="feedback"></div>
+
+</div>
+
+
+<div class="q">
+
+<p>
+e) I want a ________ (big) school bag in class 4.
+</p>
+
+<input
+class="blank textAnswer"
+data-answer="big">
+
+<div class="feedback"></div>
+
+</div>
+
+
+<div class="q">
+
+<p>
+f) That was the ________ (funny) film I've ever seen!
+</p>
+
+<input
+class="blank textAnswer"
+data-answer="funniest">
+
+<div class="feedback"></div>
+
+</div>
+
+</div>
+
+
+<!-- ================================================= -->
+<!-- QUESTION 2 -->
+<!-- ================================================= -->
+
+<div class="section">
+
+<h3>
+Q2. Complete these sentences with adverbs from the box.
+</h3>
+
+<div class="instruction">
+(5 × 1 = 5)
+</div>
+
+
+<div class="wordbox">
+
+when, early, very, together, rarely,
+absolutely, silently, thoroughly
+
+</div>
+
+
+<div class="q">
+
+<p>
+a) They ________ go out of town.
+<i>(adverb of frequency)</i>
+</p>
+
+<input
+class="blank textAnswer"
+data-answer="rarely">
+
+<div class="feedback"></div>
+
+</div>
+
+
+<div class="q">
+
+<p>
+b) Ruby learnt the spellings ________.
+<i>(adverb of manner)</i>
+</p>
+
+<input
+class="blank textAnswer"
+data-answer="thoroughly">
+
+<div class="feedback"></div>
+
+</div>
+
+
+<div class="q">
+
+<p>
+c) Are you ________ sure that this is the correct address?
+<i>(adverb of degree)</i>
+</p>
+
+<input
+class="blank textAnswer"
+data-answer="absolutely">
+
+<div class="feedback"></div>
+
+</div>
+
+
+<div class="q">
+
+<p>
+d) We cleaned our classroom ________ quickly.
+<i>(adverb of degree)</i>
+</p>
+
+<input
+class="blank textAnswer"
+data-answer="very">
+
+<div class="feedback"></div>
+
+</div>
+
+
+<div class="q">
+
+<p>
+e) ________ did she go to Kolkata?
+<i>(interrogative adverb)</i>
+</p>
+
+<input
+class="blank textAnswer"
+data-answer="when">
+
+<div class="feedback"></div>
+
+</div>
+
+</div>
+
+
+<!-- ================================================= -->
+<!-- QUESTION 3 -->
+<!-- ================================================= -->
+
+<div class="section">
+
+<h3>
+Q3. Write the names of the people who do these jobs.
+</h3>
+
+<div class="instruction">
+(4 × 1 = 4)
+</div>
+
+
+<div class="q">
+
+<p>
+a) A ________ cuts people's hair.
+</p>
+
+<input
+class="blank textAnswer"
+data-answer="barber">
+
+<div class="feedback"></div>
+
+</div>
+
+
+<div class="q">
+
+<p>
+b) A ________ sells flowers.
+</p>
+
+<input
+class="blank textAnswer"
+data-answer="florist">
+
+<div class="feedback"></div>
+
+</div>
+
+
+<div class="q">
+
+<p>
+c) A ________ weaves clothes.
+</p>
+
+<input
+class="blank textAnswer"
+data-answer="weaver">
+
+<div class="feedback"></div>
+
+</div>
+
+
+<div class="q">
+
+<p>
+d) An ________ makes or sells spectacles.
+</p>
+
+<input
+class="blank textAnswer"
+data-answer="optician">
+
+<div class="feedback"></div>
+
+</div>
+
+</div>
+
+
+<!-- ================================================= -->
+<!-- QUESTION 4 -->
+<!-- ================================================= -->
+
+<div class="section">
+
+<h3>
+Q4. Choose the correct object to complete these sentences.
+</h3>
+
+<div class="instruction">
+(4 × 1 = 4)
+</div>
+
+
+<!-- Q4 a -->
+
+<div
+class="q mcq"
+data-answer="them">
+
+<p>
+a) You should help ________.
+</p>
+
+<div class="options">
+
+<label>
+<input
+type="radio"
+name="q16"
+value="them">
+
+i) them
+</label>
+
+
+<label>
+<input
+type="radio"
+name="q16"
+value="they">
+
+ii) they
+</label>
+
+</div>
+
+<div class="feedback"></div>
+
+</div>
+
+
+<!-- Q4 b -->
+
+<div
+class="q mcq"
+data-answer="him">
+
+<p>
+b) I called ________.
+</p>
+
+<div class="options">
+
+<label>
+<input
+type="radio"
+name="q17"
+value="he">
+
+i) he
+</label>
+
+
+<label>
+<input
+type="radio"
+name="q17"
+value="him">
+
+ii) him
+</label>
+
+</div>
+
+<div class="feedback"></div>
+
+</div>
+
+
+<!-- Q4 c -->
+
+<div
+class="q mcq"
+data-answer="me">
+
+<p>
+c) A dog followed ________.
+</p>
+
+<div class="options">
+
+<label>
+<input
+type="radio"
+name="q18"
+value="me">
+
+i) me
+</label>
+
+
+<label>
+<input
+type="radio"
+name="q18"
+value="my">
+
+ii) my
+</label>
+
+</div>
+
+<div class="feedback"></div>
+
+</div>
+
+
+<!-- Q4 d -->
+
+<div
+class="q mcq"
+data-answer="it">
+
+<p>
+d) Maya took ________.
+</p>
+
+<div class="options">
+
+<label>
+<input
+type="radio"
+name="q19"
+value="it">
+
+i) it
+</label>
+
+
+<label>
+<input
+type="radio"
+name="q19"
+value="they">
+
+ii) they
+</label>
+
+</div>
+
+<div class="feedback"></div>
+
+</div>
+
+</div>
+
+
+<!-- ================================================= -->
+<!-- SUBMIT -->
+<!-- ================================================= -->
+
+<div class="submit">
+
+<button type="submit">
+SUBMIT TEST
+</button>
+
+
+<div id="result">
+
+<div>
+Test Submitted Successfully
+</div>
+
+<div
+class="score"
+id="score">
+</div>
+
+<div id="message"></div>
+
+</div>
+
+</div>
+
+</form>
+
+
+<div class="footer">
+
+****** Best of Luck ******
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- ================================================= -->
+<!-- JAVASCRIPT -->
+<!-- ================================================= -->
+
+<script>
+
+document
+.getElementById("testForm")
+.addEventListener("submit", function(e) {
+
+    e.preventDefault();
+
+
+    /* Student name */
+
+    const name =
+        document
+        .getElementById("studentName")
+        .value
+        .trim() || "Student";
+
+
+    let score = 0;
+
+
+    /* ==========================================
+       CHECK TEXT QUESTIONS
+       ========================================== */
+
+    document
+    .querySelectorAll(".textAnswer")
+    .forEach(function(input) {
+
+
+        const questionBox =
+            input.parentElement;
+
+
+        const feedback =
+            questionBox.querySelector(".feedback");
+
+
+        const given =
+            input.value
+            .trim()
+            .toLowerCase()
+            .replace(/\s+/g, " ");
+
+
+        const answer =
+            input.dataset.answer
+            .toLowerCase();
+
+
+        /* Remove old result */
+
+        feedback.className =
+            "feedback";
+
+
+        questionBox.classList.remove(
+            "correctBox",
+            "incorrectBox"
+        );
+
+
+        /* NOT ANSWERED */
+
+        if (!given) {
+
+            feedback.classList.add(
+                "unanswered"
+            );
+
+            feedback.innerHTML =
+                "⚠️ Not answered. " +
+                "<b>Correct answer: " +
+                input.dataset.answer +
+                "</b>";
+
+        }
+
+
+        /* CORRECT */
+
+        else if (given === answer) {
+
+            score++;
+
+
+            questionBox.classList.add(
+                "correctBox"
+            );
+
+
+            feedback.classList.add(
+                "correct"
+            );
+
+
+            feedback.innerHTML =
+                "✅ Correct!";
+
+        }
+
+
+        /* INCORRECT */
+
+        else {
+
+            questionBox.classList.add(
+                "incorrectBox"
+            );
+
+
+            feedback.classList.add(
+                "incorrect"
+            );
+
+
+            feedback.innerHTML =
+                "❌ Incorrect. " +
+                "<b>Correct answer: " +
+                input.dataset.answer +
+                "</b>";
+
+        }
+
+    });
+
+
+    /* ==========================================
+       CHECK MCQ QUESTIONS
+       ========================================== */
+
+    document
+    .querySelectorAll(".mcq")
+    .forEach(function(question) {
+
+
+        const feedback =
+            question.querySelector(
+                ".feedback"
+            );
+
+
+        const selected =
+            question.querySelector(
+                "input:checked"
+            );
+
+
+        const correctAnswer =
+            question.dataset.answer;
+
+
+        question.classList.remove(
+            "correctBox",
+            "incorrectBox"
+        );
+
+
+        feedback.className =
+            "feedback";
+
+
+        /* NOT ANSWERED */
+
+        if (!selected) {
+
+            feedback.classList.add(
+                "unanswered"
+            );
+
+
+            feedback.innerHTML =
+                "⚠️ Not answered. " +
+                "<b>Correct answer: " +
+                correctAnswer +
+                "</b>";
+
+        }
+
+
+        /* CORRECT */
+
+        else if (
+            selected.value === correctAnswer
+        ) {
+
+            score++;
+
+
+            question.classList.add(
+                "correctBox"
+            );
+
+
+            feedback.classList.add(
+                "correct"
+            );
+
+
+            feedback.innerHTML =
+                "✅ Correct!";
+
+        }
+
+
+        /* INCORRECT */
+
+        else {
+
+            question.classList.add(
+                "incorrectBox"
+            );
+
+
+            feedback.classList.add(
+                "incorrect"
+            );
+
+
+            feedback.innerHTML =
+                "❌ Incorrect. " +
+                "<b>Correct answer: " +
+                correctAnswer +
+                "</b>";
+
+        }
+
+    });
+
+
+    /* ==========================================
+       FINAL SCORE
+       ========================================== */
+
+    document
+    .getElementById("score")
+    .textContent =
+        name + " — " +
+        score +
+        " / 19";
+
+
+    let message;
+
+
+    if (score === 19) {
+
+        message =
+            "🏆 Excellent! Perfect Score!";
+
+    }
+
+    else if (score >= 15) {
+
+        message =
+            "🌟 Very Good! Keep it up!";
+
+    }
+
+    else if (score >= 10) {
+
+        message =
+            "👍 Good effort! Keep practising.";
+
+    }
+
+    else {
+
+        message =
+            "📚 Keep practising and try again!";
+
+    }
+
+
+    document
+    .getElementById("message")
+    .textContent = message;
+
+
+    document
+    .getElementById("result")
+    .style.display = "block";
+
+
+    /* Scroll to score */
+
+    document
+    .getElementById("result")
+    .scrollIntoView({
+        behavior: "smooth"
+    });
+
+});
+
+</script>
+
+</body>
+</html>
