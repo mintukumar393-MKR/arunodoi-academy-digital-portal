@@ -1,0 +1,98 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Class VIII Maths MCQ Test</title><style>
+*{box-sizing:border-box}body{margin:0;background:#f1f5f9;color:#172033;font:16px/1.5 Arial,sans-serif}header{background:#075985;color:white;text-align:center;padding:22px 12px}main{max-width:900px;margin:18px auto;padding:0 12px}.card{background:white;border-radius:12px;padding:18px;margin:14px 0;box-shadow:0 3px 12px #0001}h1{font-size:clamp(1.3rem,4vw,2rem);margin:0}h2{color:#075985;margin-top:0}label{display:block;margin:10px 0}select,button{font:inherit;padding:10px;border-radius:8px}select{width:100%;max-width:500px;border:1px solid #cbd5e1;background:white}button{border:0;background:#0369a1;color:white;font-weight:bold;cursor:pointer}button:disabled{opacity:.5}.note{background:#fffbeb;padding:10px;border-left:4px solid #d97706}.q{border:1px solid #dbe4ee;border-radius:10px;padding:14px;margin:12px 0}.q h3{font-size:1rem;margin:0 0 8px}.opt{display:flex;gap:8px;background:#f8fafc;padding:7px;border-radius:7px;font-weight:normal}.feedback{padding:9px;border-radius:7px;margin-top:8px;font-weight:bold}.good{background:#dcfce7;color:#166534}.bad{background:#fee2e2;color:#991b1b}.muted{font-size:.9rem;color:#64748b}.bar{height:8px;background:#e2e8f0;border-radius:10px;overflow:hidden}.bar span{display:block;height:100%;background:#0d9488;width:0}#test[hidden],#result[hidden]{display:none}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}@media(max-width:500px){.card{padding:13px}.actions button{width:100%}}
+</style>
+<script>window.MathJax={tex:{inlineMath:[["\\(","\\)"]]},options:{skipHtmlTags:["script","noscript","style","textarea","pre","code"]}};</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</head><body><header><h1>Class VIII Mathematics MCQ Test</h1><div>Interactive chapter-wise practice • Select exactly two chapters</div></header><main>
+<section class="card" id="setup"><h2>Select two chapters</h2><p>Choose exactly two different chapters. The test includes all available MCQs from those chapters.</p><label>Chapter 1<select id="c1"></select></label><label>Chapter 2<select id="c2"></select></label><p class="note" id="info">Select two chapters.</p><button id="start">Start Test</button><p class="muted">Some questions/options transcribed from screenshots need source verification. Those are marked and excluded from scoring until verified.</p></section>
+<section class="card" id="test" hidden><h2 id="title"></h2><p id="meta" class="muted"></p><div class="bar"><span id="fill"></span></div><div id="questions"></div><div class="actions"><button id="submit">Submit Test</button><button id="change">Choose Different Chapters</button></div></section>
+<section class="card" id="result" hidden><h2>Result</h2><p id="score"></p><p id="detail"></p><div class="actions"><button id="retry">Retry Same Test</button><button id="new">Choose Different Chapters</button></div></section></main>
+<script>
+const C=[
+['1. Rational Numbers',[
+['The number x and −x are additive inverses. Which number is midway between them on a number line?',['1','0','−1','1/2'],1],
+['Which number has the same absolute value as 4/3?',['8/9','−8/9','−4/3','3/4'],2],
+['The sum of −16 2/3 and 16 2/3 is:',['32 1/3','33 1/3','−33 1/3','0'],3],
+['The multiplicative inverse of 2 2/5 is:',['−12/5','5/12','12/5','−5/12'],1],
+['Page 21 question: “3 times (−4) divided by 5 times 6”. Verify expression/options against the book.',['4/5','2/5','−2/5','1'],null,'Source expression unclear; not scored until verified.']]],
+['2. Exponents and Powers',[
+['The value of (2)⁻⁵ × (64)^(2/3) is:',['512','1/512','16','1/2'],3],
+['{[(-2/3)⁻³]}² is equal to:',['3/2','64/729','81/32','729/64'],3],
+['Which is NOT equal to (−2/5)⁴?',['2⁴/(−5)⁴','(−2/5)×(−2/5)×(−2/5)×(−2/5)','(−2)⁴/5⁴','−(2⁴/5⁴)'],3],
+['(−2/7)⁻⁶ ÷ (−2/7)⁴ is equal to:',['(−2/7)²','(−2/7)⁻¹⁰','(−7/2)⁻¹⁰','(−7/2)²'],1],
+['{4⁻¹ − 2⁻¹} × 3⁻¹ is equal to:',['−1/12','1/12','3/8','−3/8'],0],
+['The standard form of 0.0000000000942 is:',['0.942 × 10⁻¹⁰','9.42 × 10⁻¹²','9.42 × 10⁻¹¹','9.42 × 10¹¹'],2],
+['The usual form of 6.8 × 10⁴ is:',['6.80000','68,000','6,80,000','0.68 × 10⁵'],[1,3],'Options B and D are equivalent; either accepted.'],
+['The value of 2⁵⁵ × 2⁶⁰ − 2⁹⁷ × 2¹⁸ is:',['2¹¹⁵','−1','1','0'],3],
+['If {(2)^(3m−1) + 10} ÷ 7 = 6, then m is:',['2','1','0','−1'],0],
+['The value of m for which (6/13)⁻⁴ × (6/13)^(3m) = (6/13)⁵ is:',['−3','−2','2','3'],3]]],
+['3. Squares and Square Roots',[
+['The square of 9,999 is:',['9,98,001','99,98,001','99,80,001','9,99,80,001'],3],
+['The smallest number by which 98 must be divided to make it a perfect square is:',['2','3','7','6'],0],
+['The square root of 12345654321 is:',['11,111','10,101','1,11,111','1,01,01,101'],2],
+['√0.09 is equal to:',['0.03','0.3','0.003','0.034'],1],
+['The smallest number that must be subtracted from 176 to make it a perfect square is:',['16','7','10','4'],1],
+['√7,225 is equal to:',['75','85','65','95'],1],
+['The sum 1 + 3 + 5 + … + 13 is:',['22','7²','91','13²'],1],
+['The value of 100² − 99² is:',['10,000','299','199','1'],2],
+['The square of the number 155 is:',['odd','even','prime','multiple of 10'],0],
+['A Pythagorean triplet having 5 as the greatest member is:',['2, 3, 5','3, 4, 5','1, 3, 5','5, 12, 13'],1]]],
+['4. Cubes and Cube Roots',[
+['Cube of an odd natural number is:',['a prime number','an even natural number','an odd natural number','none of these'],2],
+['Cube root of −729 is:',['9','−9','81','−3'],1],
+['Cube root of the product of a positive and a negative number is:',['a prime number','a positive number','a negative number','may be positive or negative'],2],
+['The cube of a natural number of the form 3n + 1, when divided by 3, leaves remainder:',['1','2','0','cannot say'],0],
+['The cube of a natural number of the form 3n + 2, when divided by 3, leaves remainder:',['0','1','2','3'],2],
+['If m is the cube root of n, then n is:',['m³','√m','n/3','∛m'],0],
+['The ones digit in the cube of 38 is:',['8','6','2','1'],2]]],
+['5. Algebraic Expressions and Identities',[
+['In 2x²y² − 3x²y²z² + 3z², the coefficient of the middle term is:',['2','3','−3','−2'],2],
+['(3x − 4y) − (2x − y) is equal to:',['x + 5y','x − 3y','5x − y','x + 3y'],1],
+['The product (2xy²z³) × (6x³y²z) is equal to:',['12x³y³z⁴','8x⁴y⁴z⁴','12x⁴y⁴z⁴','8x⁴y³z⁵'],2],
+['Volume of a box with length l²m², breadth m³n² and height l⁴n³ is:',['l⁶m⁵n⁵','l⁸m⁶n⁶','l⁶m⁶n⁶','l⁸m⁵n⁵'],0],
+['The product 2x⁸y⁸ × 4z⁹ × 0 is equal to:',['8x⁸y⁸z⁹','0','1','8'],1],
+['The degree of 7x⁵ + 3x² + 4x + 1 is:',['6','5','4','2'],1]]],
+['6. Factorisation',[
+['The common factors of 2xy²z and −4x²y² are shown in the screenshot as:',['2x²y','−2x²yz','2xy','−2xyz'],null,'Source expression/options appear inconsistent; not scored until verified.'],
+['The factors of 2x² + x − 15 are:',['(x + 3)(2x − 5)','(x − 3)(2x − 5)','(x − 3)(2x + 5)','(x + 3)(2x + 5)'],0],
+['The common factors of 3x³, 6y³ and 9z³ are:',['1','3','xyz','3xyz'],1],
+['The common factors of 18x³y², 36xy⁴ and −24x²y³ are:',['−12x²y²','−6xy²','12x²y²','6xy²'],3],
+['The factors of (y − x)a + (x − y)b are:',['(x − y)(b − a)','(y − x)(b − a)','(x − y)(a − b)','(y − x)(a + b)'],[0,2],'Options A and C are equivalent; either accepted.'],
+['If x − 1/x = 3, then x² + 1/x² is:',['7','9','5','11'],3],
+['If xy = 6 and x + y = 5, then x² + y² is:',['13','11','16','12'],0],
+['(32x⁴y³ − 16x³y⁴) ÷ (−8x²y) is equal to:',['−6x²y²','−8x²y²','−4x²y² + 2xy³','−4x²y² − 2xy³'],2],
+['If x − 3y exactly divides x² − 7xy + 12y², the remainder is:',['0','1','−1','cannot say'],0]]],
+['7. Data Handling and Probability',[
+['From the histogram, how many runs did Ravi score most of the time?',['80–100 runs','less than 20','40–60 runs','60–80 runs'],2],
+['From the histogram, how many matches did Ravi play in all?',['20 matches','24 matches','22 matches','26 matches'],2],
+['From the histogram, in how many matches did Ravi score less than 60 runs?',['8 matches','2 matches','16 matches','18 matches'],2],
+['From the pie chart, which game is played by the least number of students?',['Tennis','Basketball','Football','Badminton'],1],
+['If there are 108 students, how many play badminton according to the pie chart?',['25','26','23','27'],3],
+['The collection or set of all possible outcomes of a random experiment is known as:',['trials','events','sample space','probability'],2],
+['If a coin is tossed 3 times, the number of possible outcomes is:',['8','6','10','4'],0],
+['Two fair dice are rolled simultaneously. The probability of getting a sum of 5 is:',['1/6','2/3','1/9','4/9'],2],
+['In a pack of 52 cards, the number of face cards is:',['3','6','9','12'],3],
+['If A denotes the happening of an event, then P(A̅) is:',['1 − P(A)','P(A) − 1','1 + P(A)','P(A)'],0]]]
+];
+const $=id=>document.getElementById(id);let active=[],qs=[],done=false;
+// Safely format simple fractions as stacked MathJax fractions.
+function formatMath(value){
+ let s=String(value).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+ // Fractions such as 2/5, -2/3, and 1/x.
+ s=s.replace(/([−-]?\d+)\s*\/\s*(\d+|[a-zA-Z])/g,
+   function(_,n,d){return '\\(\\frac{'+n.replace('−','-')+'}{'+d+'}\\)';});
+ return s;
+}
+function renderMath(){
+ if(window.MathJax && window.MathJax.typesetPromise){
+  window.MathJax.typesetPromise([$ ('questions')]).catch(function(err){console.log(err);});
+ }
+}
+C.forEach((c,i)=>{for(const id of ['c1','c2']){let o=document.createElement('option');o.value=i;o.textContent=c[0];$(id).append(o)}});$('c1').value='0';$('c2').value='1';
+function selection(){let a=+$('c1').value,b=+$('c2').value;$('start').disabled=a===b;$('info').textContent=a===b?'Choose two different chapters.':`${C[a][0]} (${C[a][1].length} questions) + ${C[b][0]} (${C[b][1].length} questions) = ${C[a][1].length+C[b][1].length} questions.`} $('c1').onchange=selection;$('c2').onchange=selection;selection();
+function shuffle(a){return a.slice().sort(()=>Math.random()-.5)}
+function start(){let a=+$('c1').value,b=+$('c2').value;if(a===b)return;active=[a,b];qs=shuffle([...C[a][1].map(q=>({...q,chapter:C[a][0]})),...C[b][1].map(q=>({...q,chapter:C[b][0]}))]);done=false;$('setup').hidden=true;$('result').hidden=true;$('test').hidden=false;$('title').textContent=C[a][0]+' + '+C[b][0];$('meta').textContent=`${qs.length} questions • 1 mark each • No negative marking`;$('submit').disabled=false;$('questions').innerHTML='';qs.forEach((q,i)=>{let d=document.createElement('div');d.className='q';let h=document.createElement('h3');h.innerHTML=`Q${i+1}. ${formatMath(q[0])}`;d.append(h);let ch=document.createElement('div');ch.className='muted';ch.textContent=q.chapter;d.append(ch);q[1].forEach((op,j)=>{let l=document.createElement('label');l.className='opt';let r=document.createElement('input');r.type='radio';r.name='q'+i;r.value=j;r.onchange=progress;let t=document.createElement('span');t.innerHTML=String.fromCharCode(65+j)+'. '+formatMath(op);l.append(r,t);d.append(l)});if(q[3]&&typeof q[3]==='string'){let n=document.createElement('p');n.className='muted';n.textContent='Teacher review: '+q[3];d.append(n)}let f=document.createElement('div');f.id='f'+i;f.className='feedback';f.hidden=true;d.append(f);$('questions').append(d)});$('fill').style.width='0';window.scrollTo(0,0);renderMath()} 
+function progress(){let n=qs.filter((q,i)=>document.querySelector('input[name="q'+i+'"]:checked')).length;$('fill').style.width=(n/qs.length*100)+'%';$('meta').textContent=`${n} of ${qs.length} answered • 1 mark each`}
+function submit(){if(done)return;done=true;let score=0,graded=0,unanswered=0;qs.forEach((q,i)=>{let f=$('f'+i),chosen=document.querySelector('input[name="q'+i+'"]:checked');f.hidden=false;document.querySelectorAll('input[name="q'+i+'"]').forEach(x=>x.disabled=true);if(q[2]===null){f.textContent='Not scored: source needs verification.';return}graded++;let ans=Array.isArray(q[2])?q[2]:[q[2]];if(!chosen){unanswered++;f.className='feedback bad';f.innerHTML='Not answered. Correct answer: '+formatMath(ans.map(j=>String.fromCharCode(65+j)+'. '+q[1][j]).join(' / '))}else if(ans.includes(+chosen.value)){score++;f.className='feedback good';f.innerHTML='Correct! '+formatMath(ans.map(j=>String.fromCharCode(65+j)+'. '+q[1][j]).join(' / '))}else{f.className='feedback bad';f.innerHTML='Incorrect. Correct answer: '+formatMath(ans.map(j=>String.fromCharCode(65+j)+'. '+q[1][j]).join(' / '))}});$('submit').disabled=true;$('result').hidden=false;$('score').textContent=`Score: ${score} / ${graded}`;$('detail').textContent=`${qs.length} questions displayed. ${graded} scored; ${qs.length-graded} excluded pending verification. Unanswered scored questions: ${unanswered}.`;renderMath();$('result').scrollIntoView({behavior:'smooth'})}
+function back(){ $('test').hidden=true;$('result').hidden=true;$('setup').hidden=false;window.scrollTo(0,0)}$('start').onclick=start;$('submit').onclick=submit;$('change').onclick=back;$('new').onclick=back;$('retry').onclick=start;
+</script></body></html>
