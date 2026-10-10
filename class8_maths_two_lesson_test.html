@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Class 8 Maths | Chapter-wise Test - Arunodoi Academy</title>
+<style>
+:root{--primary:#087f8c;--dark:#163047;--light:#eef8fa;--border:#d7e1e7;--good:#e5f7e9;--bad:#fff0f0}
+*{box-sizing:border-box}body{margin:0;background:#f3f6f9;color:#1d2935;font:16px/1.5 Arial,Helvetica,sans-serif}.wrap{max-width:900px;margin:auto;padding:18px}.hero{background:linear-gradient(135deg,#075e68,#1199a6);color:#fff;padding:24px;border-radius:16px}.hero h1{margin:0 0 6px;font-size:clamp(23px,4vw,32px)}.panel,.question{background:#fff;border:1px solid var(--border);border-radius:12px;padding:18px;margin:16px 0}.panel h2{margin:0 0 10px;color:var(--dark);font-size:20px}.category-section{margin:20px 0 26px}.category-title{background:#e5f5f7;color:#075e68;border-left:5px solid var(--primary);padding:12px 15px;border-radius:8px;font-size:18px;margin:0 0 12px}.category-note{color:#536575;font-size:13px;margin:0 0 10px}.hint{color:#536575;font-size:14px}.lesson-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}.lesson{display:flex;align-items:flex-start;gap:10px;border:1px solid var(--border);padding:12px;border-radius:9px;cursor:pointer}.lesson input{margin-top:5px;accent-color:var(--primary);transform:scale(1.15)}button{border:0;border-radius:9px;background:var(--primary);color:white;padding:12px 18px;font-weight:700;font-size:15px;cursor:pointer}button:disabled{opacity:.45;cursor:not-allowed}.secondary{background:#526575}.controls{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}.question h3{font-size:16px;margin:0 0 12px}.qmeta{font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:#087f8c;font-weight:bold;margin-bottom:6px}.options{display:grid;gap:8px}.option{display:flex;gap:9px;align-items:flex-start;border:1px solid #e1e8ec;padding:9px 10px;border-radius:8px;cursor:pointer}.option input{margin-top:4px;accent-color:var(--primary)}input[type=text]{width:100%;padding:11px;border:1px solid #bac9d2;border-radius:8px;font-size:16px}.feedback{margin-top:10px;padding:9px 11px;border-radius:8px;font-size:14px}.correct{background:var(--good);color:#17632b}.incorrect{background:var(--bad);color:#9b2222}.hidden{display:none!important}.result{background:#eaf7f8;border:1px solid #9dd8dc;border-radius:12px;padding:18px;margin:16px 0}.result strong{font-size:24px}.small{font-size:13px;color:#5d6c78}.footer{text-align:center;color:#667784;font-size:13px;padding:18px}
+@media(max-width:520px){.wrap{padding:10px}.hero{padding:18px}.panel,.question{padding:14px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="hero"><h1>Class 8 Mathematics</h1><div>Chapter-wise Online Test</div><p style="margin-bottom:0">Arunodoi Academy | Digital School Portal</p></header>
+<section class="panel" id="setup"><h2>1. Select at least TWO lessons</h2><p class="hint">Choose a minimum of 2 lessons and up to all 7 lessons. Questions will be grouped separately into MCQs, True or False, and Fill in the Blanks.</p>
+<div class="lesson-list" id="lessonList"></div><p id="selectionMessage" class="hint">0 lessons selected. Select at least 2 to start.</p><div class="controls"><button id="startBtn" disabled>Start Test</button></div></section>
+<section id="testArea" class="hidden"><div class="panel"><h2 id="testHeading">Your Test</h2><p class="hint" id="testInfo"></p><div class="small">Choose one answer for each MCQ. For fill-in-the-blanks, type the answer. Submit when finished.</div></div><form id="testForm"><div id="questions"></div><div class="controls"><button type="submit">Submit Test</button><button type="button" class="secondary" id="newTestBtn">New Random Test</button><button type="button" class="secondary" id="resetBtn">Reset Answers</button><button type="button" class="secondary" id="changeBtn">Change Lessons</button></div></form><div id="results" class="result hidden" aria-live="polite"></div></section>
+<div class="footer">Arunodoi Academy, Tangla · Class 8 Mathematics Practice</div>
+</div>
+<script>
+const lessons = [
+ {id:'fractions',name:'Fractions'},
+ {id:'decimals',name:'Decimals'},
+ {id:'rational',name:'Rational Numbers'},
+ {id:'powers',name:'Exponents and Powers'},
+ {id:'algebra',name:'Algebraic Expressions'},
+ {id:'linear',name:'Linear Equations in One Variable'},
+ {id:'angles',name:'Lines and Angles'}
+];
+// Questions are transcribed from the supplied textbook screenshots. Diagram-dependent items are described in words where possible.
+const bank = [
+
+// FRACTIONS — MCQs from the previously shared review question bank
+{l:'fractions',type:'mcq',q:'If a mixed fraction is converted into an improper fraction, then its reciprocal is usually:',o:['A proper fraction','An improper fraction','Equal to itself','None of these'],a:0},
+{l:'fractions',type:'mcq',q:'The number of months in 3/5 of a century is:',o:['60','600','720','7.3'],a:2},
+{l:'fractions',type:'mcq',q:'474 surgeons were invited for a conference and 5/6 participated. How many participated?',o:['359','395','474','568'],a:1},
+{l:'fractions',type:'mcq',q:'John can read a novel in 17 hours. If he reads 2 3/7 hours daily, he would finish it in approximately:',o:['5 days','7 days','9 days','10 days'],a:1},
+{l:'fractions',type:'mcq',q:'A laptop bought for £45 costs 5/8 of its original price. The original price was:',o:['£72','£28','£90','£112'],a:0},
+{l:'fractions',type:'mcq',q:'The word “of” between two fractions generally refers to their:',o:['Sum','Difference','Product','Quotient'],a:2},
+{l:'fractions',type:'tf',q:'Two equivalent fractions are always equal.',a:'true',display:'True'},
+{l:'fractions',type:'tf',q:'The reciprocal of zero does not exist.',a:'true',display:'True'},
+{l:'fractions',type:'tf',q:'The product of two proper fractions is greater than each of the fractions.',a:'false',display:'False'},
+{l:'fractions',type:'tf',q:'To divide one fraction by another, multiply by the reciprocal of the second fraction.',a:'true',display:'True'},
+{l:'fractions',type:'tf',q:'No proper fraction is equal to a mixed fraction.',a:'true',display:'True'},
+{l:'fractions',type:'tf',q:'The multiplicative inverse of a non-zero fraction is its reciprocal.',a:'true',display:'True'},
+{l:'fractions',type:'blank',q:'There are _____ minutes in 3/5 of 2 hours.',a:['72','seventy two'],display:'72'},
+{l:'fractions',type:'blank',q:'The multiplicative inverse of 3 1/2 is _____.',a:['2/7','2⁄7'],display:'2/7'},
+{l:'fractions',type:'blank',q:'The product of a non-zero fraction and its reciprocal is always _____.',a:['1','one'],display:'1'},
+{l:'fractions',type:'blank',q:'The number of pieces each measuring 3 1/4 metres cut from a rope measuring 45 1/2 metres is _____.',a:['14','14 pieces'],display:'14'},
+{l:'fractions',type:'blank',q:'A fraction equivalent to 1/20 having denominator 60 is _____.',a:['3/60','3⁄60'],display:'3/60'},
+// DECIMALS — MCQs
+{l:'decimals',type:'mcq',q:'The decimal places in the product of two decimal numbers is equal to the _____ of their decimal places.',o:['Sum','Difference','Product','Quotient'],a:0},
+{l:'decimals',type:'mcq',q:'The value of 0.03784 × 1000 is:',o:['3.784','37.84','378.4','3784'],a:1},
+{l:'decimals',type:'mcq',q:'The decimal number 0.72 in lowest fractional form is:',o:['72/100','36/50','100/72','18/25'],a:3},
+{l:'decimals',type:'mcq',q:'The perimeter of an equilateral triangle is 16.08 cm. Its side is:',o:['8.04 cm','7.36 cm','5.36 cm','160.8 cm'],a:2},
+{l:'decimals',type:'mcq',q:'The product of 2000 and 0.001 is:',o:['1','2','0.002','200.001'],a:1},
+{l:'decimals',type:'mcq',q:'The value of 0.001 ÷ 100 is:',o:['0.1','0.01','0.0001','0.00001'],a:3},
+{l:'decimals',type:'mcq',q:'The area of a square whose side is 0.9 m is:',o:['0.3 m²','0.91 m²','0.81 m²','1.8 m²'],a:2},
+{l:'decimals',type:'tf',q:'Every terminating decimal represents a rational number.',a:'true',display:'True'},
+{l:'decimals',type:'tf',q:'Unlike decimals can be converted into like decimals by adding zeros at the end of the decimal part.',a:'true',display:'True'},
+{l:'decimals',type:'tf',q:'On multiplying a decimal number by a power of 10, digits move to the left relative to the decimal point.',a:'true',display:'True'},
+{l:'decimals',type:'tf',q:'If two numbers have m and n decimal places, their product has m+n or fewer decimal places.',a:'true',display:'True'},
+{l:'decimals',type:'tf',q:'The product of a decimal number and a whole number can never be a whole number.',a:'false',display:'False'},
+{l:'decimals',type:'blank',q:'The expression 2.8 × 6.15 ÷ 1.23 is equal to _____.',a:['14','14.0'],display:'14'},
+{l:'decimals',type:'blank',q:'The number of digits in the decimal part of 5.68 × 3.222 is _____.',a:['5'],display:'5'},
+{l:'decimals',type:'blank',q:'The decimal number 7.6291803 rounded to the nearest hundredth is _____.',a:['7.63'],display:'7.63'},
+{l:'decimals',type:'blank',q:'The value of 0.01 × 0.000001 × 1000 is _____.',a:['0.00001','0.000010'],display:'0.00001'},
+{l:'decimals',type:'blank',q:'The modulus of a decimal number nearer to zero is _____ than that of a number farther away from zero.',a:['less','smaller'],display:'Less'},
+// RATIONAL NUMBERS — MCQs
+{l:'rational',type:'mcq',q:'The expression which best describes 0/3 is:',o:['0','1','3','Undefined'],a:0},
+{l:'rational',type:'mcq',q:'The rational number 24/−18 reduced to standard form is:',o:['12/−9','4/−3','−4/3','−24/18'],a:2},
+{l:'rational',type:'mcq',q:'Which of these is a rational number?',o:['π','5/0','1.4142…','1.7̅'],a:3},
+{l:'rational',type:'mcq',q:'The product of 3/4 and its multiplicative inverse is:',o:['1','0','3/4','9/16'],a:0},
+{l:'rational',type:'mcq',q:'A rational number lying between 5/14 and 4/7 is:',o:['1/2','2/7','3/4','1'],a:0},
+{l:'rational',type:'mcq',q:'The value of (−3/4) ÷ (8/12) is:',o:['36/31','30/32','18/16','−9/8'],a:3},
+{l:'rational',type:'mcq',q:'Without actual computation, (5 7/9) ÷ (7 5/9) is:',o:['Greater than 1','Greater than 2','Less than 1','Less than 1/2'],a:2},
+{l:'rational',type:'mcq',q:'A decimal which cannot be expressed as a rational number is:',o:['0.34128590… (non-terminating, non-repeating)','0.333333…','2.105','4.0'],a:0},
+{l:'rational',type:'tf',q:'The integer zero is not a rational number.',a:'false',display:'False'},
+{l:'rational',type:'tf',q:'Two rational numbers with different numerators and denominators can never be equal.',a:'false',display:'False'},
+{l:'rational',type:'tf',q:'The number 1 is an identity element for division of rational numbers.',a:'false',display:'False'},
+{l:'rational',type:'tf',q:'There exists at least one integer between any two distinct rational numbers.',a:'false',display:'False'},
+{l:'rational',type:'tf',q:'Every rational number is necessarily represented by a terminating decimal.',a:'false',display:'False'},
+{l:'rational',type:'tf',q:'The product of a/b and d/c is ad/bc, when the denominators are non-zero.',a:'true',display:'True'},
+{l:'rational',type:'blank',q:'A rational number p/q is said to be in _____ form if p and q have no common factor other than 1.',a:['standard','lowest','standard form','lowest form'],display:'Standard form'},
+{l:'rational',type:'blank',q:'There are _____ rational numbers between any two rational numbers.',a:['infinitely many','infinite'],display:'Infinitely many'},
+{l:'rational',type:'blank',q:'Two fractions a/b and c/d are equal if ad = _____.',a:['bc'],display:'bc'},
+{l:'rational',type:'blank',q:'If a/b < c/b and b is positive, then a is _____ than c.',a:['less','smaller'],display:'Less than'},
+{l:'rational',type:'blank',q:'All rational numbers are either _____ decimals or non-terminating recurring decimals.',a:['terminating','terminating decimals'],display:'Terminating'},
+{l:'rational',type:'blank',q:'An example of a number that is rational, an integer and a whole number but not a natural number is _____.',a:['0','zero'],display:'0'},
+{l:'rational',type:'blank',q:'Every rational number can be expressed as a _____.',a:['fraction','quotient','fraction p/q'],display:'Fraction (p/q)'},
+{l:'rational',type:'blank',q:'The sign of the product of two integers that are opposite in sign is _____.',a:['negative'],display:'Negative'},
+{l:'rational',type:'blank',q:'The additive inverse of an integer a is _____.',a:['-a','−a'],display:'−a'},
+// POWERS AND EXPONENTS — True/False
+{l:'powers',type:'tf',q:'In 3⁷, the exponent is 3.',a:'false',display:'False'},
+{l:'powers',type:'tf',q:'The value of 8² is greater than 2⁸.',a:'false',display:'False'},
+{l:'powers',type:'tf',q:'To multiply two numbers in scientific form, we can reorder and regroup powers having like bases.',a:'true',display:'True'},
+{l:'powers',type:'tf',q:'The value of 3¹⁷ · 3⁹⁷ − 3¹⁰⁰ · 3¹⁴ is equal to 1.',a:'false',display:'False'},
+{l:'powers',type:'tf',q:'(a/b)⁻¹ = b/a, where a and b are non-zero rational numbers.',a:'true',display:'True'},
+// POWERS — Fill blanks
+{l:'powers',type:'blank',q:'The number 2⁵ has base _____ and exponent _____.',a:['2, 5','2 and 5','base 2 and exponent 5'],display:'Base = 2; exponent = 5'},
+{l:'powers',type:'blank',q:'The number 343 is 7 raised to the power _____.',a:['3','three'],display:'3'},
+{l:'powers',type:'blank',q:'When a negative number is raised to an odd power, the result is _____ in sign.',a:['negative','negative in sign'],display:'Negative'},
+{l:'powers',type:'blank',q:'For any natural number n, aⁿ = bⁿ is possible if and only if _____.',a:['a=b','a = b'],display:'a = b (as intended by the textbook exercise)'},
+{l:'powers',type:'blank',q:'The value of 1⁰ + 10⁰ + 100⁰ is _____.',a:['3','three'],display:'3'},
+{l:'powers',type:'blank',q:'If 200⁰ = 5ⁿ, then the value of n is _____.',a:['0','zero'],display:'0'},
+{l:'powers',type:'blank',q:'The simplest form of (a³)³ + (a²)⁴ is _____.',a:['a^9+a^8','a⁹ + a⁸','a^9 + a^8','a⁸+a⁹','a⁸ + a⁹'],display:'a⁹ + a⁸'},
+{l:'powers',type:'blank',q:'The standard form of a number is k × 10ⁿ, where k is greater than or equal to _____ and less than _____.',a:['1, 10','1 and 10','1; 10'],display:'1 and 10'},
+{l:'powers',type:'blank',q:'5,000,000,000,000,000 raindrops in standard form is _____.',a:['5 x 10^15','5×10^15','5 × 10¹⁵','5e15'],display:'5 × 10¹⁵'},
+// ALGEBRA — MCQ
+{l:'algebra',type:'mcq',q:'The expression −5x³yz² is a:',o:['monomial','binomial','trinomial','none of these'],a:0},
+{l:'algebra',type:'mcq',q:'The expression 2 − x + x² is a:',o:['monomial','binomial','trinomial','none of these'],a:2},
+{l:'algebra',type:'mcq',q:'The coefficient of x in 4xy²z is:',o:['4','4y²z','4yz','4y²z²'],a:1},
+{l:'algebra',type:'mcq',q:'The numerical coefficient in −7xy² is:',o:['7','−7','−7x','7y²'],a:1},
+{l:'algebra',type:'mcq',q:'The term 3x²y³z has degree:',o:['3','5','6','8'],a:2},
+{l:'algebra',type:'mcq',q:'The degree of the polynomial x⁴ − 3x² + xy + 4 is:',o:['0','1','2','4'],a:3},
+{l:'algebra',type:'mcq',q:'The sum of x³ − y³ and y³ − x³ is:',o:['0','2x³ − 2y³','2y³ − 2x³','x⁶ − y⁶'],a:0},
+{l:'algebra',type:'mcq',q:'The value of x³ + y³ when x = 1 and y = −1 is:',o:['−1','0','−2','2'],a:1},
+// ALGEBRA — True/False
+{l:'algebra',type:'tf',q:'A symbol having fixed numerical value is a constant term.',a:'true',display:'True'},
+{l:'algebra',type:'tf',q:'A variable factor is also called a literal factor.',a:'true',display:'True'},
+{l:'algebra',type:'tf',q:'Two unlike terms cannot be added to get a single term.',a:'true',display:'True'},
+{l:'algebra',type:'tf',q:'The sum of two like terms is a like term with numerical coefficient equal to the sum of the coefficients of the like terms.',a:'true',display:'True'},
+// ALGEBRA — Fill blanks
+{l:'algebra',type:'blank',q:'The algebraic expression representing 2 diminished from 3 times x is _____.',a:['3x-2','3x − 2','3*x-2'],display:'3x − 2'},
+{l:'algebra',type:'blank',q:'While adding two like terms, their numerical coefficients are _____.',a:['added','added together','summed'],display:'Added'},
+{l:'algebra',type:'blank',q:'The numerical coefficient in 5x²y is _____.',a:['5','five'],display:'5'},
+{l:'algebra',type:'blank',q:'The value of 462a⁴ − 512a³ + 171a² − 98a + 1 when a = 0 is _____.',a:['1','one'],display:'1'},
+{l:'algebra',type:'blank',q:'Two polynomials each of degree 5 are added. The maximum and minimum degree of the resulting polynomial are _____ and _____, respectively.',a:['5, 0','5 and 0','5; 0'],display:'5 and 0'},
+{l:'algebra',type:'blank',q:'The area of a rhombus whose diagonals measure p and q is _____.',a:['pq/2','1/2pq','½pq','(p*q)/2','p q / 2'],display:'½pq'},
+// LINEAR EQUATIONS — MCQ
+{l:'linear',type:'mcq',q:'The solution of the equation 3x + 7 = 13 is:',o:['1','−1','2','3'],a:2},
+{l:'linear',type:'mcq',q:'Two supplementary angles are such that one is 60° less than the other. The greater angle is:',o:['60°','80°','100°','120°'],a:3},
+{l:'linear',type:'mcq',q:'The length and breadth of a rectangle are in the ratio 3 : 1. If its perimeter is 72 m, the length is:',o:['9 m','18 m','27 m','36 m'],a:2},
+{l:'linear',type:'mcq',q:'Which equation has x = −3 as its solution?',o:['2x + 8 = 2','2x + 8 = 3','2x + 7 = 2','5x = 14'],a:0},
+{l:'linear',type:'mcq',q:'The maximum power of a variable in a linear equation is:',o:['1','2','3','0'],a:0},
+{l:'linear',type:'mcq',q:'The number of solutions of a linear equation in one variable is:',o:['0','1','2','3'],a:1},
+{l:'linear',type:'mcq',q:'The number of solutions of a linear equation in two variables is:',o:['0','1','2','infinitely many'],a:3},
+{l:'linear',type:'mcq',q:'For which equation is x = 0 a solution?',o:['2x + 1 = −1','x/2 + 5 = 7','3x − 1 = −1','3x − 1 = 1'],a:2},
+// LINEAR — Fill blanks
+{l:'linear',type:'blank',q:'If six times a number equals 72, then the number is _____.',a:['12','twelve'],display:'12'},
+{l:'linear',type:'blank',q:'The number x = 3 is the _____ of the equation 5x − 12 = 3.',a:['solution','root','solution or root','root or solution'],display:'Solution or root'},
+{l:'linear',type:'blank',q:'If y/2 = 3, then the value of y is _____.',a:['6','six'],display:'6'},
+{l:'linear',type:'blank',q:'While solving an equation, an additive constant having positive sign changes to _____ on transposing it to the other side.',a:['negative','minus','negative sign'],display:'Negative'},
+{l:'linear',type:'blank',q:'One-third of a number minus 1 gives 2. The number is _____.',a:['9','nine'],display:'9'},
+// LINES AND ANGLES — MCQ
+{l:'angles',type:'mcq',q:'The complement of an angle measuring 10° is:',o:['0°','45°','80°','170°'],a:2},
+{l:'angles',type:'mcq',q:'An angle measuring 10° more than its supplement is:',o:['190°','100°','95°','85°'],a:2},
+{l:'angles',type:'mcq',q:'Two supplementary angles are such that one is three times the other. The greater angle is:',o:['45°','90°','120°','135°'],a:3},
+{l:'angles',type:'mcq',q:'The difference between the supplement of 150° and the complement of 60° is:',o:['0°','30°','90°','210°'],a:0},
+{l:'angles',type:'mcq',q:'The supplement of the complement of an angle measuring 15° is:',o:['75°','105°','15°','90°'],a:1},
+{l:'angles',type:'mcq',q:'In the figure of two parallel lines cut by a transversal, which angle forms an alternate interior pair with angle x?',o:['b','a','y','z'],a:0},
+{l:'angles',type:'mcq',q:'If a transversal is perpendicular to one of two parallel lines, the angle it makes with the other line is:',o:['45°','60°','90°','can take any value'],a:2},
+{l:'angles',type:'mcq',q:'If p ∥ q, and 110° and (2x − 60)° are alternate interior angles, the value of x is:',o:['85°','90°','100°','135°'],a:0},
+{l:'angles',type:'mcq',q:'If l ∥ m and the alternate exterior angles are (8x − 16)° and (10x − 32)°, the value of x is:',o:['5°','6°','7°','8°'],a:3},
+{l:'angles',type:'mcq',q:'In the diagram with l and m cut by a transversal, the lower-right angle is 100°. Which value makes l ∥ m?',o:['w = 80°','x = 80°','x = 100°','z = 80°'],a:2},
+{l:'angles',type:'mcq',q:'Two angles are supplementary if the sum of their measures is:',o:['90°','120°','180°','360°'],a:2},
+// LINES AND ANGLES — True/False
+{l:'angles',type:'tf',q:'The supplement of an acute angle is obtuse.',a:'true',display:'True'},
+{l:'angles',type:'tf',q:'Angles of measures 50° and 150° are supplementary angles.',a:'false',display:'False'},
+{l:'angles',type:'tf',q:'The complement of the complement of an angle is the angle itself.',a:'true',display:'True'},
+{l:'angles',type:'tf',q:'If two parallel lines are cut by a transversal, the angles enclosed in a Z shape are called alternate interior angles.',a:'true',display:'True'},
+{l:'angles',type:'tf',q:'The sum of measures of all angles formed at a point is four right angles.',a:'true',display:'True'},
+{l:'angles',type:'tf',q:'If two lines intersect at a point, then all pairs of adjacent angles are supplementary.',a:'true',display:'True'},
+// LINES AND ANGLES — Fill blanks
+{l:'angles',type:'blank',q:'If two lines cut by a transversal have a pair of corresponding angles that are not equal, then the lines are _____.',a:['not parallel','non-parallel','not parallel to each other'],display:'Not parallel'},
+{l:'angles',type:'blank',q:'If two parallel lines are cut by a transversal, the sum of two interior angles on the same side of the transversal is _____ degrees.',a:['180','180 degrees','180°'],display:'180°'},
+{l:'angles',type:'blank',q:'The _____ angles are sometimes referred to as F-angles.',a:['corresponding','corresponding angles'],display:'Corresponding'},
+{l:'angles',type:'blank',q:'If two supplementary angles are adjacent to each other, they form a _____.',a:['linear pair','straight angle','linear pair of angles'],display:'Linear pair'},
+{l:'angles',type:'blank',q:'Angles formed by two intersecting lines having no common arm are called _____ angles.',a:['vertically opposite','vertically opposite angles'],display:'Vertically opposite angles'},
+{l:'angles',type:'blank',q:'In the adjoining figure, x + y + z add up to _____ degrees.',a:['180','180 degrees','180°'],display:'180°'}
+];
+const $ = id => document.getElementById(id);
+const selected = new Set();
+let activeQuestions = [];
+lessons.forEach(lesson=>{const label=document.createElement('label');label.className='lesson';label.innerHTML=`<input type="checkbox" value="${lesson.id}"><span>${lesson.name}</span>`;const cb=label.querySelector('input');cb.addEventListener('change',()=>{if(cb.checked)selected.add(lesson.id);else selected.delete(lesson.id);const n=selected.size;$('selectionMessage').textContent=n<2?`${n} lesson${n===1?'':'s'} selected. Select at least ${2-n} more to start.`:`${n} lesson${n===1?'':'s'} selected. You can choose up to all ${lessons.length} lessons.`;$('startBtn').disabled=n<2});$('lessonList').appendChild(label)});
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function shuffle(items){const a=[...items];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function renderTest(){
+ const chosen=bank.filter(q=>selected.has(q.l));
+ const types=[['mcq','Multiple Choice Questions (MCQs)','Choose the correct option for each question.'],['tf','True or False','Select True or False for each statement.'],['blank','Fill in the Blanks','Type the missing word, number, or expression.']];
+ activeQuestions=[];
+ $('testHeading').textContent=lessons.filter(l=>selected.has(l.id)).map(l=>l.name).join(' + ');
+ const selectedCount=selected.size;$('testInfo').textContent=`${chosen.length} questions from ${selectedCount} selected lesson${selectedCount===1?'':'s'}. Question types are grouped separately below. Questions are shuffled within each section.`;
+ $('questions').innerHTML='';$('results').classList.add('hidden');
+ let globalIndex=0;
+ types.forEach(([type,title,note])=>{
+   const group=shuffle(chosen.filter(q=>q.type===type));
+   if(!group.length)return;
+   const section=document.createElement('section');section.className='category-section';
+   section.innerHTML=`<h2 class="category-title">${title} <span style="font-size:13px;font-weight:normal">(${group.length})</span></h2><p class="category-note">${note}</p>`;
+   group.forEach(q=>{
+     const i=globalIndex++;activeQuestions.push(q);
+     const div=document.createElement('article');div.className='question';div.dataset.index=i;
+     let body='';
+     if(q.type==='mcq'){body='<div class="options">'+q.o.map((op,j)=>`<label class="option"><input type="radio" name="q${i}" value="${j}"><span>${String.fromCharCode(65+j)}. ${esc(op)}</span></label>`).join('')+'</div>'}
+     else if(q.type==='tf'){body=`<div class="options"><label class="option"><input type="radio" name="q${i}" value="true"><span>True</span></label><label class="option"><input type="radio" name="q${i}" value="false"><span>False</span></label></div>`}
+     else{body=`<input type="text" name="q${i}" autocomplete="off" placeholder="Type your answer here">`}
+     div.innerHTML=`<div class="qmeta">${esc(lessons.find(l=>l.id===q.l)?.name||'Maths')} · Question ${i+1}</div><h3>${i+1}. ${esc(q.q)}</h3>${body}<div class="feedback hidden" id="fb${i}"></div>`;
+     section.appendChild(div);
+   });
+   $('questions').appendChild(section);
+ });
+ $('setup').classList.add('hidden');$('testArea').classList.remove('hidden');window.scrollTo({top:0,behavior:'smooth'});
+}
+$('startBtn').addEventListener('click',renderTest);$('changeBtn').addEventListener('click',()=>{$('testArea').classList.add('hidden');$('setup').classList.remove('hidden');$('results').classList.add('hidden');window.scrollTo({top:0,behavior:'smooth'})});
+$('newTestBtn').addEventListener('click',()=>renderTest());
+$('resetBtn').addEventListener('click',()=>{if(!activeQuestions.length)return;$('testForm').reset();activeQuestions.forEach((q,i)=>{const fb=$(`fb${i}`);if(fb){fb.classList.add('hidden');fb.classList.remove('correct','incorrect');fb.textContent='';}});$('results').classList.add('hidden');window.scrollTo({top:0,behavior:'smooth'});});
+function norm(s){return String(s??'').toLowerCase().replace(/[⁰¹²³⁴⁵⁶⁷⁸⁹]/g,c=>({'⁰':'0','¹':'1','²':'2','³':'3','⁴':'4','⁵':'5','⁶':'6','⁷':'7','⁸':'8','⁹':'9'}[c])).replace(/[−–]/g,'-').replace(/×/g,'x').replace(/\s+/g,'').replace(/[(){}]/g,'').replace(/\*/g,'').replace(/°/g,'').replace(/,/g,'');}
+$('testForm').addEventListener('submit',e=>{e.preventDefault();const qs=activeQuestions;let score=0,answered=0;qs.forEach((q,i)=>{let val='';if(q.type==='blank'){val=$('testForm').elements[`q${i}`].value.trim()}else{const chosen=document.querySelector(`input[name="q${i}"]:checked`);val=chosen?chosen.value:''}let correct=false;if(val!==''){answered++;if(q.type==='mcq')correct=Number(val)===q.a;else if(q.type==='tf')correct=val===q.a;else correct=q.a.some(a=>norm(a)===norm(val));}if(correct)score++;const fb=$(`fb${i}`);fb.classList.remove('hidden','correct','incorrect');fb.classList.add(correct?'correct':'incorrect');fb.textContent=(correct?'Correct. ':'Incorrect. ')+(q.type==='mcq'?`Correct answer: ${String.fromCharCode(65+q.a)}. ${q.o[q.a]}`:q.type==='tf'?`Correct answer: ${q.display}`:`Expected answer: ${q.display}`);});const percent=Math.round(score/qs.length*100);$('results').innerHTML=`<h2>Test Result</h2><p><strong>${score} / ${qs.length}</strong> marks (${percent}%)</p><p>Answered: ${answered} · Unanswered: ${qs.length-answered}</p><p>${percent>=80?'Excellent work!':percent>=50?'Good effort. Review the incorrect answers and try again.':'Keep practising. Review the correct answers and try again.'}</p><div class="controls"><button type="button" id="retryBtn">Try Again</button></div>`;$('results').classList.remove('hidden');$('retryBtn').addEventListener('click',()=>{renderTest();});$('results').scrollIntoView({behavior:'smooth',block:'start'});});
+</script>
+</body>
+</html>
