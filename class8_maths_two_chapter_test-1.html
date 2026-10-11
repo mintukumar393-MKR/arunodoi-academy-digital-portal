@@ -83,10 +83,24 @@ function formatMath(value){
    function(_,n,d){return '\\(\\frac{'+n.replace('−','-')+'}{'+d+'}\\)';});
  return s;
 }
-function renderMath(){
- if(window.MathJax && window.MathJax.typesetPromise){
-  window.MathJax.typesetPromise([$ ('questions')]).catch(function(err){console.log(err);});
- }
+async function renderMath() {
+  try {
+    if (!window.MathJax) {
+      console.warn("MathJax has not loaded yet.");
+      return;
+    }
+
+    await window.MathJax.startup.promise;
+
+    const questions = document.getElementById("questions");
+    const result = document.getElementById("result");
+
+    await window.MathJax.typesetPromise(
+      [questions, result].filter(Boolean)
+    );
+  } catch (error) {
+    console.error("Math rendering error:", error);
+  }
 }
 C.forEach((c,i)=>{for(const id of ['c1','c2']){let o=document.createElement('option');o.value=i;o.textContent=c[0];$(id).append(o)}});$('c1').value='0';$('c2').value='1';
 function selection(){let a=+$('c1').value,b=+$('c2').value;$('start').disabled=a===b;$('info').textContent=a===b?'Choose two different chapters.':`${C[a][0]} (${C[a][1].length} questions) + ${C[b][0]} (${C[b][1].length} questions) = ${C[a][1].length+C[b][1].length} questions.`} $('c1').onchange=selection;$('c2').onchange=selection;selection();
