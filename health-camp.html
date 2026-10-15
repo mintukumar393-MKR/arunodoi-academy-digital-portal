@@ -133,22 +133,27 @@ const registrationUrl = window.location.href.split("#")[0];
 
 
 
+
 const registrationUrl =
   "https://mintukumar393-mkr.github.io/arunodoi-academy-digital-portal/health-camp.html";
 
 const registrationQR = document.getElementById("registrationQR");
 
 if (registrationQR) {
-  registrationQR.alt = "Scan to register for the Arunodoi Academy Free Health Camp";
-  registrationQR.width = 1000;
-  registrationQR.height = 1000;
-  registrationQR.src =
-    "https://api.qrserver.com/v1/create-qr-code/?size=1000x1000&ecc=H&format=png&data=" +
-    encodeURIComponent(registrationUrl);
+  registrationQR.alt = "Scan to register for the Arunodoi Academy Health Camp";
+
+  registrationQR.onload = function () {
+    console.log("QR code loaded successfully.");
+  };
 
   registrationQR.onerror = function () {
-    console.error("QR code failed to load. Please check your internet connection.");
+    console.error("QR image failed to load.");
+    registrationQR.alt = "QR unavailable. Use the registration link below.";
   };
+
+  registrationQR.src =
+    "https://api.qrserver.com/v1/create-qr-code/?size=1000x1000&format=png&data=" +
+    encodeURIComponent(registrationUrl);
 }
 
 
