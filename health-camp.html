@@ -2,240 +2,192 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#102c3c">
-  <title>Free Health Camp 2026 | Arunodoi Academy</title>
-  <style>
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      color: #173246;
-      background: #eef4f7;
-      line-height: 1.6;
-    }
-    .page { width: min(1050px, 92%); margin: 28px auto; }
-    .hero {
-      padding: 32px;
-      color: white;
-      border-radius: 24px;
-      background: linear-gradient(135deg, #102c3c, #176b70);
-      box-shadow: 0 14px 0 #cbdce1, 0 24px 38px #163b4a35;
-    }
-    .eyebrow {
-      color: #a8f0d7;
-      font-size: 12px;
-      font-weight: bold;
-      letter-spacing: 2px;
-    }
-    h1 { font-size: clamp(30px, 5vw, 48px); line-height: 1.12; }
-    .hero p { color: #e0f0f2; }
-    .facts {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
-      gap: 14px;
-      margin-top: 24px;
-    }
-    .fact {
-      padding: 16px;
-      border: 1px solid #ffffff35;
-      border-radius: 16px;
-      background: #ffffff12;
-      box-shadow: inset 0 1px #ffffff20, 0 6px 0 #0b2530;
-    }
-    .fact strong { display: block; color: #a8f0d7; }
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 22px;
-      margin-top: 30px;
-    }
-    .card {
-      padding: 24px;
-      background: white;
-      border: 1px solid #dbe6eb;
-      border-radius: 20px;
-      box-shadow: 0 8px 0 #d4e0e5, 0 16px 28px #18384b12;
-    }
-    h2 { margin-top: 0; }
-    label { display: block; font-weight: bold; margin: 14px 0 5px; }
-    input, select {
-      width: 100%;
-      padding: 12px;
-      border: 1px solid #bdcdd5;
-      border-radius: 10px;
-      font: inherit;
-      background: white;
-    }
-    .consent {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      font-weight: normal;
-    }
-    .consent input { width: auto; margin-top: 7px; }
-    .btn {
-      display: inline-block;
-      width: 100%;
-      padding: 13px 16px;
-      margin-top: 16px;
-      border: 0;
-      border-radius: 12px;
-      background: #126c69;
-      color: white;
-      font-size: 16px;
-      font-weight: bold;
-      text-align: center;
-      text-decoration: none;
-      cursor: pointer;
-      box-shadow: 0 5px 0 #0b4d4b;
-    }
-    .btn:hover { transform: translateY(-2px); }
-    .btn-alt { background: #174a69; box-shadow: 0 5px 0 #10354c; }
-    .qr { display: block; width: 190px; height: 190px; margin: 16px auto; }
-    .muted { color: #627681; font-size: 14px; }
-    .notice { margin-top: 16px; padding: 12px; border-radius: 10px; background: #edf7f5; }
-    footer { text-align: center; padding: 28px 0; color: #627681; font-size: 13px; }
-    @media (max-width: 480px) {
-      .page { width: 94%; margin: 14px auto; }
-      .hero, .card { padding: 20px; }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#102c3c">
+<title>Free Health Camp 2026 | Arunodoi Academy</title>
+<style>
+*{box-sizing:border-box}
+:root{--navy:#102c3c;--teal:#176b70;--mint:#a8f0d7;--ink:#173246}
+body{margin:0;font-family:Arial,sans-serif;color:var(--ink);line-height:1.6;background:linear-gradient(140deg,#f7fbfc,#e3eef2)}
+.page{width:min(1050px,94%);margin:22px auto}
+.nav{display:flex;justify-content:space-between;align-items:center;padding:13px 17px;background:white;border:1px solid #dce7ec;border-radius:16px;box-shadow:0 5px 0 #d8e4e8,0 12px 22px #17324612;margin-bottom:25px}
+.brand{font-weight:800;color:var(--navy)}
+.home{padding:9px 15px;border-radius:11px;background:#174a69;color:white;text-decoration:none;font-weight:bold;box-shadow:0 4px 0 #10354c}
+.hero{padding:clamp(23px,5vw,42px);border-radius:25px;color:white;background:linear-gradient(135deg,#102c3c,#176b70);border:1px solid #397780;box-shadow:0 12px 0 #c4d5da,0 25px 38px #17324630,inset 0 1px #ffffff45}
+.eyebrow{color:var(--mint);font-size:12px;font-weight:bold;letter-spacing:2px}
+h1{font-size:clamp(30px,5vw,48px);line-height:1.12;margin:12px 0}
+.hero p{color:#e0f0f2}
+.facts,.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px}
+.facts{margin-top:24px}
+.fact{padding:16px;border-radius:15px;background:#ffffff12;border:1px solid #ffffff35;box-shadow:0 7px 0 #0b2530,inset 0 1px #ffffff25;transition:transform .2s}
+.fact:hover{transform:translateY(-4px)}
+.fact strong{display:block;color:var(--mint);font-size:12px;letter-spacing:1px}
+.cards{grid-template-columns:repeat(auto-fit,minmax(290px,1fr));align-items:start;margin:32px 0}
+.card{padding:clamp(20px,3vw,28px);background:linear-gradient(145deg,#fff,#f9fcfd);border:1px solid #dbe6eb;border-radius:21px;box-shadow:0 9px 0 #d2dfe4,0 20px 30px #18384b15;transition:transform .2s,box-shadow .2s}
+.card:hover{transform:translateY(-3px);box-shadow:0 12px 0 #d2dfe4,0 25px 35px #18384b20}
+h2{margin-top:0;color:var(--navy)}
+label{display:block;font-weight:bold;margin:14px 0 5px}
+input,select{width:100%;padding:12px;border:1px solid #bdcdd5;border-radius:10px;font:inherit;background:white}
+input:focus,select:focus{outline:3px solid #176b7030;border-color:#176b70}
+.consent{display:flex;gap:10px;font-weight:normal;align-items:flex-start}
+.consent input{width:auto;margin-top:7px}
+.btn{display:block;width:100%;padding:13px 15px;margin-top:16px;border:0;border-radius:12px;background:#126c69;color:white;text-align:center;text-decoration:none;font-size:15px;font-weight:bold;cursor:pointer;box-shadow:0 6px 0 #0b4d4b,0 10px 18px #0b4d4b20;transition:transform .15s,box-shadow .15s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 8px 0 #0b4d4b,0 14px 22px #0b4d4b25}
+.btn:active{transform:translateY(3px);box-shadow:0 2px 0 #0b4d4b}
+.btn:disabled{opacity:.6;cursor:wait}
+.btn-alt{background:#174a69;box-shadow:0 6px 0 #10354c}
+.qr-wrap{width:max-content;max-width:100%;margin:20px auto;padding:17px;background:white;border:1px solid #dce7ec;border-radius:18px;box-shadow:0 7px 0 #dce6ea,0 14px 24px #17324612}
+.qr{display:block;width:200px;height:200px;max-width:100%}
+.muted{color:#627681;font-size:14px}
+.notice{margin-top:15px;padding:12px;border-radius:10px;background:#edf7f5;color:#214d4b;font-size:14px}
+footer{margin-top:42px;padding:28px 15px;text-align:center;color:#d9e9ee;background:linear-gradient(135deg,#102c3c,#174c59);border-radius:22px 22px 0 0;box-shadow:0 -5px 0 #c9d9de}
+footer strong{color:var(--mint)}
+footer a{display:inline-block;margin-top:10px;color:white;font-weight:bold}
+@media(max-width:480px){.page{margin-top:12px}.nav{margin-bottom:17px}.brand{font-size:13px}.cards{gap:20px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{transition:none!important}}
+</style>
 </head>
 <body>
-  <main class="page">
-    <header class="hero">
-      <div class="eyebrow">ARUNODOI ACADEMY · TANGLA</div>
-      <h1>Free Health Check-up Camp 2026</h1>
-      <p>Care for every generation. Students and villagers are welcome to register.</p>
-      <div class="facts">
-        <div class="fact">
-          <strong>DATE</strong>
-          24 October 2026 · Saturday
-        </div>
-        <div class="fact">
-          <strong>TIME</strong>
-          10:00 AM – 4:00 PM
-        </div>
-        <div class="fact">
-          <strong>VENUE</strong>
-          Arunodoi Academy, Tangla
-        </div>
-      </div>
-    </header>
+<main class="page">
+<nav class="nav" aria-label="Main navigation">
+  <div class="brand">ARUNODOI ACADEMY</div>
+  <a class="home" href="index.html">⌂ Home</a>
+</nav>
 
-    <section class="cards">
-      <div class="card">
-        <h2>Online Registration</h2>
-        <p class="muted">Fill in your details below. Fields marked required must be completed.</p>
+<header class="hero">
+  <div class="eyebrow">COMMUNITY CARE · TANGLA</div>
+  <h1>Free Health Check-up Camp 2026</h1>
+  <p>Care for every generation. Students and villagers are welcome to register.</p>
+  <div class="facts">
+    <div class="fact"><strong>DATE</strong>24 October 2026 · Saturday</div>
+    <div class="fact"><strong>TIME</strong>10:00 AM – 4:00 PM</div>
+    <div class="fact"><strong>VENUE</strong>Arunodoi Academy, Tangla</div>
+  </div>
+</header>
 
-        <form id="registrationForm">
-          <label for="name">Name of attendee *</label>
-          <input id="name" name="name" required maxlength="100">
+<section class="cards">
+<div class="card">
+  <h2>Online Registration</h2>
+  <p class="muted">Please complete the required details.</p>
+  <form id="registrationForm">
+    <label for="name">Name of attendee *</label>
+    <input id="name" name="name" required maxlength="100">
+    <label for="age">Age of attendee *</label>
+    <input id="age" name="age" type="number" min="0" max="120" required>
+    <label for="village">Village / locality *</label>
+    <input id="village" name="village" required maxlength="100">
+    <label for="phone">Mobile number (optional)</label>
+    <input id="phone" name="phone" type="tel" maxlength="20">
+    <label for="service">Registration for *</label>
+    <select id="service" name="service" required>
+      <option value="">Choose a service</option>
+      <option>General health check-up</option>
+      <option>Child specialist consultation</option>
+      <option>Eye specialist consultation</option>
+      <option>More than one service</option>
+    </select>
+    <label class="consent"><input type="checkbox" name="consent" required><span>I agree to provide these details for health camp registration.</span></label>
+    <button class="btn" id="submitButton" type="submit">Submit Registration</button>
+    <p id="formMessage" class="notice" role="status" aria-live="polite">Your registration will be sent to the school's spreadsheet.</p>
+  </form>
+  <p class="muted">Do not enter medical history or sensitive medical details here.</p>
+</div>
 
-          <label for="age">Age of attendee *</label>
-          <input id="age" name="age" type="number" min="0" max="120" required>
+<div class="card">
+  <h2>Scan or Share to Register</h2>
+  <p class="muted">Scan the QR code to open this registration page on another device.</p>
+  <div class="qr-wrap"><img id="registrationQr" class="qr" alt="QR code for this Health Camp registration page"></div>
+  <button class="btn btn-alt" id="shareButton" type="button">↗ Share Registration Link</button>
+  <button class="btn" id="copyButton" type="button">Copy Registration Link</button>
+  <div class="notice"><strong>Offline registration</strong><br>Visit Arunodoi Academy on 22 or 23 October 2026 to register in person.</div>
+</div>
 
-          <label for="village">Village / locality *</label>
-          <input id="village" name="village" required maxlength="100">
+<div class="card">
+  <h2>Camp Information</h2>
+  <p>Free consultations planned:</p>
+  <ul>
+    <li>General health check-up</li>
+    <li>Child specialist consultation</li>
+    <li>Eye specialist consultation</li>
+  </ul>
+  <p class="muted">Blood pressure and blood sugar screening are not available.</p>
+  <div class="notice">Venue: Arunodoi Academy, Tangla, Udalguri, Assam.<br>Date: 24 October 2026, 10 AM–4 PM.</div>
+</div>
+</section>
+</main>
 
-          <label for="phone">Mobile number (optional)</label>
-          <input id="phone" name="phone" type="tel" maxlength="20">
+<footer>
+  <strong>Arunodoi Academy</strong><br>
+  Tangla, Udalguri, Assam<br>
+  Free Health Check-up Camp · 24 October 2026<br>
+  <a href="index.html">← Back to Home</a>
+</footer>
 
-          <label for="service">Registration for *</label>
-          <select id="service" name="service" required>
-            <option value="">Choose a service</option>
-            <option>General health check-up</option>
-            <option>Child specialist consultation</option>
-            <option>Eye specialist consultation</option>
-            <option>More than one service</option>
-          </select>
+<script>
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw3z0BO9GN7yTlf4Fh_6r0PB6OWYyc6P1ZmxLez1BhFtCh1t6kqBPlqeByMO6mEWfYYWw/exec";
+const form = document.getElementById("registrationForm");
+const message = document.getElementById("formMessage");
+const submitButton = document.getElementById("submitButton");
+const registrationUrl = window.location.href.split("#")[0];
 
-          <label class="consent">
-            <input type="checkbox" name="consent" required>
-            <span>I agree to provide these details for health camp registration.</span>
-          </label>
+document.getElementById("registrationQr").src =
+  "https://api.qrserver.com/v1/create-qr-code/?size=240x240&data=" +
+  encodeURIComponent(registrationUrl);
 
-          <button class="btn" id="submitButton" type="submit">
-            Submit Registration
-          </button>
-          <p id="formMessage" class="notice" role="status" aria-live="polite">
-            Your information will be sent to the school's registration spreadsheet.
-          </p>
-        </form>
-        <p class="muted">Please do not enter medical history or sensitive medical details here.</p>
-      </div>
+document.getElementById("shareButton").addEventListener("click", async () => {
+  try {
+    if (navigator.share) {
+      await navigator.share({
+        title: "Free Health Camp Registration - Arunodoi Academy",
+        text: "Register for the Free Health Check-up Camp at Arunodoi Academy, Tangla, on 24 October 2026.",
+        url: registrationUrl
+      });
+    } else {
+      await navigator.clipboard.writeText(registrationUrl);
+      alert("Registration link copied. You can now share it.");
+    }
+  } catch (error) {
+    if (error.name !== "AbortError") {
+      window.prompt("Copy this registration link:", registrationUrl);
+    }
+  }
+});
 
-      <div class="card">
-        <h2>Register with Google Form</h2>
-        <p>Prefer the existing Google Form? Use the button below. Both methods are part of the same registration system, but their response tabs may differ.</p>
-        <a class="btn btn-alt"
-           href="https://docs.google.com/forms/d/e/1FAIpQLScmx_buuNG4K9ZvXbJFSJMAa3iEXt58o-_-zFwfbpnzDMkwMg/viewform?usp=dialog"
-           target="_blank" rel="noopener">
-          Open Google Form
-        </a>
+document.getElementById("copyButton").addEventListener("click", async () => {
+  try {
+    await navigator.clipboard.writeText(registrationUrl);
+    alert("Registration link copied successfully.");
+  } catch (error) {
+    window.prompt("Copy this registration link:", registrationUrl);
+  }
+});
 
-        <h2 style="margin-top:30px">Scan to Register</h2>
-        <img class="qr"
-          src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&amp;data=https%3A%2F%2Fdocs.google.com%2Fforms%2Fd%2Fe%2F1FAIpQLScmx_buuNG4K9ZvXbJFSJMAa3iEXt58o-_-zFwfbpnzDMkwMg%2Fviewform%3Fusp%3Ddialog"
-          alt="QR code linking to the Health Camp Google Form">
-        <p class="muted">Scan with a phone camera to open the Google registration form.</p>
+form.addEventListener("submit", async event => {
+  event.preventDefault();
+  if (!form.reportValidity()) return;
 
-        <div class="notice">
-          <strong>Offline registration</strong><br>
-          Visit Arunodoi Academy on 22 or 23 October 2026 to register in person.
-        </div>
-      </div>
-    </section>
+  const data = new URLSearchParams();
+  data.set("name", form.elements.name.value.trim());
+  data.set("age", form.elements.age.value);
+  data.set("village", form.elements.village.value.trim());
+  data.set("phone", form.elements.phone.value.trim());
+  data.set("service", form.elements.service.value);
+  data.set("consent", form.elements.consent.checked ? "yes" : "no");
 
-    <footer>
-      Arunodoi Academy · Tangla, Udalguri, Assam<br>
-      Free Health Camp · 24 October 2026
-    </footer>
-  </main>
+  submitButton.disabled = true;
+  message.textContent = "Sending registration…";
 
-  <script>
-    const SCRIPT_URL =
-      "https://script.google.com/macros/s/AKfycbw3z0BO9GN7yTlf4Fh_6r0PB6OWYyc6P1ZmxLez1BhFtCh1t6kqBPlqeByMO6mEWfYYWw/exec";
-
-    const form = document.getElementById("registrationForm");
-    const message = document.getElementById("formMessage");
-    const submitButton = document.getElementById("submitButton");
-
-    form.addEventListener("submit", async function (event) {
-      event.preventDefault();
-
-      if (!form.reportValidity()) return;
-
-      const data = new URLSearchParams();
-      data.set("name", form.name.value.trim());
-      data.set("age", form.age.value);
-      data.set("village", form.village.value.trim());
-      data.set("phone", form.phone.value.trim());
-      data.set("service", form.service.value);
-      data.set("consent", form.consent.checked ? "yes" : "no");
-
-      submitButton.disabled = true;
-      message.textContent = "Sending registration…";
-
-      try {
-        await fetch(SCRIPT_URL, {
-          method: "POST",
-          mode: "no-cors",
-          body: data
-        });
-
-        message.textContent =
-          "Your submission was sent. Because the service does not return a readable confirmation to this page, please use the Google Form if you need to verify that your registration was recorded.";
-        form.reset();
-      } catch (error) {
-        message.textContent =
-          "We could not confirm the submission. Please use the Google Form instead.";
-      } finally {
-        submitButton.disabled = false;
-      }
-    });
-  </script>
+  try {
+    await fetch(SCRIPT_URL, { method: "POST", mode: "no-cors", body: data });
+    message.textContent = "Request sent, but this page cannot confirm the spreadsheet saved it. Please contact the school if you need to verify your registration.";
+    form.reset();
+  } catch (error) {
+    message.textContent = "We could not send the registration. Please try again or register offline at school.";
+  } finally {
+    submitButton.disabled = false;
+  }
+});
+</script>
 </body>
 </html>
