@@ -6,6 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#102c3c">
 <title>Free Health Camp 2026 | Arunodoi Academy</title>
+
 <style>
 *{box-sizing:border-box}
 :root{--navy:#102c3c;--teal:#176b70;--mint:#a8f0d7;--ink:#173246}
@@ -38,7 +39,7 @@ input:focus,select:focus{outline:3px solid #176b7030;border-color:#176b70}
 .btn:disabled{opacity:.6;cursor:wait}
 .btn-alt{background:#174a69;box-shadow:0 6px 0 #10354c}
 .qr-wrap{width:max-content;max-width:100%;margin:20px auto;padding:17px;background:white;border:1px solid #dce7ec;border-radius:18px;box-shadow:0 7px 0 #dce6ea,0 14px 24px #17324612}
-.qr{display:block;width:200px;height:200px;max-width:100%}
+.qr{display:block;width:240px;height:240px;max-width:100%;object-fit:contain}
 .muted{color:#627681;font-size:14px}
 .notice{margin-top:15px;padding:12px;border-radius:10px;background:#edf7f5;color:#214d4b;font-size:14px}
 footer{margin-top:42px;padding:28px 15px;text-align:center;color:#d9e9ee;background:linear-gradient(135deg,#102c3c,#174c59);border-radius:22px 22px 0 0;box-shadow:0 -5px 0 #c9d9de}
@@ -48,8 +49,10 @@ footer a{display:inline-block;margin-top:10px;color:white;font-weight:bold}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{transition:none!important}}
 </style>
 </head>
+
 <body>
 <main class="page">
+
 <nav class="nav" aria-label="Main navigation">
   <div class="brand">ARUNODOI ACADEMY</div>
   <a class="home" href="index.html">⌂ Home</a>
@@ -59,6 +62,7 @@ footer a{display:inline-block;margin-top:10px;color:white;font-weight:bold}
   <div class="eyebrow">COMMUNITY CARE · TANGLA</div>
   <h1>Free Health Check-up Camp 2026</h1>
   <p>Care for every generation. Students and villagers are welcome to register.</p>
+
   <div class="facts">
     <div class="fact"><strong>DATE</strong>24 October 2026 · Saturday</div>
     <div class="fact"><strong>TIME</strong>10:00 AM – 4:00 PM</div>
@@ -67,18 +71,24 @@ footer a{display:inline-block;margin-top:10px;color:white;font-weight:bold}
 </header>
 
 <section class="cards">
+
 <div class="card">
   <h2>Online Registration</h2>
   <p class="muted">Please complete the required details.</p>
+
   <form id="registrationForm">
     <label for="name">Name of attendee *</label>
     <input id="name" name="name" required maxlength="100">
+
     <label for="age">Age of attendee *</label>
     <input id="age" name="age" type="number" min="0" max="120" required>
+
     <label for="village">Village / locality *</label>
     <input id="village" name="village" required maxlength="100">
+
     <label for="phone">Mobile number (optional)</label>
     <input id="phone" name="phone" type="tel" maxlength="20">
+
     <label for="service">Registration for *</label>
     <select id="service" name="service" required>
       <option value="">Choose a service</option>
@@ -87,20 +97,42 @@ footer a{display:inline-block;margin-top:10px;color:white;font-weight:bold}
       <option>Eye specialist consultation</option>
       <option>More than one service</option>
     </select>
-    <label class="consent"><input type="checkbox" name="consent" required><span>I agree to provide these details for health camp registration.</span></label>
+
+    <label class="consent">
+      <input type="checkbox" name="consent" required>
+      <span>I agree to provide these details for health camp registration.</span>
+    </label>
+
     <button class="btn" id="submitButton" type="submit">Submit Registration</button>
-    <p id="formMessage" class="notice" role="status" aria-live="polite">Your registration will be sent to the school's spreadsheet.</p>
+    <p id="formMessage" class="notice" role="status" aria-live="polite">
+      Your registration will be sent to the school's spreadsheet.
+    </p>
   </form>
+
   <p class="muted">Do not enter medical history or sensitive medical details here.</p>
 </div>
 
 <div class="card">
   <h2>Scan or Share to Register</h2>
   <p class="muted">Scan the QR code to open this registration page on another device.</p>
-  <div class="qr-wrap"><img id="registrationQr" class="qr" alt="QR code for this Health Camp registration page"></div>
+
+  <div class="qr-wrap">
+    <img
+      id="registrationQr"
+      class="qr"
+      alt="QR code for the Health Camp registration page"
+      width="240"
+      height="240"
+    >
+  </div>
+
   <button class="btn btn-alt" id="shareButton" type="button">↗ Share Registration Link</button>
   <button class="btn" id="copyButton" type="button">Copy Registration Link</button>
-  <div class="notice"><strong>Offline registration</strong><br>Visit Arunodoi Academy on 22 or 23 October 2026 to register in person.</div>
+
+  <div class="notice">
+    <strong>Offline registration</strong><br>
+    Visit Arunodoi Academy on 22 or 23 October 2026 to register in person.
+  </div>
 </div>
 
 <div class="card">
@@ -111,9 +143,15 @@ footer a{display:inline-block;margin-top:10px;color:white;font-weight:bold}
     <li>Child specialist consultation</li>
     <li>Eye specialist consultation</li>
   </ul>
+
   <p class="muted">Blood pressure and blood sugar screening are not available.</p>
-  <div class="notice">Venue: Arunodoi Academy, Tangla, Udalguri, Assam.<br>Date: 24 October 2026, 10 AM–4 PM.</div>
+
+  <div class="notice">
+    Venue: Arunodoi Academy, Tangla, Udalguri, Assam.<br>
+    Date: 24 October 2026, 10 AM–4 PM.
+  </div>
 </div>
+
 </section>
 </main>
 
@@ -125,30 +163,33 @@ footer a{display:inline-block;margin-top:10px;color:white;font-weight:bold}
 </footer>
 
 <script>
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw3z0BO9GN7yTlf4Fh_6r0PB6OWYyc6P1ZmxLez1BhFtCh1t6kqBPlqeByMO6mEWfYYWw/exec";
+"use strict";
+
+const SCRIPT_URL =
+  "https://script.google.com/macros/s/AKfycbw3z0BO9GN7yTlf4Fh_6r0PB6OWYyc6P1ZmxLez1BhFtCh1t6kqBPlqeByMO6mEWfYYWw/exec";
+
 const form = document.getElementById("registrationForm");
 const message = document.getElementById("formMessage");
 const submitButton = document.getElementById("submitButton");
-const registrationUrl = window.location.href.split("#")[0];
 
-
-
-
+/* Use one consistent URL for QR, sharing and copying. */
 const registrationUrl =
   "https://mintukumar393-mkr.github.io/arunodoi-academy-digital-portal/health-camp.html";
 
-const registrationQR = document.getElementById("registrationQR");
+/* Load the QR image. The ID matches the HTML exactly. */
+const registrationQR = document.getElementById("registrationQr");
 
 if (registrationQR) {
-  registrationQR.alt = "Scan to register for the Arunodoi Academy Health Camp";
+  registrationQR.alt =
+    "Scan to register for the Arunodoi Academy Health Camp";
 
   registrationQR.onload = function () {
-    console.log("QR code loaded successfully.");
+    console.log("QR code image loaded.");
   };
 
   registrationQR.onerror = function () {
-    console.error("QR image failed to load.");
-    registrationQR.alt = "QR unavailable. Use the registration link below.";
+    message.textContent =
+      "The QR image could not load. Please use the Share or Copy Registration Link button.";
   };
 
   registrationQR.src =
@@ -156,8 +197,7 @@ if (registrationQR) {
     encodeURIComponent(registrationUrl);
 }
 
-
-
+/* Share the registration link. */
 document.getElementById("shareButton").addEventListener("click", async () => {
   try {
     if (navigator.share) {
@@ -167,8 +207,7 @@ document.getElementById("shareButton").addEventListener("click", async () => {
         url: registrationUrl
       });
     } else {
-      await navigator.clipboard.writeText(registrationUrl);
-      alert("Registration link copied. You can now share it.");
+      window.prompt("Copy this registration link:", registrationUrl);
     }
   } catch (error) {
     if (error.name !== "AbortError") {
@@ -177,6 +216,7 @@ document.getElementById("shareButton").addEventListener("click", async () => {
   }
 });
 
+/* Copy the registration link. */
 document.getElementById("copyButton").addEventListener("click", async () => {
   try {
     await navigator.clipboard.writeText(registrationUrl);
@@ -186,8 +226,10 @@ document.getElementById("copyButton").addEventListener("click", async () => {
   }
 });
 
+/* Submit the registration to Google Apps Script. */
 form.addEventListener("submit", async event => {
   event.preventDefault();
+
   if (!form.reportValidity()) return;
 
   const data = new URLSearchParams();
@@ -202,11 +244,23 @@ form.addEventListener("submit", async event => {
   message.textContent = "Sending registration…";
 
   try {
-    await fetch(SCRIPT_URL, { method: "POST", mode: "no-cors", body: data });
-    message.textContent = "Request sent, but this page cannot confirm the spreadsheet saved it. Please contact the school if you need to verify your registration.";
+    /*
+      no-cors prevents reading the server response.
+      A resolved fetch does not prove the spreadsheet saved the record.
+    */
+    await fetch(SCRIPT_URL, {
+      method: "POST",
+      mode: "no-cors",
+      body: data
+    });
+
+    message.textContent =
+      "The request was sent, but this page cannot confirm it was saved. Please contact the school if you need to verify your registration.";
+
     form.reset();
   } catch (error) {
-    message.textContent = "We could not send the registration. Please try again or register offline at school.";
+    message.textContent =
+      "We could not send the registration. Please try again or register offline at school.";
   } finally {
     submitButton.disabled = false;
   }
