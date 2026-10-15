@@ -1,0 +1,241 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#102c3c">
+  <title>Free Health Camp 2026 | Arunodoi Academy</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      color: #173246;
+      background: #eef4f7;
+      line-height: 1.6;
+    }
+    .page { width: min(1050px, 92%); margin: 28px auto; }
+    .hero {
+      padding: 32px;
+      color: white;
+      border-radius: 24px;
+      background: linear-gradient(135deg, #102c3c, #176b70);
+      box-shadow: 0 14px 0 #cbdce1, 0 24px 38px #163b4a35;
+    }
+    .eyebrow {
+      color: #a8f0d7;
+      font-size: 12px;
+      font-weight: bold;
+      letter-spacing: 2px;
+    }
+    h1 { font-size: clamp(30px, 5vw, 48px); line-height: 1.12; }
+    .hero p { color: #e0f0f2; }
+    .facts {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: 14px;
+      margin-top: 24px;
+    }
+    .fact {
+      padding: 16px;
+      border: 1px solid #ffffff35;
+      border-radius: 16px;
+      background: #ffffff12;
+      box-shadow: inset 0 1px #ffffff20, 0 6px 0 #0b2530;
+    }
+    .fact strong { display: block; color: #a8f0d7; }
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 22px;
+      margin-top: 30px;
+    }
+    .card {
+      padding: 24px;
+      background: white;
+      border: 1px solid #dbe6eb;
+      border-radius: 20px;
+      box-shadow: 0 8px 0 #d4e0e5, 0 16px 28px #18384b12;
+    }
+    h2 { margin-top: 0; }
+    label { display: block; font-weight: bold; margin: 14px 0 5px; }
+    input, select {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #bdcdd5;
+      border-radius: 10px;
+      font: inherit;
+      background: white;
+    }
+    .consent {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-weight: normal;
+    }
+    .consent input { width: auto; margin-top: 7px; }
+    .btn {
+      display: inline-block;
+      width: 100%;
+      padding: 13px 16px;
+      margin-top: 16px;
+      border: 0;
+      border-radius: 12px;
+      background: #126c69;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      text-align: center;
+      text-decoration: none;
+      cursor: pointer;
+      box-shadow: 0 5px 0 #0b4d4b;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-alt { background: #174a69; box-shadow: 0 5px 0 #10354c; }
+    .qr { display: block; width: 190px; height: 190px; margin: 16px auto; }
+    .muted { color: #627681; font-size: 14px; }
+    .notice { margin-top: 16px; padding: 12px; border-radius: 10px; background: #edf7f5; }
+    footer { text-align: center; padding: 28px 0; color: #627681; font-size: 13px; }
+    @media (max-width: 480px) {
+      .page { width: 94%; margin: 14px auto; }
+      .hero, .card { padding: 20px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="hero">
+      <div class="eyebrow">ARUNODOI ACADEMY · TANGLA</div>
+      <h1>Free Health Check-up Camp 2026</h1>
+      <p>Care for every generation. Students and villagers are welcome to register.</p>
+      <div class="facts">
+        <div class="fact">
+          <strong>DATE</strong>
+          24 October 2026 · Saturday
+        </div>
+        <div class="fact">
+          <strong>TIME</strong>
+          10:00 AM – 4:00 PM
+        </div>
+        <div class="fact">
+          <strong>VENUE</strong>
+          Arunodoi Academy, Tangla
+        </div>
+      </div>
+    </header>
+
+    <section class="cards">
+      <div class="card">
+        <h2>Online Registration</h2>
+        <p class="muted">Fill in your details below. Fields marked required must be completed.</p>
+
+        <form id="registrationForm">
+          <label for="name">Name of attendee *</label>
+          <input id="name" name="name" required maxlength="100">
+
+          <label for="age">Age of attendee *</label>
+          <input id="age" name="age" type="number" min="0" max="120" required>
+
+          <label for="village">Village / locality *</label>
+          <input id="village" name="village" required maxlength="100">
+
+          <label for="phone">Mobile number (optional)</label>
+          <input id="phone" name="phone" type="tel" maxlength="20">
+
+          <label for="service">Registration for *</label>
+          <select id="service" name="service" required>
+            <option value="">Choose a service</option>
+            <option>General health check-up</option>
+            <option>Child specialist consultation</option>
+            <option>Eye specialist consultation</option>
+            <option>More than one service</option>
+          </select>
+
+          <label class="consent">
+            <input type="checkbox" name="consent" required>
+            <span>I agree to provide these details for health camp registration.</span>
+          </label>
+
+          <button class="btn" id="submitButton" type="submit">
+            Submit Registration
+          </button>
+          <p id="formMessage" class="notice" role="status" aria-live="polite">
+            Your information will be sent to the school's registration spreadsheet.
+          </p>
+        </form>
+        <p class="muted">Please do not enter medical history or sensitive medical details here.</p>
+      </div>
+
+      <div class="card">
+        <h2>Register with Google Form</h2>
+        <p>Prefer the existing Google Form? Use the button below. Both methods are part of the same registration system, but their response tabs may differ.</p>
+        <a class="btn btn-alt"
+           href="https://docs.google.com/forms/d/e/1FAIpQLScmx_buuNG4K9ZvXbJFSJMAa3iEXt58o-_-zFwfbpnzDMkwMg/viewform?usp=dialog"
+           target="_blank" rel="noopener">
+          Open Google Form
+        </a>
+
+        <h2 style="margin-top:30px">Scan to Register</h2>
+        <img class="qr"
+          src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&amp;data=https%3A%2F%2Fdocs.google.com%2Fforms%2Fd%2Fe%2F1FAIpQLScmx_buuNG4K9ZvXbJFSJMAa3iEXt58o-_-zFwfbpnzDMkwMg%2Fviewform%3Fusp%3Ddialog"
+          alt="QR code linking to the Health Camp Google Form">
+        <p class="muted">Scan with a phone camera to open the Google registration form.</p>
+
+        <div class="notice">
+          <strong>Offline registration</strong><br>
+          Visit Arunodoi Academy on 22 or 23 October 2026 to register in person.
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      Arunodoi Academy · Tangla, Udalguri, Assam<br>
+      Free Health Camp · 24 October 2026
+    </footer>
+  </main>
+
+  <script>
+    const SCRIPT_URL =
+      "https://script.google.com/macros/s/AKfycbw3z0BO9GN7yTlf4Fh_6r0PB6OWYyc6P1ZmxLez1BhFtCh1t6kqBPlqeByMO6mEWfYYWw/exec";
+
+    const form = document.getElementById("registrationForm");
+    const message = document.getElementById("formMessage");
+    const submitButton = document.getElementById("submitButton");
+
+    form.addEventListener("submit", async function (event) {
+      event.preventDefault();
+
+      if (!form.reportValidity()) return;
+
+      const data = new URLSearchParams();
+      data.set("name", form.name.value.trim());
+      data.set("age", form.age.value);
+      data.set("village", form.village.value.trim());
+      data.set("phone", form.phone.value.trim());
+      data.set("service", form.service.value);
+      data.set("consent", form.consent.checked ? "yes" : "no");
+
+      submitButton.disabled = true;
+      message.textContent = "Sending registration…";
+
+      try {
+        await fetch(SCRIPT_URL, {
+          method: "POST",
+          mode: "no-cors",
+          body: data
+        });
+
+        message.textContent =
+          "Your submission was sent. Because the service does not return a readable confirmation to this page, please use the Google Form if you need to verify that your registration was recorded.";
+        form.reset();
+      } catch (error) {
+        message.textContent =
+          "We could not confirm the submission. Please use the Google Form instead.";
+      } finally {
+        submitButton.disabled = false;
+      }
+    });
+  </script>
+</body>
+</html>
