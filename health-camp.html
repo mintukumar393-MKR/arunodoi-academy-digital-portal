@@ -131,9 +131,11 @@ const message = document.getElementById("formMessage");
 const submitButton = document.getElementById("submitButton");
 const registrationUrl = window.location.href.split("#")[0];
 
-document.getElementById("registrationQr").src =
-  "https://api.qrserver.com/v1/create-qr-code/?size=240x240&data=" +
+
+document.getElementById("registrationQR").src =
+  "https://api.qrserver.com/v1/create-qr-code/?size=500x500&ecc=H&format=png&data=" +
   encodeURIComponent(registrationUrl);
+
 
 document.getElementById("shareButton").addEventListener("click", async () => {
   try {
