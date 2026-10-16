@@ -120,41 +120,7 @@
 
 
 <body>
-<!-- =========================================
-     ARUNODOI SCHOOL PHOTO SHOWCASE
-     ========================================= -->
 
-<section class="arunodo-top-showcase">
-
-  <div class="arunodo-photo-stage">
-
-    <img
-      class="arunodo-photo"
-      src="images/school-events/IMG_20250904_082342.jpg"
-      alt="School Event">
-
-    <img
-      class="arunodo-photo"
-      src="images/school-events/20250904_81851AMByGPSMapCamera.jpg"
-      alt="Sports and Activities">
-
-    <img
-      class="arunodo-photo"
-      src="images/school-events/IMG_20250904_082426.jpg"
-      alt="Cultural Programme">
-
-    <img
-      class="arunodo-photo"
-      src="images/school-events/20250904_82201AMByGPSMapCamera.jpg"
-      alt="Science Exhibition">
-
-  </div>
-
-  <div class="arunodo-showcase-title">
-    ✨ SCHOOL MOMENTS ✨
-  </div>
-
-</section>
   <!-- =========================================
        HEADER
        ========================================= -->
@@ -337,7 +303,206 @@
       </div>
 
     </section>
+<!-- HEALTH CAMP 3D INTERACTIVE BANNER -->
+<div class="banner-wrapper">
+  <div class="banner-card" id="bannerCard">
+    <div class="banner-glare"></div>
 
+    <div class="banner-content">
+      <p class="banner-institution">ARUNODOI ACADEMY · TANGLA, ASSAM</p>
+
+      <h2 class="banner-title">
+        FREE HEALTH CHECK-UP &amp; EYE SCREENING CAMP
+      </h2>
+
+      <p class="banner-date">24 OCTOBER 2026</p>
+
+      <p class="banner-time">
+        10:00 AM – 4:00 PM · Arunodoi Academy, Tangla
+      </p>
+
+      <div class="badge-container">
+        <span class="badge">General Health Check-up</span>
+        <span class="badge">Child Specialist</span>
+        <span class="badge">Eye Specialist</span>
+      </div>
+
+      <p class="banner-note">Online and offline registration available</p>
+
+      <a href="health-camp.html" class="banner-cta">
+        REGISTER FOR THE HEALTH CAMP →
+      </a>
+    </div>
+  </div>
+</div>
+
+<style>
+  .banner-wrapper {
+    perspective: 1200px;
+    max-width: 1200px;
+    margin: 32px auto;
+    padding: 10px;
+  }
+
+  .banner-card {
+    position: relative;
+    border-radius: 26px;
+    background: linear-gradient(135deg, #063b68, #087c72);
+    color: #ffffff;
+    box-shadow: 0 25px 45px rgba(0, 0, 0, 0.28), 0 0 0 1px rgba(255, 255, 255, 0.12) inset;
+    text-align: center;
+    font-family: Arial, sans-serif;
+    transform-style: preserve-3d;
+    transition: transform 0.15s ease-out, box-shadow 0.15s ease-out;
+    cursor: default;
+    overflow: hidden;
+  }
+
+  .banner-glare {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.22), transparent 60%);
+    pointer-events: none;
+    opacity: 0;
+    transform: translateZ(1px);
+    transition: opacity 0.2s ease;
+  }
+
+  .banner-content {
+    position: relative;
+    padding: 36px 24px;
+    transform-style: preserve-3d;
+  }
+
+  .banner-institution {
+    margin: 0 0 8px;
+    color: #b8f5df;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+    font-size: 14px;
+    transform: translateZ(25px);
+  }
+
+  .banner-title {
+    margin: 10px 0;
+    font-size: clamp(24px, 4vw, 42px);
+    line-height: 1.25;
+    font-weight: 800;
+    text-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+    transform: translateZ(45px);
+  }
+
+  .banner-date {
+    margin: 14px 0 6px;
+    color: #ffe66d;
+    font-size: clamp(22px, 3vw, 28px);
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+    transform: translateZ(35px);
+  }
+
+  .banner-time {
+    margin: 6px 0 20px;
+    font-size: 17px;
+    color: #e5f4fc;
+    transform: translateZ(30px);
+  }
+
+  .badge-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 14px;
+    margin: 22px 0;
+    transform-style: preserve-3d;
+  }
+
+  .badge {
+    background: #ffffff;
+    color: #063b68;
+    padding: 12px 18px;
+    border-radius: 14px;
+    font-weight: bold;
+    font-size: 15px;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.2);
+    transform: translateZ(40px);
+    transition: transform 0.2s ease, background 0.2s ease;
+    display: inline-block;
+  }
+
+  .badge:hover {
+    transform: translateZ(55px) scale(1.06);
+    background: #f4fbff;
+  }
+
+  .banner-note {
+    margin: 14px 0 24px;
+    font-size: 15px;
+    color: #e0f6eb;
+    transform: translateZ(25px);
+  }
+
+  .banner-cta {
+    display: inline-block;
+    padding: 16px 32px;
+    border-radius: 14px;
+    background: #ffe66d;
+    color: #063b68;
+    text-decoration: none;
+    font-size: 17px;
+    font-weight: 800;
+    box-shadow: 0 6px 0 #c6a93d, 0 14px 25px rgba(0, 0, 0, 0.25);
+    transform: translateZ(50px);
+    transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+  }
+
+  .banner-cta:hover {
+    background: #fff085;
+    transform: translateZ(65px) translateY(-2px);
+    box-shadow: 0 8px 0 #c6a93d, 0 18px 28px rgba(0, 0, 0, 0.3);
+  }
+
+  .banner-cta:active {
+    transform: translateZ(45px) translateY(4px);
+    box-shadow: 0 2px 0 #c6a93d, 0 8px 15px rgba(0, 0, 0, 0.2);
+  }
+</style>
+
+<script>
+  (function () {
+    const card = document.getElementById('bannerCard');
+    const glare = card.querySelector('.banner-glare');
+
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+
+      const rotateX = ((centerY - y) / centerY) * 12;
+      const rotateY = ((x - centerX) / centerX) * 14;
+
+      card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+      card.style.boxShadow = `0 35px 60px rgba(0, 0, 0, 0.35)`;
+
+      glare.style.opacity = '1';
+      glare.style.background = `radial-gradient(circle at ${x}px ${y}px, rgba(255, 255, 255, 0.28), transparent 60%)`;
+    });
+
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = 'rotateX(0deg) rotateY(0deg)';
+      card.style.boxShadow = '0 25px 45px rgba(0, 0, 0, 0.28)';
+      glare.style.opacity = '0';
+    });
+  })();
+</script>
+<!-- END HEALTH CAMP 3D INTERACTIVE BANNER -->
 <section class="section solar-feature">
   <div class="container">
     <div class="solar-card">
@@ -916,7 +1081,41 @@
 </div>
 
 
+<!-- =========================================
+     ARUNODOI SCHOOL PHOTO SHOWCASE
+     ========================================= -->
 
+<section class="arunodo-top-showcase">
+
+  <div class="arunodo-photo-stage">
+
+    <img
+      class="arunodo-photo"
+      src="images/school-events/IMG_20250904_082342.jpg"
+      alt="School Event">
+
+    <img
+      class="arunodo-photo"
+      src="images/school-events/20250904_81851AMByGPSMapCamera.jpg"
+      alt="Sports and Activities">
+
+    <img
+      class="arunodo-photo"
+      src="images/school-events/IMG_20250904_082426.jpg"
+      alt="Cultural Programme">
+
+    <img
+      class="arunodo-photo"
+      src="images/school-events/20250904_82201AMByGPSMapCamera.jpg"
+      alt="Science Exhibition">
+
+  </div>
+
+  <div class="arunodo-showcase-title">
+    ✨ SCHOOL MOMENTS ✨
+  </div>
+
+</section>
     <!-- =========================================
          GALLERY
          ========================================= -->
