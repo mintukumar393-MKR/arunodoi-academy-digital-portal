@@ -7,74 +7,228 @@
 <meta name="theme-color" content="#102c3c">
 <title>Free Health Camp 2026 | Arunodoi Academy</title>
 
+
 <style>
 *{box-sizing:border-box}
-:root{--navy:#102c3c;--teal:#176b70;--mint:#a8f0d7;--ink:#173246}
-body{margin:0;font-family:Arial,sans-serif;color:var(--ink);line-height:1.6;background:linear-gradient(140deg,#f7fbfc,#e3eef2)}
-.page{width:min(1050px,94%);margin:22px auto}
-.nav{display:flex;justify-content:space-between;align-items:center;padding:13px 17px;background:white;border:1px solid #dce7ec;border-radius:16px;box-shadow:0 5px 0 #d8e4e8,0 12px 22px #17324612;margin-bottom:25px}
-.brand{font-weight:800;color:var(--navy)}
-.home{padding:9px 15px;border-radius:11px;background:#174a69;color:white;text-decoration:none;font-weight:bold;box-shadow:0 4px 0 #10354c}
-.hero{padding:clamp(23px,5vw,42px);border-radius:25px;color:white;background:linear-gradient(135deg,#102c3c,#176b70);border:1px solid #397780;box-shadow:0 12px 0 #c4d5da,0 25px 38px #17324630,inset 0 1px #ffffff45}
-.eyebrow{color:var(--mint);font-size:12px;font-weight:bold;letter-spacing:2px}
-h1{font-size:clamp(30px,5vw,48px);line-height:1.12;margin:12px 0}
-.hero p{color:#e0f0f2}
-.facts,.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px}
-.facts{margin-top:24px}
-.fact{padding:16px;border-radius:15px;background:#ffffff12;border:1px solid #ffffff35;box-shadow:0 7px 0 #0b2530,inset 0 1px #ffffff25;transition:transform .2s}
-.fact:hover{transform:translateY(-4px)}
-.fact strong{display:block;color:var(--mint);font-size:12px;letter-spacing:1px}
-.cards{grid-template-columns:repeat(auto-fit,minmax(290px,1fr));align-items:start;margin:32px 0}
-.card{padding:clamp(20px,3vw,28px);background:linear-gradient(145deg,#fff,#f9fcfd);border:1px solid #dbe6eb;border-radius:21px;box-shadow:0 9px 0 #d2dfe4,0 20px 30px #18384b15;transition:transform .2s,box-shadow .2s}
-.card:hover{transform:translateY(-3px);box-shadow:0 12px 0 #d2dfe4,0 25px 35px #18384b20}
-h2{margin-top:0;color:var(--navy)}
-label{display:block;font-weight:bold;margin:14px 0 5px}
-input,select{width:100%;padding:12px;border:1px solid #bdcdd5;border-radius:10px;font:inherit;background:white}
-input:focus,select:focus{outline:3px solid #176b7030;border-color:#176b70}
-.consent{display:flex;gap:10px;font-weight:normal;align-items:flex-start}
-.consent input{width:auto;margin-top:7px}
-.btn{display:block;width:100%;padding:13px 15px;margin-top:16px;border:0;border-radius:12px;background:#126c69;color:white;text-align:center;text-decoration:none;font-size:15px;font-weight:bold;cursor:pointer;box-shadow:0 6px 0 #0b4d4b,0 10px 18px #0b4d4b20;transition:transform .15s,box-shadow .15s}
-.btn:hover{transform:translateY(-2px);box-shadow:0 8px 0 #0b4d4b,0 14px 22px #0b4d4b25}
-.btn:active{transform:translateY(3px);box-shadow:0 2px 0 #0b4d4b}
-.btn:disabled{opacity:.6;cursor:wait}
-.btn-alt{background:#174a69;box-shadow:0 6px 0 #10354c}
-.qr-wrap{width:max-content;max-width:100%;margin:20px auto;padding:17px;background:white;border:1px solid #dce7ec;border-radius:18px;box-shadow:0 7px 0 #dce6ea,0 14px 24px #17324612}
+:root{
+  --navy:#103846;
+  --teal:#176b70;
+  --teal-dark:#0e5358;
+  --mint:#a8f0d7;
+  --ink:#173246;
+  --muted:#617782;
+  --line:#d9e6e9;
+}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  color:var(--ink);
+  line-height:1.6;
+  background:
+    radial-gradient(ellipse at top left,#e0f2ef,transparent 45%),
+    linear-gradient(145deg,#f8fbfc,#eaf2f4);
+}
+.page{width:min(1120px,94%);margin:22px auto 0}
+.nav{
+  display:flex;justify-content:space-between;align-items:center;
+  gap:14px;padding:13px 17px;background:#fff;
+  border:1px solid var(--line);border-radius:18px;
+  box-shadow:0 5px 0 #dce7e9,0 12px 26px #1732460d;
+  margin-bottom:24px
+}
+.brand{font-weight:850;letter-spacing:.035em;color:var(--navy)}
+.home{
+  display:inline-block;padding:9px 15px;border-radius:12px;
+  background:#174a69;color:#fff;text-decoration:none;font-weight:bold;
+  box-shadow:0 4px 0 #10354c
+}
+.hero{
+  padding:clamp(26px,5vw,54px);border-radius:28px;color:#fff;
+  background:linear-gradient(125deg,#0d2d3b,#14545d 58%,#176b70);
+  border:1px solid #397780;
+  box-shadow:0 10px 0 #cbdadd,0 24px 42px #17324620;
+}
+.eyebrow{
+  color:var(--mint);font-size:12px;font-weight:850;
+  letter-spacing:2px;text-transform:uppercase
+}
+h1{
+  font-size:clamp(31px,5.5vw,52px);
+  line-height:1.1;letter-spacing:-.035em;margin:14px 0
+}
+.hero p{max-width:680px;color:#e1f0f2;font-size:17px}
+.facts,.cards{display:grid;gap:16px}
+.facts{grid-template-columns:repeat(3,minmax(0,1fr));margin-top:28px}
+.fact{
+  padding:17px;border-radius:16px;background:#ffffff12;
+  border:1px solid #ffffff36;box-shadow:0 6px 0 #0b2530
+}
+.fact strong{
+  display:block;color:var(--mint);font-size:11px;
+  letter-spacing:1.3px;margin-bottom:4px
+}
+.cards{
+  grid-template-columns:minmax(0,1.08fr) minmax(260px,.82fr);
+  align-items:start;gap:22px;margin:30px 0 38px
+}
+.card{
+  min-width:0;padding:clamp(21px,3vw,30px);
+  background:linear-gradient(150deg,#fff,#fbfdfd);
+  border:1px solid var(--line);border-radius:23px;
+  box-shadow:0 8px 0 #d8e4e7,0 18px 36px #17324612;
+  transition:transform .18s,box-shadow .18s
+}
+.card:hover{transform:translateY(-2px)}
+h2{
+  margin:0 0 8px;color:var(--navy);
+  font-size:clamp(22px,3vw,27px);line-height:1.2
+}
+label{display:block;font-weight:bold;font-size:14px;margin:17px 0 7px}
+input:not([type=checkbox]),select{
+  display:block;width:100%;min-height:50px;padding:12px 14px;
+  border:1px solid #bdcdd5;border-radius:12px;
+  font:inherit;font-size:16px;background:#fff;color:var(--ink)
+}
+input:focus,select:focus{
+  outline:none;border-color:var(--teal);
+  box-shadow:0 0 0 4px #176b7020
+}
+.consent{
+  display:flex;gap:11px;align-items:flex-start;
+  font-weight:normal;font-size:14px;line-height:1.5;margin:20px 0
+}
+.consent input{width:19px;height:19px;margin-top:3px;accent-color:var(--teal)}
+.btn{
+  display:block;width:100%;min-height:49px;padding:13px 16px;
+  margin-top:13px;border:0;border-radius:13px;
+  background:var(--teal);color:#fff;text-align:center;
+  text-decoration:none;font-size:15px;font-weight:bold;
+  cursor:pointer;box-shadow:0 5px 0 #0b4d4b;
+  transition:transform .15s,box-shadow .15s
+}
+.btn:hover{transform:translateY(-2px);box-shadow:0 7px 0 #0b4d4b}
+.btn:disabled{opacity:.65;cursor:wait;transform:none}
+.btn-alt{background:#174a69;box-shadow:0 5px 0 #10354c}
+.qr-wrap{
+  width:max-content;max-width:100%;margin:20px auto;
+  padding:15px;background:#fff;border:1px solid var(--line);
+  border-radius:18px;box-shadow:0 6px 0 #dce6ea,0 13px 24px #17324612
+}
 .qr{display:block;width:240px;height:240px;max-width:100%;object-fit:contain}
-.muted{color:#627681;font-size:14px}
-.notice{margin-top:15px;padding:12px;border-radius:10px;background:#edf7f5;color:#214d4b;font-size:14px}
-footer{margin-top:42px;padding:28px 15px;text-align:center;color:#d9e9ee;background:linear-gradient(135deg,#102c3c,#174c59);border-radius:22px 22px 0 0;box-shadow:0 -5px 0 #c9d9de}
+.muted{color:var(--muted);font-size:14px}
+.notice{
+  margin-top:15px;padding:13px 14px;border-radius:12px;
+  background:#edf7f5;border:1px solid #d7ece7;
+  color:#214d4b;font-size:14px
+}
+#formMessage:empty{display:none}
+#registrationConfirmation[hidden]{display:none!important}
+.confirmation-card{
+  margin-top:22px;padding:22px;text-align:center;
+  border-radius:18px;background:#effaf5;border:1px solid #bfe8d6
+}
+.confirmation-card h2{color:#135b49}
+#confirmedRegistrationNumber{
+  color:var(--navy);overflow-wrap:anywhere
+}
+#personalRegistrationQr{
+  display:block;width:220px;height:220px;max-width:100%;
+  object-fit:contain;margin:14px auto;background:#fff;
+  padding:8px;border:1px solid var(--line);border-radius:12px
+}
+#printConfirmationButton{
+  min-height:44px;padding:10px 16px;border:0;border-radius:11px;
+  background:var(--navy);color:#fff;font-weight:bold;cursor:pointer
+}
+footer{
+  margin-top:48px;padding:30px 15px 34px;text-align:center;
+  color:#d9e9ee;background:linear-gradient(135deg,#102c3c,#174c59);
+  border-radius:24px 24px 0 0;box-shadow:0 -5px 0 #c9d9de
+}
 footer strong{color:var(--mint)}
-footer a{display:inline-block;margin-top:10px;color:white;font-weight:bold}
-@media(max-width:480px){.page{margin-top:12px}.nav{margin-bottom:17px}.brand{font-size:13px}.cards{gap:20px}}
-@media(prefers-reduced-motion:reduce){*,*:before,*:after{transition:none!important}}
+footer a{display:inline-block;margin-top:10px;color:#fff;font-weight:bold}
+@media(max-width:760px){
+  .facts{grid-template-columns:1fr}
+  .fact{padding:13px 15px}
+  .cards{grid-template-columns:1fr}
+}
+@media(max-width:480px){
+  .page{width:calc(100% - 22px);margin-top:11px}
+  .nav{margin-bottom:16px;padding:10px 12px}
+  .brand{font-size:13px}
+  .home{padding:8px 11px;font-size:13px}
+  .hero{border-radius:22px;padding:25px 20px}
+  .cards{gap:17px;margin-top:22px}
+  .card{padding:21px 18px;border-radius:19px}
+  .qr-wrap{padding:12px}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*:before,*:after{scroll-behavior:auto!important;transition:none!important}
+}
+@media print{
+  body{background:#fff}
+  .nav,.hero,.cards>.card:not(:first-child),footer,#registrationForm{display:none!important}
+  .page{width:100%;margin:0}
+  .cards{display:block;margin:0}
+  .card{box-shadow:none;border:0;padding:0}
+  .confirmation-card{border:0;background:#fff}
+}
 </style>
+
 </head>
 
 <body>
 <main class="page">
 
+
 <nav class="nav" aria-label="Main navigation">
-  <div class="brand">ARUNODOI ACADEMY</div>
+  <div class="brand">
+    <span style="display:inline-grid;place-items:center;width:36px;height:36px;border-radius:12px;background:#103846;color:#a8f0d7;font-size:20px" aria-hidden="true">✚</span>
+    <span>ARUNODOI ACADEMY</span>
+  </div>
   <a class="home" href="index.html">⌂ Home</a>
 </nav>
 
+
+
 <header class="hero">
   <div class="eyebrow">COMMUNITY CARE · TANGLA</div>
+
   <h1>Free Health Check-up Camp 2026</h1>
-  <p>Care for every generation. Students and villagers are welcome to register.</p>
+
+  <p>
+    Care for every generation. Students and villagers are welcome
+    to register for a free consultation.
+  </p>
 
   <div class="facts">
-    <div class="fact"><strong>DATE</strong>24 October 2026 · Saturday</div>
-    <div class="fact"><strong>TIME</strong>10:00 AM – 4:00 PM</div>
-    <div class="fact"><strong>VENUE</strong>Arunodoi Academy, Tangla</div>
+    <div class="fact">
+      <strong>DATE</strong>
+      24 October 2026 · Saturday
+    </div>
+
+    <div class="fact">
+      <strong>TIME</strong>
+      10:00 AM – 4:00 PM
+    </div>
+
+    <div class="fact">
+      <strong>VENUE</strong>
+      Arunodoi Academy, Tangla
+    </div>
   </div>
 </header>
+
 
 <section class="cards">
 
 <div class="card">
-  <h2>Online Registration</h2>
-  <p class="muted">Please complete the required details.</p>
+  <p style="margin:0 0 6px;font-size:11px;font-weight:800;letter-spacing:1.4px;color:#176b70;text-transform:uppercase">
+    Secure registration
+  </p>
+  <h2>Register for the Camp</h2>
+  <p class="muted">Complete the details below. Fields marked * are required.</p>
 
   <form id="registrationForm">
     <label for="name">Name of attendee *</label>
@@ -104,7 +258,7 @@ footer a{display:inline-block;margin-top:10px;color:white;font-weight:bold}
     </label>
 
     <button class="btn" id="submitButton" type="submit">Submit Registration</button>
-    <p id="formMessage" class="notice" role="status" aria-live="polite">
+    <p id="formMessage" class="notice" role="status" aria-live="polite"></p>
       
 <div id="registrationConfirmation" hidden>
   <div class="confirmation-card">
@@ -131,26 +285,40 @@ footer a{display:inline-block;margin-top:10px;color:white;font-weight:bold}
     <button type="button" id="printConfirmationButton">
       Print Confirmation
     </button>
-  </div>
+   </div>
 </div>
-    </p>
   </form>
+
+  <div id="registrationConfirmation" hidden>
+    <!-- Keep the existing confirmation-card content here. -->
+  </div>
 
   <p class="muted">Do not enter medical history or sensitive medical details here.</p>
 </div>
 
 <div class="card">
-  <h2>Scan or Share to Register</h2>
-  <p class="muted">Scan the QR code to open this registration page on another device.</p>
+  
+<h2>Registration Made Simple</h2>
+<p class="muted">
+  Register online using the QR code, or visit the school for offline registration.
+</p>
 
-  <div class="qr-wrap">
-    <img
-      id="registrationQr"
-      class="qr"
-      alt="QR code for the Health Camp registration page"
-      width="240"
-      height="240"
-    >
+<div class="notice">
+  <strong>Online registration</strong><br>
+  Scan the QR code below to open this registration page.
+</div>
+
+<!-- Keep your existing QR-code wrapper and image here unchanged. -->
+
+<div class="notice">
+  <strong>Offline registration</strong><br>
+  Visit Arunodoi Academy on 22 or 23 October 2026 for offline registration.
+</div>
+
+<p class="muted">
+  Registration is subject to availability. Please register only once per attendee.
+</p>
+
   </div>
 
   <button class="btn btn-alt" id="shareButton" type="button">↗ Share Registration Link</button>
@@ -182,12 +350,42 @@ footer a{display:inline-block;margin-top:10px;color:white;font-weight:bold}
 </section>
 </main>
 
+<section class="card" style="margin-bottom:32px;text-align:center">
+  <p style="margin:0 0 8px;font-size:11px;font-weight:800;letter-spacing:1.5px;color:#176b70;text-transform:uppercase">
+    Together for Community Well-being
+  </p>
+  <h2>Our Collaboration Partners</h2>
+  <p class="muted">
+    The Free Health Check-up Camp is being organised in collaboration with:
+  </p>
+  <div style="display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:18px;margin-top:20px">
+    <div style="padding:18px;min-width:220px;max-width:100%;border:1px solid #d9e6e9;border-radius:15px;background:#f8fbfc">
+      <strong>HDFC ERGO GIC Ltd.</strong>
+    </div>
+    <div style="padding:18px;min-width:220px;max-width:100%;border:1px solid #d9e6e9;border-radius:15px;background:#f8fbfc">
+      <strong>Peerless Hospital</strong>
+    </div>
+    <div style="padding:18px;min-width:220px;max-width:100%;border:1px solid #d9e6e9;border-radius:15px;background:#f8fbfc">
+      <strong>Guwahati Eye Hospital</strong>
+    </div>
+  </div>
+</section>
+
+
 <footer>
-  <strong>Arunodoi Academy</strong><br>
-  Tangla, Udalguri, Assam<br>
-  Free Health Check-up Camp · 24 October 2026<br>
-  <a href="index.html">← Back to Home</a>
+  <strong>ARUNODOI ACADEMY</strong>
+  <p style="margin:6px 0">
+    Joorpukhuri MB Road, Tangla, Udalguri, Assam
+  </p>
+  <p style="margin:6px 0">
+    Free Health Check-up Camp · 24 October 2026
+  </p>
+  <p style="margin:6px 0;font-size:13px">
+    Together for a healthier community.
+  </p>
+  <a href="index.html">← Back to School Portal</a>
 </footer>
+
 
 
 <script>
