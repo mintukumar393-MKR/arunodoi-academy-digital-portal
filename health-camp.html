@@ -105,7 +105,34 @@ footer a{display:inline-block;margin-top:10px;color:white;font-weight:bold}
 
     <button class="btn" id="submitButton" type="submit">Submit Registration</button>
     <p id="formMessage" class="notice" role="status" aria-live="polite">
-      Your registration will be sent to the school's spreadsheet.
+      
+<div id="registrationConfirmation" hidden>
+  <div class="confirmation-card">
+    <h2>Registration Successful!</h2>
+    <p>
+      Your registration for the Arunodoi Academy Free Health Camp
+      has been saved.
+    </p>
+
+    <p class="registration-number-label">Your Registration Number</p>
+    <h3 id="confirmedRegistrationNumber">AAHC-2026-0001</h3>
+
+    <img
+      id="personalRegistrationQr"
+      alt="Personal registration QR code"
+      width="220"
+      height="220"
+    >
+
+    <p>
+      Please save this number or show this QR code at the registration desk.
+    </p>
+
+    <button type="button" id="printConfirmationButton">
+      Print Confirmation
+    </button>
+  </div>
+</div>
     </p>
   </form>
 
@@ -162,44 +189,31 @@ footer a{display:inline-block;margin-top:10px;color:white;font-weight:bold}
   <a href="index.html">← Back to Home</a>
 </footer>
 
+
 <script>
 "use strict";
 
-
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzEc0tUMO2-olSkl1aSHyQzB9hrryQOCYOmuBwZysAUzO3CF_jDR8y-xKRBo3E_kOxNIQ/exec";
 
+const registrationUrl =
+  "https://mintukumar393-mkr.github.io/arunodoi-academy-digital-portal/health-camp.html";
 
 const form = document.getElementById("registrationForm");
 const message = document.getElementById("formMessage");
 const submitButton = document.getElementById("submitButton");
-
-/* Use one consistent URL for QR, sharing and copying. */
-const registrationUrl =
-  "https://mintukumar393-mkr.github.io/arunodoi-academy-digital-portal/health-camp.html";
-
-/* Load the QR image. The ID matches the HTML exactly. */
 const registrationQR = document.getElementById("registrationQr");
+const confirmation = document.getElementById("registrationConfirmation");
+const confirmedNumber = document.getElementById("confirmedRegistrationNumber");
+const personalQR = document.getElementById("personalRegistrationQr");
 
 if (registrationQR) {
-  registrationQR.alt =
-    "Scan to register for the Arunodoi Academy Health Camp";
-
-  registrationQR.onload = function () {
-    console.log("QR code image loaded.");
-  };
-
-  registrationQR.onerror = function () {
-    message.textContent =
-      "The QR image could not load. Please use the Share or Copy Registration Link button.";
-  };
-
+  registrationQR.alt = "Scan to register for the Arunodoi Academy Health Camp";
   registrationQR.src =
     "https://api.qrserver.com/v1/create-qr-code/?size=1000x1000&format=png&data=" +
     encodeURIComponent(registrationUrl);
 }
 
-/* Share the registration link. */
-document.getElementById("shareButton").addEventListener("click", async () => {
+document.getElementById("shareButton")?.addEventListener("click", async () => {
   try {
     if (navigator.share) {
       await navigator.share({
@@ -217,8 +231,7 @@ document.getElementById("shareButton").addEventListener("click", async () => {
   }
 });
 
-/* Copy the registration link. */
-document.getElementById("copyButton").addEventListener("click", async () => {
+document.getElementById("copyButton")?.addEventListener("click", async () => {
   try {
     await navigator.clipboard.writeText(registrationUrl);
     alert("Registration link copied successfully.");
@@ -227,11 +240,73 @@ document.getElementById("copyButton").addEventListener("click", async () => {
   }
 });
 
-/* Submit the registration to Google Apps Script. */
+function checkRegistrationStatus(requestId) {
+  return new Promise((resolve, reject) => {
+    const callbackName =
+      "registrationCallback_" + Date.now() + "_" +
+      Math.random().toString(36).slice(2);
+
+    const script = document.createElement("script");
+    const timeout = setTimeout(() => {
+      cleanup();
+      reject(new Error("Verification timed out."));
+    }, 10000);
+
+    function cleanup() {
+      clearTimeout(timeout);
+      delete window[callbackName];
+      script.remove();
+    }
+
+    window[callbackName] = data => {
+      cleanup();
+      resolve(data);
+    };
+
+    script.onerror = () => {
+      cleanup();
+      reject(new Error("Could not contact registration verification service."));
+    };
+
+    const url = new URL(SCRIPT_URL);
+    url.searchParams.set("action", "status");
+    url.searchParams.set("requestId", requestId);
+    url.searchParams.set("callback", callbackName);
+    url.searchParams.set("_", String(Date.now()));
+
+    script.src = url.toString();
+    document.body.appendChild(script);
+  });
+}
+
+async function waitForSavedRegistration(requestId) {
+  for (let attempt = 0; attempt < 8; attempt++) {
+    const result = await checkRegistrationStatus(requestId);
+
+    if (result.status === "success" && result.registrationNumber) {
+      return result.registrationNumber;
+    }
+
+    if (result.status === "error") {
+      throw new Error(result.message || "Could not verify registration.");
+    }
+
+    await new Promise(resolve => setTimeout(resolve, 1500));
+  }
+
+  throw new Error(
+    "We could not confirm the saved registration yet. Please contact the school before submitting again."
+  );
+}
+
 form.addEventListener("submit", async event => {
   event.preventDefault();
 
   if (!form.reportValidity()) return;
+
+  const requestId =
+    "AAHC-" + Date.now().toString(36) + "-" +
+    Math.random().toString(36).slice(2, 12);
 
   const data = new URLSearchParams();
   data.set("name", form.elements.name.value.trim());
@@ -240,32 +315,47 @@ form.addEventListener("submit", async event => {
   data.set("phone", form.elements.phone.value.trim());
   data.set("service", form.elements.service.value);
   data.set("consent", form.elements.consent.checked ? "yes" : "no");
+  data.set("requestId", requestId);
 
   submitButton.disabled = true;
-  message.textContent = "Sending registration…";
+  message.textContent = "Submitting registration. Please wait…";
+  if (confirmation) confirmation.hidden = true;
 
   try {
-    /*
-      no-cors prevents reading the server response.
-      A resolved fetch does not prove the spreadsheet saved the record.
-    */
+    // no-cors sends the form, but its response cannot be read.
+    // We verify the specific request ID separately using JSONP.
     await fetch(SCRIPT_URL, {
       method: "POST",
       mode: "no-cors",
       body: data
     });
 
-    message.textContent =
-      "The request was sent, but this page cannot confirm it was saved. Please contact the school if you need to verify your registration.";
+    message.textContent = "Checking that your registration was saved…";
+    const registrationNumber = await waitForSavedRegistration(requestId);
 
+    confirmedNumber.textContent = registrationNumber;
+    personalQR.alt = "QR code for registration " + registrationNumber;
+    personalQR.src =
+      "https://api.qrserver.com/v1/create-qr-code/?size=600x600&format=png&data=" +
+      encodeURIComponent(registrationNumber);
+
+    confirmation.hidden = false;
+    message.textContent = "Registration saved successfully.";
     form.reset();
+    confirmation.scrollIntoView({ behavior: "smooth", block: "center" });
+
   } catch (error) {
-    message.textContent =
-      "We could not send the registration. Please try again or register offline at school.";
+    message.textContent = error.message ||
+      "We could not confirm your registration. Please contact the school before trying again.";
   } finally {
     submitButton.disabled = false;
   }
 });
+
+document.getElementById("printConfirmationButton")?.addEventListener("click", () => {
+  window.print();
+});
 </script>
+
 </body>
 </html>
