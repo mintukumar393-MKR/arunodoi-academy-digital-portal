@@ -383,6 +383,22 @@ input:focus,select:focus{
   border:1px solid #d1fae5;
 }
 
+/* Map frame inside card */
+.map-embed-wrapper{
+  width:100%;
+  margin-top:18px;
+  border-radius:16px;
+  overflow:hidden;
+  border:1.5px solid var(--border-light);
+  box-shadow:0 6px 18px rgba(2,132,199,0.08);
+}
+.map-embed-wrapper iframe{
+  display:block;
+  width:100%;
+  height:240px;
+  border:0;
+}
+
 /* Institutional partners */
 .partner-deck{
   display:grid;
@@ -588,15 +604,15 @@ footer a{
 
         <img id="personalRegistrationQr" alt="Personal QR code" width="190" height="190">
 
-        <button type="button" class="action-btn action-btn-alt" id="printConfirmationButton" style="margin-top:12px">
-          Print or Save Slip
+        <button type="button" class="action-btn" id="downloadSlipButton" style="margin-top:12px;background:#059669">
+          📥 Save Registration Slip
         </button>
       </div>
     </div>
   </form>
 </div>
 
-<!-- QR and details card -->
+<!-- QR and details card with map -->
 <div class="interactive-card">
   <h2>Scan &amp; Share</h2>
   <p style="margin:4px 0 14px;color:var(--ink-muted);font-size:13px">
@@ -629,9 +645,16 @@ footer a{
       <li>Child health consultation</li>
       <li>Comprehensive eye screening</li>
     </ul>
-    <p style="font-size:12px;color:var(--ink-muted);margin-top:8px">
-      Location map: <a href="https://maps.app.goo.gl/jVFbkkLY9Ap5nRU78" target="_blank" rel="noopener" style="color:var(--blue-vibrant);font-weight:700">Open Arunodoi Academy on Google Maps</a>
-    </p>
+  </div>
+
+  <!-- Responsive Google Map inside layout -->
+  <div class="map-embed-wrapper">
+    <iframe 
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1409.208220200895!2d91.91222048996201!3d26.649441050771884!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x375b0ed390816925%3A0xb59963791bbed284!2sARUNODOI%20ACADEMY!5e1!3m2!1sen!2sin!4v1792175726063!5m2!1sen!2sin" 
+      allowfullscreen="" 
+      loading="lazy" 
+      referrerpolicy="strict-origin-when-cross-origin">
+    </iframe>
   </div>
 </div>
 
@@ -649,7 +672,7 @@ footer a{
     <div class="partner-badge">Guwahati Eye Hospital</div>
   </div>
 </section>
-<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1409.208220200895!2d91.91222048996201!3d26.649441050771884!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x375b0ed390816925%3A0xb59963791bbed284!2sARUNODOI%20ACADEMY!5e1!3m2!1sen!2sin!4v1792175726063!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+
 </main>
 
 <!-- Floating dock for mobile users -->
@@ -732,6 +755,8 @@ const registrationQR = document.getElementById("registrationQr");
 const confirmation = document.getElementById("registrationConfirmation");
 const confirmedNumber = document.getElementById("confirmedRegistrationNumber");
 const personalQR = document.getElementById("personalRegistrationQr");
+
+let lastSavedData = {};
 
 if (registrationQR) {
   registrationQR.src = "https://api.qrserver.com/v1/create-qr-code/?size=600x600&format=png&data=" + encodeURIComponent(registrationUrl);
@@ -837,8 +862,14 @@ form.addEventListener("submit", async event => {
 
   const requestId = "AAHC-" + Date.now().toString(36) + "-" + Math.random().toString(36).slice(2, 8);
 
+  lastSavedData = {
+    name: form.elements.name.value.trim(),
+    phone: phoneClean,
+    service: form.elements.service.value
+  };
+
   const data = new URLSearchParams();
-  data.set("name", form.elements.name.value.trim());
+  data.set("name", lastSavedData.name);
   data.set("age", ageVal);
   data.set("phone", phoneClean);
   data.set("village", form.elements.village.value.trim());
@@ -861,7 +892,11 @@ form.addEventListener("submit", async event => {
     const regNumber = await waitForSavedRegistration(requestId);
 
     confirmedNumber.textContent = regNumber;
+    lastSavedData.regNumber = regNumber;
+
+    personalQR.crossOrigin = "anonymous";
     personalQR.src = "https://api.qrserver.com/v1/create-qr-code/?size=400x400&format=png&data=" + encodeURIComponent(regNumber);
+    
     confirmation.hidden = false;
     message.textContent = "Registration recorded successfully!";
     form.reset();
@@ -874,8 +909,68 @@ form.addEventListener("submit", async event => {
   }
 });
 
-document.getElementById("printConfirmationButton")?.addEventListener("click", () => {
-  window.print();
+/* Automatically renders and downloads slip to the device */
+document.getElementById("downloadSlipButton")?.addEventListener("click", () => {
+  const canvas = document.createElement("canvas");
+  const ctx = canvas.getContext("2d");
+  canvas.width = 600;
+  canvas.height = 760;
+
+  // Background
+  ctx.fillStyle = "#ffffff";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  // Border & Header
+  ctx.fillStyle = "#0369a1";
+  ctx.fillRect(0, 0, canvas.width, 110);
+
+  ctx.fillStyle = "#ffffff";
+  ctx.font = "bold 24px sans-serif";
+  ctx.textAlign = "center";
+  ctx.fillText("ARUNODOI ACADEMY", canvas.width / 2, 45);
+
+  ctx.font = "14px sans-serif";
+  ctx.fillText("Free Health Camp · 24 October 2026", canvas.width / 2, 75);
+
+  // Info details
+  ctx.fillStyle = "#0f172a";
+  ctx.font = "bold 15px sans-serif";
+  ctx.textAlign = "left";
+  ctx.fillText("ATTENDEE NAME:", 45, 150);
+  ctx.font = "18px sans-serif";
+  ctx.fillText(lastSavedData.name || "Attendee", 45, 175);
+
+  ctx.font = "bold 15px sans-serif";
+  ctx.fillText("REGISTRATION ID:", 45, 215);
+  ctx.font = "bold 24px monospace";
+  ctx.fillStyle = "#0284c7";
+  ctx.fillText(lastSavedData.regNumber || "AAHC-2026", 45, 245);
+
+  ctx.fillStyle = "#0f172a";
+  ctx.font = "bold 15px sans-serif";
+  ctx.fillText("SERVICE REGISTERED:", 45, 285);
+  ctx.font = "16px sans-serif";
+  ctx.fillText(lastSavedData.service || "Health Check-up", 45, 310);
+
+  // Draw QR code image
+  const qrImg = new Image();
+  qrImg.crossOrigin = "anonymous";
+  qrImg.onload = () => {
+    ctx.drawImage(qrImg, (canvas.width - 240) / 2, 340, 240, 240);
+
+    ctx.fillStyle = "#64748b";
+    ctx.font = "13px sans-serif";
+    ctx.textAlign = "center";
+    ctx.fillText("Present this slip or QR at the registration counter on camp day.", canvas.width / 2, 630);
+    ctx.fillText("Venue: Arunodoi Academy, Tangla · Time: 10:00 AM - 4:00 PM", canvas.width / 2, 655);
+
+    // Save download
+    const link = document.createElement("a");
+    link.download = (lastSavedData.regNumber || "Health_Camp_Slip") + ".png";
+    link.href = canvas.toDataURL("image/png");
+    link.click();
+  };
+  qrImg.src = personalQR.src;
 });
 </script>
 
