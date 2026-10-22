@@ -1,0 +1,247 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#123c78">
+  <title>Alumni Feedback | Arunodoi Academy</title>
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #eef4ff;
+      color: #203047;
+      line-height: 1.6;
+    }
+
+    header {
+      background: linear-gradient(135deg, #123c78, #1769aa);
+      color: white;
+      text-align: center;
+      padding: 30px 18px;
+    }
+
+    header h1 { margin: 0 0 8px; font-size: 27px; }
+    header p { margin: 5px 0; }
+
+    .container {
+      max-width: 720px;
+      margin: 25px auto;
+      padding: 0 15px;
+    }
+
+    .card {
+      background: white;
+      padding: 25px;
+      border-radius: 16px;
+      box-shadow: 0 5px 22px #123c7814;
+    }
+
+    h2 { color: #123c78; margin-top: 0; }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin: 17px 0 7px;
+    }
+
+    .required { color: #c62828; }
+
+    input, select, textarea {
+      display: block;
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      font: inherit;
+      background: #fff;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      outline: 2px solid #78a9ed;
+      border-color: #1769aa;
+    }
+
+    textarea { min-height: 110px; resize: vertical; }
+
+    .hint {
+      color: #64748b;
+      font-size: 13px;
+      margin-top: 5px;
+    }
+
+    .consent {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin: 20px 0;
+      font-weight: normal;
+    }
+
+    .consent input {
+      width: auto;
+      margin-top: 6px;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      border: 0;
+      border-radius: 9px;
+      background: #123c78;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:disabled { opacity: 0.65; cursor: wait; }
+
+    .message {
+      display: none;
+      margin-top: 18px;
+      padding: 14px;
+      border-radius: 9px;
+    }
+
+    .success { background: #e7f8ed; color: #176534; }
+    .error { background: #fff0f0; color: #a32121; }
+
+    footer {
+      text-align: center;
+      color: #64748b;
+      font-size: 13px;
+      padding: 15px;
+    }
+
+    @media (max-width: 480px) {
+      .card { padding: 18px; }
+      header h1 { font-size: 23px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>ARUNODOI ACADEMY</h1>
+  <p>Alumni Meet & Interaction Programme</p>
+  <p>23 October 2026 | Tangla, Assam</p>
+</header>
+
+<main class="container">
+  <div class="card">
+    <h2>Alumni Feedback Form</h2>
+    <p>
+      Your memories, experiences and suggestions are valuable to us.
+      Please share a few words to help Arunodoi Academy grow.
+    </p>
+
+    <form id="feedbackForm">
+      <label for="respondentType">I am a <span class="required">*</span></label>
+      <select id="respondentType" name="respondentType" required>
+        <option value="">-- Select your category --</option>
+        <option value="Former Student">Former Student / Alumnus</option>
+        <option value="Former Teacher">Former Teacher</option>
+      </select>
+
+      <label for="fullName">Full Name <span class="required">*</span></label>
+      <input id="fullName" name="fullName" type="text"
+             maxlength="120" autocomplete="name" required>
+
+      <label for="years">Passing Year / Service Years</label>
+      <input id="years" name="years" type="text" maxlength="100"
+             placeholder="e.g. Passed in 2018 or served from 2010–2016">
+
+      <label for="mobile">Mobile Number (Optional)</label>
+      <input id="mobile" name="mobile" type="tel"
+             inputmode="tel" maxlength="20" autocomplete="tel"
+             placeholder="Enter your mobile number">
+
+      <label for="memory">Your Memorable Experience <span class="required">*</span></label>
+      <textarea id="memory" name="memory" maxlength="3000"
+                placeholder="Share a favourite memory or experience at our school..."
+                required></textarea>
+
+      <label for="suggestions">Suggestions for Our School</label>
+      <textarea id="suggestions" name="suggestions" maxlength="3000"
+                placeholder="Your ideas, advice or suggestions..."></textarea>
+
+      <label class="consent">
+        <input type="checkbox" name="permission" value="Yes">
+        <span>I give permission for the school to publish my feedback in school publications or on its official website.</span>
+      </label>
+      <input type="hidden" name="permission" value="No">
+
+      <button type="submit" id="submitButton">Submit Feedback</button>
+
+      <div id="successMessage" class="message success" role="status">
+        Thank you for sharing your feedback! Please wait for the submission process to finish before closing this page.
+      </div>
+
+      <div id="errorMessage" class="message error" role="alert">
+        Something went wrong while sending your feedback. Please check your internet connection and try again.
+      </div>
+    </form>
+  </div>
+</main>
+
+<footer>
+  Arunodoi Academy · Learn • Explore • Grow
+</footer>
+
+<script>
+  const SCRIPT_URL =
+    "https://script.google.com/macros/s/AKfycbxfh12dPmJ8Xa3a4rA0srfeB9D2X-ukHL0htDsxhHJCcPtXtxICWF7WxA64rSeS56hR/exec";
+
+  const form = document.getElementById("feedbackForm");
+  const submitButton = document.getElementById("submitButton");
+  const successMessage = document.getElementById("successMessage");
+  const errorMessage = document.getElementById("errorMessage");
+
+  form.addEventListener("submit", async function (event) {
+    event.preventDefault();
+
+    successMessage.style.display = "none";
+    errorMessage.style.display = "none";
+    submitButton.disabled = true;
+    submitButton.textContent = "Submitting...";
+
+    try {
+      const formData = new FormData(form);
+      const payload = new URLSearchParams();
+
+      for (const [key, value] of formData.entries()) {
+        if (key === "permission") continue;
+        payload.append(key, value);
+      }
+
+      payload.set(
+        "permission",
+        form.querySelector('input[name="permission"][type="checkbox"]').checked
+          ? "Yes"
+          : "No"
+      );
+
+      await fetch(SCRIPT_URL, {
+        method: "POST",
+        mode: "no-cors",
+        body: payload
+      });
+
+      successMessage.style.display = "block";
+      form.reset();
+      submitButton.textContent = "Submit Another Response";
+    } catch (error) {
+      errorMessage.style.display = "block";
+      submitButton.textContent = "Try Again";
+    } finally {
+      submitButton.disabled = false;
+    }
+  });
+</script>
+
+</body>
+</html>
