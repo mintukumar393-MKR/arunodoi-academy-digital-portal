@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#123b63">
+
+  <title>Health Camp QR Check-in | Arunodoi Academy</title>
+
+  <script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
+
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f1f5f9;
+      color: #172b3a;
+    }
+
+    header {
+      background: linear-gradient(135deg, #123b63, #1769aa);
+      color: white;
+      text-align: center;
+      padding: 25px 15px;
+    }
+
+    header h1 { margin: 8px 0; font-size: 27px; }
+    header p { margin: 5px 0; }
+
+    main {
+      max-width: 850px;
+      margin: 22px auto;
+      padding: 0 14px 30px;
+    }
+
+    .notice {
+      padding: 13px;
+      background: #fff5d8;
+      border: 1px solid #f0d58b;
+      border-radius: 10px;
+      margin-bottom: 16px;
+      font-size: 14px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .card {
+      background: white;
+      border: 1px solid #d9e4ed;
+      border-radius: 15px;
+      padding: 18px;
+      box-shadow: 0 4px 15px #123b6310;
+      min-width: 0;
+    }
+
+    h2 {
+      margin-top: 0;
+      color: #123b63;
+      font-size: 20px;
+    }
+
+    .help {
+      font-size: 13px;
+      color: #607586;
+      line-height: 1.5;
+    }
+
+    #reader {
+      width: 100%;
+      overflow: hidden;
+      border-radius: 10px;
+    }
+
+    button, input { font: inherit; }
+
+    button {
+      border: 0;
+      border-radius: 9px;
+      padding: 12px 14px;
+      min-height: 44px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:disabled {
+      opacity: .5;
+      cursor: not-allowed;
+    }
+
+    .primary { background: #1769aa; color: white; }
+    .secondary { background: #e6eff7; color: #123b63; }
+
+    .buttons {
+      display: flex;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .buttons button { flex: 1; }
+
+    label {
+      display: block;
+      margin: 15px 0 6px;
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #bdcbd7;
+      border-radius: 9px;
+      background: white;
+    }
+
+    .status {
+      padding: 12px;
+      border-radius: 9px;
+      margin-bottom: 16px;
+      background: #edf3f7;
+      font-size: 14px;
+      font-weight: bold;
+      line-height: 1.5;
+      overflow-wrap: anywhere;
+    }
+
+    .good { background: #e5f7ec; color: #12683a; }
+    .bad { background: #ffeded; color: #b42318; }
+    .warn { background: #fff5d8; color: #805500; }
+
+    .details {
+      display: grid;
+      grid-template-columns: 125px minmax(0, 1fr);
+      gap: 12px 8px;
+      font-size: 14px;
+    }
+
+    .key { color: #607586; }
+    .value { font-weight: bold; overflow-wrap: anywhere; }
+
+    #confirmButton {
+      width: 100%;
+      margin-top: 18px;
+    }
+
+    .empty {
+      color: #607586;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    footer {
+      text-align: center;
+      color: #607586;
+      font-size: 12px;
+      padding: 20px 0;
+    }
+
+    @media (max-width: 650px) {
+      .grid { grid-template-columns: 1fr; }
+      header h1 { font-size: 23px; }
+    }
+  </style>
+</head>
+
+<body>
+<header>
+  <div><strong>ARUNODOI ACADEMY</strong></div>
+  <h1>Free Health Camp</h1>
+  <p>QR Registration Verification &amp; Check-in</p>
+</header>
+
+<main>
+  <div class="notice">
+    <strong>Staff use only.</strong>
+    Verify the attendee's details before confirming check-in.
+  </div>
+
+  <div class="grid">
+    <section class="card">
+      <h2>1. Scan QR Code</h2>
+
+      <p class="help">
+        Scan the attendee's personal QR code containing a registration
+        number such as AAHC-2026-0002.
+      </p>
+
+      <div id="reader"></div>
+
+      <div class="buttons">
+        <button class="primary" id="startButton">Start Camera</button>
+        <button class="secondary" id="stopButton" disabled>Stop Camera</button>
+      </div>
+
+      <label for="manualNumber">Registration Number</label>
+      <input id="manualNumber"
+             placeholder="AAHC-2026-0001"
+             autocomplete="off">
+
+      <div class="buttons">
+        <button class="secondary" id="lookupButton">Find Attendee</button>
+      </div>
+
+      <label for="staffPin">Staff PIN</label>
+      <input id="staffPin"
+             type="password"
+             inputmode="numeric"
+             autocomplete="current-password"
+             placeholder="Enter staff PIN">
+
+      <p class="help">
+        The PIN is verified by Apps Script. Do not share it with attendees.
+      </p>
+    </section>
+
+    <section class="card">
+      <h2>2. Attendee Details</h2>
+
+      <div id="resultStatus" class="status">
+        Ready. Scan a QR code or enter a registration number.
+      </div>
+
+      <div id="details" class="empty">
+        Attendee details will appear here after verification.
+      </div>
+
+      <button id="confirmButton" class="primary" disabled>
+        Confirm Check-in
+      </button>
+
+      <div class="buttons">
+        <button id="nextButton" class="secondary">Scan Next</button>
+      </div>
+    </section>
+  </div>
+
+  <footer>Arunodoi Academy • Health Camp Attendance Desk</footer>
+</main>
+
+<script>
+"use strict";
+
+// Existing Apps Script web app deployment.
+const API_URL =
+  "https://script.google.com/macros/s/AKfycbwEwNT1_EwHWeNvY1UXxjAoOYC61yyrAa6C6X2TrhmQvtpqyux87GPmASIkXJJWiKWzXw/exec";
+
+let scanner = null;
+let cameraRunning = false;
+let currentAttendee = null;
+let requestBusy = false;
+
+const $ = id => document.getElementById(id);
+
+function setStatus(message, type = "") {
+  $("resultStatus").className = "status" + (type ? " " + type : "");
+  $("resultStatus").textContent = message;
+}
+
+function showAttendee(a) {
+  currentAttendee = a;
+
+  const fields = [
+    ["Registration No.", a.registrationNumber],
+    ["Name", a.name],
+    ["Age", a.age],
+    ["Village", a.village],
+    ["Registered Service", a.service],
+    ["Check-in Status", a.checkinStatus || "Not checked in"],
+    ["Check-in Time", a.checkinTime || "—"]
+  ];
+
+  const box = $("details");
+  box.className = "details";
+  box.replaceChildren();
+
+  fields.forEach(([label, value]) => {
+    const key = document.createElement("div");
+    key.className = "key";
+    key.textContent = label;
+
+    const val = document.createElement("div");
+    val.className = "value";
+    val.textContent = value || "—";
+
+    box.append(key, val);
+  });
+
+  const alreadyCheckedIn =
+    String(a.checkinStatus || "").trim().toLowerCase() === "checked in"
+    || Boolean(a.checkinTime);
+
+  $("confirmButton").disabled = alreadyCheckedIn;
+  $("confirmButton").textContent =
+    alreadyCheckedIn ? "Already Checked In" : "Confirm Check-in";
+
+  if (alreadyCheckedIn) {
+    setStatus(
+      "ALREADY CHECKED IN. The original check-in record is preserved.",
+      "bad"
+    );
+  } else {
+    setStatus(
+      "Registration found. Verify the details before check-in.",
+      "good"
+    );
+  }
+
+  $("manualNumber").value = a.registrationNumber || "";
+}
+
+// JSONP is used for cross-origin lookups from GitHub Pages.
+function lookupAttendee(registrationNumber) {
+  return new Promise((resolve, reject) => {
+    const callbackName =
+      "healthCampLookup_" + Date.now() + "_" +
+      Math.floor(Math.random() * 100000);
+
+    const script = document.createElement("script");
+
+    let finished = false;
+
+    const timeout = setTimeout(() => {
+      finish(new Error("Lookup timed out. Check your internet connection."));
+    }, 15000);
+
+    function finish(error, data) {
+      if (finished) return;
+      finished = true;
+
+      clearTimeout(timeout);
+      delete window[callbackName];
+      script.remove();
+
+      if (error) reject(error);
+      else resolve(data);
+    }
+
+    window[callbackName] = data => finish(null, data);
+
+    script.onerror = () => {
+      finish(new Error("Could not contact the registration service."));
+    };
+
+    script.src =
+      API_URL +
+      "?action=lookup" +
+      "&registrationNumber=" + encodeURIComponent(registrationNumber) +
+      "&callback=" + encodeURIComponent(callbackName) +
+      "&_=" + Date.now();
+
+    document.body.appendChild(script);
+  });
+}
+
+async function lookupNumber(raw) {
+  const number = String(raw || "").trim().toUpperCase();
+
+  if (!/^AAHC-2026-\d{4,}$/.test(number)) {
+    setStatus("Enter a valid registration number, e.g. AAHC-2026-0002.", "warn");
+    return;
+  }
+
+  if (requestBusy) return;
+
+  requestBusy = true;
+  currentAttendee = null;
+  $("confirmButton").disabled = true;
+  setStatus("Searching registration...");
+
+  try {
+    const data = await lookupAttendee(number);
+
+    if (data.status === "success" && data.attendee) {
+      showAttendee(data.attendee);
+    } else {
+      $("details").className = "empty";
+      $("details").textContent =
+        data.message || "Registration not found.";
+
+      setStatus(data.message || "Registration not found.", "bad");
+    }
+  } catch (error) {
+    setStatus(error.message || "Lookup failed.", "bad");
+  } finally {
+    requestBusy = false;
+  }
+}
+
+async function confirmCheckin() {
+  if (!currentAttendee || requestBusy) return;
+
+  const staffPin = $("staffPin").value.trim();
+
+  if (!staffPin) {
+    setStatus("Enter the staff PIN before confirming check-in.", "warn");
+    $("staffPin").focus();
+    return;
+  }
+
+  const attendee = currentAttendee;
+
+  if (!confirm(
+    "Confirm check-in for " + attendee.name +
+    " (" + attendee.registrationNumber + ")?"
+  )) return;
+
+  requestBusy = true;
+  $("confirmButton").disabled = true;
+  setStatus("Recording check-in. Please wait...");
+
+  try {
+    const body = new URLSearchParams({
+      action: "checkin",
+      registrationNumber: attendee.registrationNumber,
+      staffPin: staffPin
+    });
+
+    // Cross-origin POST response is opaque in no-cors mode.
+    // We therefore verify the saved record using a fresh lookup.
+    await fetch(API_URL, {
+      method: "POST",
+      mode: "no-cors",
+      body: body
+    });
+
+    await new Promise(resolve => setTimeout(resolve, 1500));
+
+    const data = await lookupAttendee(attendee.registrationNumber);
+
+    if (data.status === "success" && data.attendee) {
+      showAttendee(data.attendee);
+
+      const saved = data.attendee;
+      const checked =
+        String(saved.checkinStatus || "").trim().toLowerCase() === "checked in"
+        || Boolean(saved.checkinTime);
+
+      if (checked) {
+        setStatus(
+          "CHECK-IN VERIFIED — " + (saved.checkinTime || "time unavailable"),
+          "good"
+        );
+      } else {
+        setStatus(
+          "Check-in was not verified. Check the staff PIN and deployment, then try again.",
+          "bad"
+        );
+        $("confirmButton").disabled = false;
+      }
+    } else {
+      setStatus(
+        "Unable to verify check-in. Please look up the attendee again.",
+        "bad"
+      );
+    }
+  } catch (error) {
+    setStatus(
+      "Verification failed. Check the internet connection and try again.",
+      "bad"
+    );
+    $("confirmButton").disabled = false;
+  } finally {
+    requestBusy = false;
+  }
+}
+
+async function startCamera() {
+  if (!window.Html5Qrcode) {
+    setStatus("Scanner library did not load. Check your internet connection.", "bad");
+    return;
+  }
+
+  if (cameraRunning || requestBusy) return;
+
+  try {
+    if (!scanner) {
+      scanner = new Html5Qrcode("reader");
+    }
+
+    await scanner.start(
+      { facingMode: "environment" },
+      { fps: 10, qrbox: { width: 240, height: 240 } },
+      async decodedText => {
+        if (requestBusy) return;
+
+        await stopCamera();
+        $("manualNumber").value = decodedText.trim();
+        await lookupNumber(decodedText);
+      },
+      () => {}
+    );
+
+    cameraRunning = true;
+    $("startButton").disabled = true;
+    $("stopButton").disabled = false;
+
+    setStatus("Camera active. Hold the QR code steady inside the frame.");
+  } catch (error) {
+    setStatus(
+      "Could not start camera. Allow camera access and open the page over HTTPS.",
+      "bad"
+    );
+  }
+}
+
+async function stopCamera() {
+  if (scanner && cameraRunning) {
+    try {
+      await scanner.stop();
+    } catch (error) {
+      console.warn("Camera stop warning:", error);
+    }
+
+    cameraRunning = false;
+  }
+
+  $("startButton").disabled = false;
+  $("stopButton").disabled = true;
+}
+
+async function resetForNext() {
+  await stopCamera();
+
+  currentAttendee = null;
+  $("manualNumber").value = "";
+  $("details").className = "empty";
+  $("details").textContent =
+    "Attendee details will appear here after verification.";
+
+  $("confirmButton").disabled = true;
+  $("confirmButton").textContent = "Confirm Check-in";
+
+  setStatus("Ready for the next attendee.");
+  $("manualNumber").focus();
+}
+
+$("startButton").addEventListener("click", startCamera);
+$("stopButton").addEventListener("click", stopCamera);
+
+$("lookupButton").addEventListener("click", () => {
+  lookupNumber($("manualNumber").value);
+});
+
+$("manualNumber").addEventListener("keydown", event => {
+  if (event.key === "Enter") {
+    lookupNumber($("manualNumber").value);
+  }
+});
+
+$("confirmButton").addEventListener("click", confirmCheckin);
+$("nextButton").addEventListener("click", resetForNext);
+</script>
+</body>
+</html>
