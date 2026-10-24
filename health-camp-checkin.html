@@ -3,9 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#123b63">
+  <meta name="theme-color" content="#07101f">
 
   <title>Health Camp QR Check-in | Arunodoi Academy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet">
 
   <script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
 
@@ -17,17 +20,45 @@
       font-family: Arial, sans-serif;
       background: #f1f5f9;
       color: #172b3a;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
     }
 
     header {
-      background: linear-gradient(135deg, #123b63, #1769aa);
+      background: radial-gradient(circle at top, #17314a 0%, #07101f 72%);
       color: white;
       text-align: center;
-      padding: 25px 15px;
+      padding: 30px 15px 26px;
+      border-bottom: 1px solid #14243a;
     }
 
-    header h1 { margin: 8px 0; font-size: 27px; }
-    header p { margin: 5px 0; }
+    .school-name {
+      margin: 0;
+      font-size: clamp(30px, 5vw, 46px);
+      line-height: 1.15;
+      font-weight: 900;
+      letter-spacing: 1.5px;
+      text-shadow: 0 3px 16px #10d49a35;
+    }
+
+    header h1 { margin: 12px 0 7px; font-size: clamp(24px, 4vw, 34px); }
+    header p { margin: 5px 0; font-size: 16px; }
+
+    .home-button {
+      display: inline-block;
+      margin-top: 16px;
+      padding: 10px 18px;
+      border-radius: 9px;
+      background: #10d49a;
+      color: #06111f;
+      text-decoration: none;
+      font-weight: 800;
+      transition: background .2s ease, transform .2s ease;
+    }
+
+    .home-button:hover { background: #35edb5; transform: translateY(-1px); }
+    .home-button:focus-visible { outline: 3px solid white; outline-offset: 3px; }
 
     main {
       max-width: 850px;
@@ -156,24 +187,59 @@
     }
 
     footer {
+      margin-top: auto;
       text-align: center;
-      color: #607586;
+      color: #8ea3bf;
+      background: #030817;
+      border-top: 1px solid #14243a;
       font-size: 12px;
-      padding: 20px 0;
+      padding: 24px 15px 28px;
+    }
+
+    .footer-copy { margin: 0 0 18px; }
+
+    .brand-signature {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      min-height: 42px;
+    }
+
+    .brand-line { width: 58px; height: 1px; background: #344156; }
+
+    .brand-name {
+      color: #00e6a0;
+      font-family: "Dancing Script", cursive;
+      font-size: clamp(30px, 5vw, 40px);
+      font-weight: 700;
+      line-height: 1.2;
+      text-shadow: 0 0 14px #00e6a02b;
+    }
+
+    .brand-initials {
+      color: #8c9bb1;
+      font-size: 12px;
+      font-weight: bold;
+      letter-spacing: 2px;
     }
 
     @media (max-width: 650px) {
       .grid { grid-template-columns: 1fr; }
-      header h1 { font-size: 23px; }
+      header { padding: 25px 12px 22px; }
+      .brand-line { width: 30px; }
+      main { width: 100%; }
     }
   </style>
 </head>
 
 <body>
 <header>
-  <div><strong>ARUNODOI ACADEMY</strong></div>
+  <div class="school-name">ARUNODOI ACADEMY</div>
   <h1>Free Health Camp</h1>
   <p>QR Registration Verification &amp; Check-in</p>
+  <a class="home-button" href="https://mintukumar393-mkr.github.io/arunodoi-academy-digital-portal/index.html">⌂ Home</a>
 </header>
 
 <main>
@@ -240,8 +306,19 @@
     </section>
   </div>
 
-  <footer>Arunodoi Academy • Health Camp Attendance Desk</footer>
 </main>
+
+<footer>
+  <p class="footer-copy">© 2026 Heavy. Arunodoi Academy. All rights reserved.</p>
+  <div class="brand-signature" aria-label="HeavyDukh MKR">
+    <span class="brand-line" aria-hidden="true"></span>
+    <span class="brand-name">HeavyDukh</span>
+    <span class="brand-line" aria-hidden="true"></span>
+    <span class="brand-initials">MKR</span>
+  </div>
+  <p style="margin: 14px 0 0; color: #607586;">Arunodoi Academy • Health Camp Attendance Desk</p>
+</footer>
+
 
 <script>
 "use strict";
